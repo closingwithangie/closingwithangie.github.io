@@ -552,13 +552,13 @@
     background: var(--dark);
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 14px 20px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
     width: 100%;
     text-align: left;
     border-radius: 12px 12px 0 0;
@@ -566,6 +566,15 @@
   }
 
   .modal-close:hover { background: #333; }
+
+  .modal-close-x {
+    font-size: 20px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .modal-close:hover .modal-close-x { opacity: 1; }
 
   #modal-content { padding: 0; }
 
@@ -918,6 +927,7 @@
     <a href="index.html#about">About</a>
     <a href="angie_hub.html">Agent Hub &#128274;</a>
     <a href="calculators.html">Calculators</a>
+    <a href="loan_programs.html">Loan Programs</a>
     <a href="buyer_roadmap.html">Buyer Roadmap</a>
     <a href="credit_action_plan.html">Credit Plan</a>
     <a href="index.html#contact" style="background:#c9a84c;color:white;padding:8px 16px;border-radius:6px;font-weight:700;">Get Pre-Approved</a>
@@ -1006,19 +1016,11 @@
           <input type="text" id="g_email" placeholder="you@email.com">
         </div>
 
-        <span class="role-label-text">I am a…</span>
-        <div class="role-grid">
-          <div class="role-btn" onclick="selectRole(this, 'agent')">
-            <span class="role-icon">🏡</span>
-            <span class="role-label">Real Estate Agent</span>
-          </div>
-          <div class="role-btn" onclick="selectRole(this, 'buyer')">
-            <span class="role-icon">🔑</span>
-            <span class="role-label">Home Buyer</span>
-          </div>
-          <div class="role-btn" onclick="selectRole(this, 'seller')">
-            <span class="role-icon">📦</span>
-            <span class="role-label">Home Seller</span>
+        <div style="background:#eef2f7;border:1.5px solid #d0dae6;border-radius:8px;padding:12px 16px;margin-bottom:4px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:18px;">🏡</span>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#1a2e4a;">This hub is for Real Estate Agents only.</div>
+            <div style="font-size:11px;color:#5a6a7a;margin-top:2px;">These tools are designed to help you serve your buyers better. If you're a buyer, visit our <a href="calculators.html" style="color:#c9a84c;font-weight:600;">free calculators</a> or <a href="buyer_roadmap.html" style="color:#c9a84c;font-weight:600;">buyer roadmap</a> instead.</div>
           </div>
         </div>
 
@@ -1028,9 +1030,9 @@
         </div>
 
         <button class="gate-submit" onclick="handleAccess()">Access the Tools →</button>
-        <div class="gate-error" id="gate-error">Please fill in your name, email, and select a role.</div>
+        <div class="gate-error" id="gate-error">Please fill in your name and email to continue.</div>
 
-        <p class="gate-fine">Built by Angie Wilmoth · Glory Mortgage · NMLS# XXXXXXX<br>Questions? <strong>angie@angiewilmoth.com</strong></p>
+        <p class="gate-fine">Glory Mortgage · NMLS# 2617463 · 336-408-9531<br>Questions? <strong>angie@closingwithangie.com</strong></p>
       </div>
     </div>
 
@@ -1117,7 +1119,7 @@
       <p>
         <strong>Ready to talk through a specific buyer?</strong><br>
         Call or text Angie directly — she responds fast and can pull numbers on the spot.<br>
-        <em>angie@angiewilmoth.com · [Phone] · Glory Mortgage · NMLS# XXXXXXX</em>
+        <em>angie@closingwithangie.com · 336-408-9531 · Glory Mortgage · NMLS# 2617463</em>
       </p>
       <a class="contact-cta" href="tel:+1XXXXXXXXXX">📞 Call Angie</a>
     </div>
@@ -1129,9 +1131,12 @@
 <!-- ══════════════════════════════════
      TOOL OVERLAY / MODAL
 ══════════════════════════════════ -->
-<div id="tool-overlay">
+<div id="tool-overlay" onclick="closeTool()">
   <div class="tool-modal">
-    <button class="modal-close" onclick="closeTool()">← Back to Tools Hub</button>
+    <button class="modal-close" onclick="closeTool()">
+      <span>← Back to Tools Hub</span>
+      <span class="modal-close-x">✕</span>
+    </button>
     <div id="modal-content"></div>
   </div>
 </div>
@@ -1155,10 +1160,11 @@ function handleAccess() {
   const last  = document.getElementById('g_last').value.trim();
   const email = document.getElementById('g_email').value.trim();
 
-  if (!first || !email || !selectedRole) {
+  if (!first || !email) {
     document.getElementById('gate-error').style.display = 'block';
     return;
   }
+  selectedRole = 'agent';
 
   document.getElementById('gate-error').style.display = 'none';
 
@@ -1174,7 +1180,7 @@ function showHub() {
   document.getElementById('gate-screen').style.display = 'none';
   document.getElementById('hub-screen').style.display = 'block';
 
-  const roleLabels = { agent: 'Real Estate Agent', buyer: 'Home Buyer', seller: 'Home Seller' };
+  const roleLabels = { agent: 'Real Estate Agent', buyer: 'Real Estate Agent', seller: 'Real Estate Agent' };
   document.getElementById('hub-name').textContent = userData.first || 'friend';
   document.getElementById('hub-role-badge').textContent = roleLabels[userData.role] || 'Guest';
 }
@@ -1215,6 +1221,7 @@ function openTool(tool) {
     content.innerHTML = buildStabilityHTML();
   } else if (tool === 'review') {
     content.innerHTML = buildReviewHTML();
+    setTimeout(buildReviewList, 50);
   }
 
   overlay.classList.add('open');
@@ -1225,6 +1232,11 @@ function closeTool() {
   document.getElementById('tool-overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeTool();
+});
 
 // ══════════════════════════════════
 // MATH HELPERS
@@ -1355,7 +1367,7 @@ function sendBW(method) {
   const name  = document.getElementById('bw-bname').value.trim() || 'there';
   const email = document.getElementById('bw-bemail').value.trim();
   const phone = document.getElementById('bw-bphone').value.trim();
-  const msg = `Hi ${name}!\n\nHere are the numbers we looked at together:\n\n🏡 BUY NOW\n• Home Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.downNow)}\n• Monthly P&I: ${fmt(r.payNow)} at ${r.rateNow}%\n\n⏳ WAIT 12 MONTHS\n• Home Price: ${fmt(r.priceW)} (after appreciation)\n• Down Payment: ${fmt(r.downW)} (+${fmt(r.xDown)} more)\n• Monthly P&I: ${fmt(r.payW)} at ${r.rateW}%\n\n💸 REAL COST OF WAITING: ${fmt(r.total)}\nThat's ${fmt(r.rentPd)} in rent paid to someone else, ${fmt(r.xDown)} more needed at closing, and ${fmt(r.payW-r.payNow)}/month more — permanently.\n\nRemember: it's not when you buy. It's when you sell. 🏠\n\nLet's build your plan!\n— Angie Wilmoth\nGlory Mortgage | NMLS# XXXXXXX\n[Phone] | angie@angiewilmoth.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
+  const msg = `Hi ${name}!\n\nHere are the numbers we looked at together:\n\n🏡 BUY NOW\n• Home Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.downNow)}\n• Monthly P&I: ${fmt(r.payNow)} at ${r.rateNow}%\n\n⏳ WAIT 12 MONTHS\n• Home Price: ${fmt(r.priceW)} (after appreciation)\n• Down Payment: ${fmt(r.downW)} (+${fmt(r.xDown)} more)\n• Monthly P&I: ${fmt(r.payW)} at ${r.rateW}%\n\n💸 REAL COST OF WAITING: ${fmt(r.total)}\nThat's ${fmt(r.rentPd)} in rent paid to someone else, ${fmt(r.xDown)} more needed at closing, and ${fmt(r.payW-r.payNow)}/month more — permanently.\n\nRemember: it's not when you buy. It's when you sell. 🏠\n\nLet's build your plan!\n— Angie Wilmoth\nGlory Mortgage | NMLS# 2617463\n336-408-9531 | angie@closingwithangie.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
 
   document.getElementById('bw-prev').textContent = msg;
   if (method==='email') window.location.href=`mailto:${email}?subject=${encodeURIComponent('Your Home Buying Numbers – Angie Wilmoth')}&body=${encodeURIComponent(msg)}`;
@@ -1464,7 +1476,7 @@ function sendS(method) {
   const name  = document.getElementById('s-bname').value.trim()||'there';
   const email = document.getElementById('s-bemail').value.trim();
   const phone = document.getElementById('s-bphone').value.trim();
-  const msg = `Hi ${name}!\n\nHere's your payment stability breakdown:\n\n🏠 YOUR SCENARIO\n• Purchase Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.down)} (${(r.downPct*100).toFixed(1)}%)\n• Total Est. Monthly Payment at ${r.rate}%: ${fmt(r.totNow)}\n\n😬 WORST CASE: Prices Drop ${(r.drop*100).toFixed(0)}%\n• New monthly payment: ${fmt(r.totD)}\n• Change: only ${fmt(r.swing)}/month — because your rate is FIXED\n• Prices would need to fall ${r.beDrop.toFixed(1)}% to lose your down payment equity\n\n✅ FUTURE REFI AT ${r.refi}%\n• New payment: ${fmt(r.totR)}/month\n• Monthly savings: ${fmt(r.rSave)}\n\nYour payment is stable because your loan is fixed. Marry the home — date the rate. 🏡\n\n— Angie Wilmoth\nGlory Mortgage | NMLS# XXXXXXX\n[Phone] | angie@angiewilmoth.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
+  const msg = `Hi ${name}!\n\nHere's your payment stability breakdown:\n\n🏠 YOUR SCENARIO\n• Purchase Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.down)} (${(r.downPct*100).toFixed(1)}%)\n• Total Est. Monthly Payment at ${r.rate}%: ${fmt(r.totNow)}\n\n😬 WORST CASE: Prices Drop ${(r.drop*100).toFixed(0)}%\n• New monthly payment: ${fmt(r.totD)}\n• Change: only ${fmt(r.swing)}/month — because your rate is FIXED\n• Prices would need to fall ${r.beDrop.toFixed(1)}% to lose your down payment equity\n\n✅ FUTURE REFI AT ${r.refi}%\n• New payment: ${fmt(r.totR)}/month\n• Monthly savings: ${fmt(r.rSave)}\n\nYour payment is stable because your loan is fixed. Marry the home — date the rate. 🏡\n\n— Angie Wilmoth\nGlory Mortgage | NMLS# 2617463\n336-408-9531 | angie@closingwithangie.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
 
   document.getElementById('s-prev').textContent=msg;
   if (method==='email') window.location.href=`mailto:${email}?subject=${encodeURIComponent('Your Payment Stability Analysis – Angie Wilmoth')}&body=${encodeURIComponent(msg)}`;
@@ -1501,8 +1513,8 @@ const challenges = [
   { title: "Offer Overwhelm", emoji: "🏳️", what: "They keep losing offers and are ready to quit.", agent: "Winning isn't always about price. Sellers want certainty of close. Solid financing beats a higher offer with a shaky buyer.", me: "I provide verified pre-approval (not just prequal), call listing agents directly, and move fast when it counts." }
 ];
 
-// Build review list on modal open
-setTimeout(() => {
+// Build review list — called when tool opens
+function buildReviewList() {
   const list = document.getElementById('review-list');
   if (!list) return;
   list.innerHTML = challenges.map((c,i) => `
@@ -1531,7 +1543,7 @@ setTimeout(() => {
         <label style="font-size:11.5px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="radio" name="r${i}" value="no"> They don't</label>
       </div>
     </div>`).join('');
-}, 50);
+}
 
 function scoreReview() {
   let atRisk = 0, unsure = 0;
