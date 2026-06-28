@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSCR Investor Calculator | Closing with Angie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f5e9c0;
+  --gold-dim: rgba(201,168,76,0.12);
+  --navy: #1a2e4a;
+  --navy-mid: #243d5e;
+  --navy-light: #eef2f7;
+  --dark: #1a1a1a;
+  --charcoal: #2e2e2e;
+  --white: #ffffff;
+  --warm-white: #faf8f3;
+  --light-gray: #f4f6f9;
+  --rule: #e2d9c5;
+  --rule-blue: #d0dae6;
+  --mid: #5a6a7a;
+  --green: #1e6641;
+  --green-bg: #eaf5ee;
+  --amber: #b45309;
+  --amber-bg: #fef3c7;
+  --red: #991b1b;
+  --red-bg: #fef2f2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--light-gray);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+#main-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: white;
+  z-index: 1000;
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav-logo a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nl-main {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.nl-sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.nav-links { display: flex; gap: 20px; align-items: center; }
+
+.nav-links a {
+  color: var(--navy-mid);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links a.active { color: var(--gold); font-weight: 700; }
+
+.nav-cta {
+  background: var(--gold) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+}
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--navy);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
+
+/* ── HERO ── */
+.page-hero {
+  background: var(--navy);
+  padding: 110px 32px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(201,168,76,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.page-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.page-hero h1 em { color: var(--gold); font-style: italic; }
+
+.page-hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 24px 56px;
+}
+
+/* ── SECTION HEADERS ── */
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.section-title em { color: var(--gold); font-style: italic; }
+
+.section-rule {
+  width: 40px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+
+/* ── WHAT IS DSCR ── */
+.explainer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.explainer-card {
+  background: white;
+  border: 1.5px solid var(--rule-blue);
+  border-radius: 10px;
+  padding: 22px;
+  transition: border-color 0.2s;
+}
+
+.explainer-card:hover { border-color: var(--gold); }
+
+.ec-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+.ec-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.ec-body { font-size: 13px; color: var(--mid); line-height: 1.7; }
+.ec-body strong { color: var(--navy); }
+
+/* Formula box */
+.formula-box {
+  background: var(--navy);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.formula-box h3 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 14px;
+}
+
+.formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.formula-part {
+  text-align: center;
+}
+
+.formula-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+  padding-bottom: 6px;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+  margin-bottom: 6px;
+}
+
+.formula-denom {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+
+.formula-op {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.formula-result {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.formula-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 16px;
+  line-height: 1.65;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* DSCR tier table */
+.dscr-tiers {
+  background: white;
+  border: 1.5px solid var(--rule-blue);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.tier-header {
+  background: var(--navy);
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--rule-blue);
+  align-items: center;
+  font-size: 13px;
+}
+
+.tier-row:last-child { border-bottom: none; }
+.tier-row.header { background: var(--navy-light); font-weight: 700; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--mid); }
+
+.tier-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.tier-score.great { color: var(--green); }
+.tier-score.good { color: var(--gold); }
+.tier-score.tight { color: var(--amber); }
+.tier-score.hard { color: var(--red); }
+
+.tier-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 100px;
+  display: inline-block;
+}
+
+.status-green { background: var(--green-bg); color: var(--green); }
+.status-gold { background: var(--amber-bg); color: var(--amber); }
+.status-red { background: var(--red-bg); color: var(--red); }
+
+/* ── CALCULATOR ── */
+.calc-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 16px rgba(26,46,74,0.08);
+}
+
+.calc-header {
+  background: var(--navy);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ch-icon { font-size: 22px; }
+
+.ch-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+
+.ch-sub { font-size: 11.5px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+
+.calc-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.calc-inputs { padding: 24px; border-right: 1.5px solid var(--rule-blue); }
+.calc-results { padding: 24px; background: var(--navy-light); }
+
+.field { margin-bottom: 16px; }
+
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.field input[type="number"],
+.field select {
+  width: 100%;
+  border: 1.5px solid var(--rule-blue);
+  border-radius: 7px;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field input:focus, .field select:focus { border-color: var(--gold); }
+.field .hint { font-size: 10.5px; color: #999; margin-top: 3px; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.calc-btn {
+  width: 100%;
+  background: var(--gold);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.calc-btn:hover { background: #b8962e; }
+.calc-btn:active { transform: scale(0.98); }
+
+/* Results */
+.results-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 240px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+  gap: 8px;
+}
+
+.results-empty .ei { font-size: 32px; }
+
+/* DSCR score display */
+.dscr-score-display {
+  text-align: center;
+  padding: 20px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.dscr-score-display.great { background: var(--green-bg); border: 2px solid #b7dfc8; }
+.dscr-score-display.good { background: var(--amber-bg); border: 2px solid #fcd34d; }
+.dscr-score-display.tight { background: #fff8e6; border: 2px solid #fcd34d; }
+.dscr-score-display.fail { background: var(--red-bg); border: 2px solid #fecaca; }
+
+.dscr-big-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.dscr-big-num.great { color: var(--green); }
+.dscr-big-num.good { color: var(--amber); }
+.dscr-big-num.tight { color: var(--amber); }
+.dscr-big-num.fail { color: var(--red); }
+
+.dscr-verdict {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.dscr-verdict-sub {
+  font-size: 11.5px;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule-blue);
+  gap: 10px;
+  font-size: 13px;
+}
+
+.result-row:last-child { border-bottom: none; }
+.rl { color: var(--mid); flex: 1; line-height: 1.4; }
+.rv { font-weight: 700; color: var(--navy); text-align: right; white-space: nowrap; }
+.rv.green { color: var(--green); }
+.rv.amber { color: var(--amber); }
+.rv.red { color: var(--red); }
+.rv.gold { color: var(--gold); font-size: 16px; }
+
+.result-cta {
+  margin-top: 14px;
+  background: var(--navy);
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.result-cta p { font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 10px; line-height: 1.6; }
+
+.result-cta a {
+  display: inline-block;
+  background: var(--gold);
+  color: white;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ── ELIGIBILITY SNAPSHOT ── */
+.eligibility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.elig-card {
+  background: white;
+  border: 1.5px solid var(--rule-blue);
+  border-radius: 9px;
+  padding: 18px;
+}
+
+.elig-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+.elig-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.elig-value { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.elig-sub { font-size: 11.5px; color: var(--mid); line-height: 1.55; }
+
+/* ── AGENT SCRIPTS ── */
+.scripts-section {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+
+.scripts-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.scripts-section .scripts-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 20px;
+  line-height: 1.65;
+}
+
+.script-item {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+}
+
+.script-item:last-child { margin-bottom: 0; }
+
+.si-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.si-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ── FAQ ── */
+.faq-section { margin-bottom: 24px; }
+
+.faq-item {
+  background: white;
+  border: 1.5px solid var(--rule-blue);
+  border-radius: 9px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.faq-q {
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s;
+}
+
+.faq-q:hover { background: var(--navy-light); }
+
+.faq-arrow {
+  font-size: 18px;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.faq-a {
+  display: none;
+  padding: 0 20px 16px;
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.75;
+  border-top: 1px solid var(--rule-blue);
+  padding-top: 14px;
+}
+
+.faq-item.open .faq-a { display: block; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+/* ── CTA ── */
+.cta-strip {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.cta-strip h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.cta-strip h3 em { color: var(--gold); font-style: italic; }
+.cta-strip p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+.cta-btns { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+
+.btn-gold {
+  background: var(--gold);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.btn-gold:hover { background: #b8962e; }
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  transition: border-color 0.2s;
+}
+
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.disclaimer {
+  font-size: 10.5px;
+  color: #aaa;
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.footer-mid { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.8; text-align: center; }
+.footer-right { font-size: 11px; color: rgba(255,255,255,0.35); text-align: right; line-height: 1.8; }
+
+/* ── MOBILE ── */
+@media(max-width:768px) {
+  #main-nav { padding: 12px 20px; }
+  .nav-hamburger { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 260px;
+    background: var(--navy);
+    padding: 80px 28px 32px;
+    gap: 6px;
+    z-index: 1001;
+    border-left: 3px solid var(--gold);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { color: white; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 15px; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { margin-top: 16px; text-align: center !important; }
+  #nav-overlay.open { display: block; }
+  .explainer-grid { grid-template-columns: 1fr; }
+  .calc-body { grid-template-columns: 1fr; }
+  .calc-inputs { border-right: none; border-bottom: 1.5px solid var(--rule-blue); }
+  .eligibility-grid { grid-template-columns: 1fr 1fr; }
+  .tier-row { grid-template-columns: 80px 1fr 1fr; gap: 8px; font-size: 12px; }
+  .cta-strip { grid-template-columns: 1fr; }
+  .cta-btns { flex-direction: row; flex-wrap: wrap; }
+  .field-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-right { text-align: center; }
+  .page-hero h1 { font-size: 28px; }
+  .formula { gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="index.html">
+      <span class="nl-main">Closing with Angie</span>
+      <span class="nl-sub">Homes &middot; Loans &middot; Results</span>
+    </a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()">&#9776;</button>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="angie_hub.html">Agent Hub &#128274;</a>
+    <a href="calculators.html">Calculators</a>
+    <a href="loan_programs.html">Loan Programs</a>
+    <a href="dscr_calculator.html" class="active">DSCR</a>
+    <a href="buyer_roadmap.html">Buyer Roadmap</a>
+    <a href="credit_action_plan.html">Credit Plan</a>
+    <a href="https://prod.lendingpad.com/glory-mortgage-llc/4c44a24a-db5d-4782-8734-f99a117d610e/pos#/" target="_blank" class="nav-cta">Get Pre-Approved</a>
+  </div>
+</nav>
+<div id="nav-overlay" onclick="toggleMobileNav()"></div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="eyebrow">For Real Estate Agents &amp; Their Investor Clients</div>
+  <h1>DSCR Loans — Does the rent<br>cover the <em>mortgage?</em><br>That's the whole question.</h1>
+  <p>DSCR loans qualify investors based on the property's rental income — not their personal income, tax returns, or W-2s. If the rent covers the payment, they can qualify. Run the numbers here.</p>
+</div>
+
+<div class="main">
+
+  <!-- WHAT IS DSCR -->
+  <div style="margin-bottom:10px;">
+    <div class="section-eyebrow">The Basics</div>
+    <h2 class="section-title">What every agent needs to know about <em>DSCR loans</em></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="explainer-grid">
+    <div class="explainer-card">
+      <span class="ec-icon">🏠</span>
+      <div class="ec-title">What is a DSCR loan?</div>
+      <div class="ec-body">A DSCR (Debt Service Coverage Ratio) loan is a non-QM investment property loan that qualifies based on the <strong>property's rental income</strong> — not the borrower's personal income, tax returns, or employment. If the property produces enough rent to cover its mortgage payment, the investor can qualify. <strong>No W-2s. No tax returns. No personal DTI calculation.</strong></div>
+    </div>
+    <div class="explainer-card">
+      <span class="ec-icon">💡</span>
+      <div class="ec-title">Why does this matter for your buyers?</div>
+      <div class="ec-body">Many investors — self-employed borrowers, business owners, people with lots of write-offs — <strong>can't qualify for a conventional investment loan</strong> because their tax returns don't reflect their real income. DSCR sidesteps that entirely. The question isn't "what do you make?" It's <strong>"what does the property make?"</strong> That opens the door for a lot of buyers who thought they were stuck.</div>
+    </div>
+    <div class="explainer-card">
+      <span class="ec-icon">📈</span>
+      <div class="ec-title">Who is this for?</div>
+      <div class="ec-body">DSCR loans are ideal for: <strong>Self-employed investors</strong> with complex income, <strong>portfolio investors</strong> who've maxed conventional limits, <strong>first-time investors</strong> with strong assets but messy tax returns, <strong>anyone buying a long-term or short-term rental</strong> property. If your buyer is asking about investment properties — ask about DSCR first.</div>
+    </div>
+    <div class="explainer-card">
+      <span class="ec-icon">🔑</span>
+      <div class="ec-title">What makes it different?</div>
+      <div class="ec-body">Traditional investment loans look at <strong>personal income</strong>. DSCR looks at <strong>property income</strong>. Investors can close in an LLC for liability protection. Interest-only options are available to maximize cash flow. No limit on number of financed properties in most cases. <strong>Faster, less documentation, built for investors who move quickly.</strong></div>
+    </div>
+  </div>
+
+  <!-- FORMULA -->
+  <div class="formula-box">
+    <h3>The DSCR Formula</h3>
+    <div class="formula">
+      <div class="formula-part">
+        <div class="formula-num">Monthly Gross Rent</div>
+        <div class="formula-denom">Monthly PITIA Payment</div>
+      </div>
+      <div class="formula-op">=</div>
+      <div class="formula-result">DSCR Ratio</div>
+    </div>
+    <div class="formula-desc">PITIA = Principal + Interest + Taxes + Insurance + HOA (if applicable). A ratio of 1.0 means rent exactly covers the payment. Higher is better. Most programs require 1.0 minimum.</div>
+  </div>
+
+  <!-- DSCR TIERS -->
+  <div class="dscr-tiers" style="margin-bottom:28px;">
+    <div class="tier-header"><span>📊</span> What Your DSCR Ratio Means</div>
+    <div class="tier-row header">
+      <div>DSCR</div>
+      <div>What it means</div>
+      <div>Lender view</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-score great">1.25+</div>
+      <div>Rent covers payment by 25% or more — strong cash flow</div>
+      <div><span class="tier-status status-green">Best pricing</span></div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-score good">1.10–1.24</div>
+      <div>Good cash flow — rent comfortably covers the mortgage</div>
+      <div><span class="tier-status status-green">Strong approval</span></div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-score good">1.00–1.09</div>
+      <div>Rent just covers the payment — minimum for most programs</div>
+      <div><span class="tier-status status-gold">Qualifies — tighter</span></div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-score tight">0.75–0.99</div>
+      <div>Rent doesn't fully cover payment — some programs allow this</div>
+      <div><span class="tier-status status-gold">Limited options</span></div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-score hard">Below 0.75</div>
+      <div>Significant shortfall — property doesn't support the debt</div>
+      <div><span class="tier-status status-red">Most programs: No</span></div>
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div style="margin-bottom:10px;">
+    <div class="section-eyebrow">The Calculator</div>
+    <h2 class="section-title">Run the numbers on your <em>investor's property</em></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-header">
+      <div class="ch-icon">📊</div>
+      <div>
+        <div class="ch-title">DSCR Calculator</div>
+        <div class="ch-sub">Enter the property details to see the DSCR ratio and whether it qualifies</div>
+      </div>
+    </div>
+    <div class="calc-body">
+      <div class="calc-inputs">
+        <div class="field">
+          <label>Purchase Price / Property Value ($)</label>
+          <input type="number" id="d_price" value="350000" min="50000" step="5000">
+        </div>
+        <div class="field">
+          <label>Down Payment (%)</label>
+          <input type="number" id="d_down" value="20" min="20" max="40" step="1">
+          <div class="hint">DSCR loans typically require 20–25% down minimum</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Interest Rate (%)</label>
+            <input type="number" id="d_rate" value="7.5" min="1" max="15" step="0.125">
+            <div class="hint">DSCR rates run ~0.5–1.5% higher than conventional</div>
+          </div>
+          <div class="field">
+            <label>Loan Term</label>
+            <select id="d_term">
+              <option value="30" selected>30 Year Fixed</option>
+              <option value="40io">40 Year (10yr I/O)</option>
+              <option value="15">15 Year Fixed</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Property Tax Rate (%)</label>
+            <input type="number" id="d_tax" value="0.85" min="0" max="5" step="0.05">
+          </div>
+          <div class="field">
+            <label>Annual Insurance ($)</label>
+            <input type="number" id="d_ins" value="1800" min="0" step="100">
+          </div>
+        </div>
+        <div class="field">
+          <label>Monthly HOA ($) — if applicable</label>
+          <input type="number" id="d_hoa" value="0" min="0" step="25">
+        </div>
+        <div class="field">
+          <label>Monthly Gross Rent ($)</label>
+          <input type="number" id="d_rent" value="2200" min="0" step="50">
+          <div class="hint">Use current lease or market rent from appraisal (1007 form)</div>
+        </div>
+        <div class="field">
+          <label>Investor Credit Score Range</label>
+          <select id="d_score">
+            <option value="760">760+ (Excellent)</option>
+            <option value="740">740–759</option>
+            <option value="720">720–739</option>
+            <option value="700" selected>700–719</option>
+            <option value="680">680–699</option>
+            <option value="660">660–679</option>
+            <option value="640">640–659</option>
+            <option value="620">620–639</option>
+          </select>
+        </div>
+        <button class="calc-btn" onclick="calcDSCR()">Calculate DSCR →</button>
+      </div>
+
+      <div class="calc-results" id="d_results">
+        <div class="results-empty" id="d_empty">
+          <div class="ei">📊</div>
+          <div>Enter the property details<br>and hit <strong>Calculate</strong> to see<br>the DSCR ratio.</div>
+        </div>
+        <div id="d_output" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELIGIBILITY SNAPSHOT -->
+  <div style="margin-bottom:10px;">
+    <div class="section-eyebrow">Quick Reference — 1-4 Unit Properties</div>
+    <h2 class="section-title">Typical <em>DSCR eligibility</em> guidelines</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="eligibility-grid">
+    <div class="elig-card">
+      <span class="elig-icon">💳</span>
+      <div class="elig-label">Min Credit Score</div>
+      <div class="elig-value">620 – 700+</div>
+      <div class="elig-sub">Higher scores = better LTV and pricing. 700+ for best terms. 620 min on most programs.</div>
+    </div>
+    <div class="elig-card">
+      <span class="elig-icon">📉</span>
+      <div class="elig-label">Min DSCR</div>
+      <div class="elig-value">1.0 (some 0.75)</div>
+      <div class="elig-sub">Most programs require DSCR ≥ 1.0. Some allow 0.75–0.99 with compensating factors.</div>
+    </div>
+    <div class="elig-card">
+      <span class="elig-icon">🏦</span>
+      <div class="elig-label">Max LTV (Purchase)</div>
+      <div class="elig-value">Up to 80%</div>
+      <div class="elig-sub">760+ FICO can go to 85% on some programs. Most allow 75-80% at standard credit.</div>
+    </div>
+    <div class="elig-card">
+      <span class="elig-icon">💵</span>
+      <div class="elig-label">Loan Amounts</div>
+      <div class="elig-value">$100K – $3M+</div>
+      <div class="elig-sub">Most programs start at $100K-$125K minimum. Jumbo DSCR available up to $3M+.</div>
+    </div>
+    <div class="elig-card">
+      <span class="elig-icon">🏠</span>
+      <div class="elig-label">Property Types</div>
+      <div class="elig-value">SFR, 2-4 Units</div>
+      <div class="elig-sub">Single family, condos (warrantable & non-warrantable), 2-4 unit. 5-8 units available separately.</div>
+    </div>
+    <div class="elig-card">
+      <span class="elig-icon">🏢</span>
+      <div class="elig-label">Who Can Borrow</div>
+      <div class="elig-value">LLC or Personal</div>
+      <div class="elig-sub">Borrowers can close in an LLC, corporation, or personal name. Great for investors focused on liability protection.</div>
+    </div>
+  </div>
+
+  <div style="background:white;border:1.5px solid var(--rule-blue);border-radius:9px;padding:16px 20px;margin-bottom:28px;font-size:12.5px;color:var(--mid);line-height:1.7;">
+    ⚠️ <strong style="color:var(--navy);">Important:</strong> These are general guidelines based on commonly available DSCR programs. Actual terms, rates, and eligibility vary by lender, property type, loan amount, and borrower profile. Call Angie at <strong style="color:var(--navy);">336-408-9531</strong> to run a specific scenario — it takes 10 minutes.
+  </div>
+
+  <!-- AGENT SCRIPTS -->
+  <div class="scripts-section">
+    <h3>Questions to Ask Your Investor Clients</h3>
+    <p class="scripts-sub">When an investor buyer calls, lead with these questions. They immediately shift the conversation into DSCR territory and signal that you know your stuff.</p>
+    <div class="script-item">
+      <div class="si-label">On the property</div>
+      <div class="si-text">"What's the projected monthly rent on this property? Is it currently leased or are we working off market rent?"</div>
+    </div>
+    <div class="script-item">
+      <div class="si-label">On their income situation</div>
+      <div class="si-text">"Are you self-employed or do you have a lot of write-offs on your tax returns? Because there's a loan program that doesn't need any of that — it just looks at whether the rent covers the payment."</div>
+    </div>
+    <div class="script-item">
+      <div class="si-label">On their entity</div>
+      <div class="si-text">"Are you planning to buy in your personal name or in an LLC? My lender can do it either way — just want to make sure we structure it right from the start."</div>
+    </div>
+    <div class="script-item">
+      <div class="si-label">On their timeline</div>
+      <div class="si-text">"One of the advantages of this loan type is it moves faster — less documentation than a conventional investment loan. How quickly are you looking to close?"</div>
+    </div>
+    <div class="script-item">
+      <div class="si-label">The handoff to Angie</div>
+      <div class="si-text">"Let me connect you with my lender — she can run the DSCR numbers in about 10 minutes and tell you exactly what you qualify for. No obligation, just real numbers."</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="margin-bottom:10px;">
+    <div class="section-eyebrow">Common Questions</div>
+    <h2 class="section-title">What agents ask about <em>DSCR loans</em></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">What if the property doesn't have a tenant yet? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Most DSCR programs allow <strong>market rent from an appraisal</strong> (1007 rent schedule) instead of requiring an active lease. This means your investor can purchase a vacant property and qualify based on what the property <em>should</em> rent for — not what it's currently renting for. This is a huge advantage for fix-and-rent strategies.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Can investors use DSCR for short-term rentals like Airbnb or VRBO? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Yes — many programs allow short-term rental income. For purchases, the 1007 rent schedule reflecting short-term rental income is used. For refinances, lenders can use 12 months of documented rental history from the platform. Minimum FICO is typically 700 for short-term rental DSCR and requires DSCR ≥ 1.0. Call Angie to confirm which programs fit your investor's specific property.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">What if the DSCR is below 1.0? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Some programs allow DSCR as low as 0.75 with compensating factors — typically a higher down payment (25-30%), stronger credit (720+), and more reserves. The pricing won't be as good, but it's not automatically a no. If your investor's deal is close, call Angie and let her shop it.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Can a first-time investor use a DSCR loan? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Yes on most programs, but with some restrictions. First-time investors typically need a minimum FICO of 660-680, must have a primary housing history (can't be living rent-free), and some programs limit loan amounts to $1.5M. The key requirement is 12 months of housing history. If your buyer owns their home and is buying their first investment property — they're generally eligible.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Are there prepayment penalties? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Yes — most DSCR programs have prepayment penalties, typically 5% of the loan balance in year 1, stepping down over 3-5 years. This is important to discuss with your investor upfront. If they plan to flip the property or refinance quickly, we need to structure the loan with that in mind. There are options — call Angie to talk through the right structure for their hold strategy.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Can investors close in an LLC? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Yes — most DSCR programs allow closing in an LLC or corporation, which is one of the biggest advantages for serious investors focused on liability protection and portfolio scaling. The borrower still signs a personal guarantee on most programs. This is a great conversation to have with your investor clients who are building out their portfolio structure.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How fast can DSCR loans close? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Faster than conventional investment loans in most cases — typically 21-30 days with a clean file. Because there's no income verification, employment verification, or personal DTI calculation, there's less back-and-forth with underwriting. For your investor clients who need to move quickly on a deal, this is a significant advantage over conventional financing.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <div>
+      <h3>Have an investor client?<br>Let's run the <em>real numbers.</em></h3>
+      <p>Give me the property address, the projected rent, and the purchase price — I'll have DSCR numbers back to you in 10 minutes. No obligation, no paperwork. Just answers so you can have a real conversation with your buyer.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="tel:3364089531" class="btn-gold">📞 Call Angie — 336-408-9531</a>
+      <a href="angie_hub.html" class="btn-outline">🔐 Agent Hub</a>
+    </div>
+  </div>
+
+  <p class="disclaimer">DSCR calculator results are estimates for educational purposes only. Actual qualification, rates, and terms depend on lender guidelines, property type, borrower credit profile, and market conditions. Programs referenced are based on currently available wholesale DSCR products and are subject to change without notice. Not available in all states. Contact Angie Wilmoth · Glory Mortgage · NMLS# 2617463 · 336-408-9531 for a personalized scenario.</p>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Closing with Angie</div>
+  <div class="footer-mid">&copy; 2025 Closing with Angie &middot; Angie Wilmoth &middot; NMLS# 2617463<br>Licensed in North Carolina &middot; Glory Mortgage &middot; Realty One Group Results</div>
+  <div class="footer-right">336-408-9531<br>angiewilmoth@gmail.com</div>
+</footer>
+
+<script>
+// ── NAV ──
+function toggleMobileNav() {
+  document.getElementById('nav-links').classList.toggle('open');
+  document.getElementById('nav-overlay').classList.toggle('open');
+}
+document.querySelectorAll('#nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+  });
+});
+
+// ── FAQ ──
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+
+// ── DSCR CALCULATOR ──
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+function fmtRatio(n) { return n.toFixed(2); }
+
+function monthlyPayment(principal, annualRate, years) {
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+}
+
+function calcDSCR() {
+  const price  = parseFloat(document.getElementById('d_price').value) || 0;
+  const downPct = parseFloat(document.getElementById('d_down').value) / 100;
+  const rate   = parseFloat(document.getElementById('d_rate').value) || 7.5;
+  const term   = document.getElementById('d_term').value;
+  const taxRate = parseFloat(document.getElementById('d_tax').value) / 100;
+  const ins    = parseFloat(document.getElementById('d_ins').value) / 12;
+  const hoa    = parseFloat(document.getElementById('d_hoa').value) || 0;
+  const rent   = parseFloat(document.getElementById('d_rent').value) || 0;
+  const score  = parseInt(document.getElementById('d_score').value) || 700;
+
+  if (price === 0 || rent === 0) { alert('Please enter a property value and monthly rent.'); return; }
+
+  const down  = price * downPct;
+  const loan  = price - down;
+  const ltv   = Math.round((loan / price) * 100);
+
+  // Calculate PI based on term
+  let pi;
+  if (term === '40io') {
+    // Interest only for 10 years
+    pi = loan * (rate / 100 / 12);
+  } else {
+    pi = monthlyPayment(loan, rate, parseInt(term));
+  }
+
+  const tax    = (price * taxRate) / 12;
+  const pitia  = pi + tax + ins + hoa;
+  const dscr   = rent / pitia;
+
+  // Rent needed for various DSCR targets
+  const rentFor100 = pitia * 1.0;
+  const rentFor110 = pitia * 1.1;
+  const rentFor125 = pitia * 1.25;
+
+  // Determine DSCR tier
+  let tier, tierClass, verdict, verdictSub;
+  if (dscr >= 1.25) {
+    tier = '1.25+ ✅'; tierClass = 'great';
+    verdict = '🏆 Excellent DSCR — Best Pricing Tier';
+    verdictSub = 'Strong cash flow. This property should qualify for the best available rates and highest LTV options.';
+  } else if (dscr >= 1.10) {
+    tier = '1.10–1.24 ✅'; tierClass = 'good';
+    verdict = '✅ Good DSCR — Strong Approval';
+    verdictSub = 'Solid cash flow. This property qualifies comfortably on most DSCR programs.';
+  } else if (dscr >= 1.00) {
+    tier = '1.00–1.09 ✅'; tierClass = 'good';
+    verdict = '✅ Qualifies — Minimum Threshold';
+    verdictSub = 'Rent just covers the payment. Qualifies on most programs but pricing may not be at the best tier.';
+  } else if (dscr >= 0.75) {
+    tier = '0.75–0.99 ⚠️'; tierClass = 'tight';
+    verdict = '⚠️ Below 1.0 — Limited Options';
+    verdictSub = 'Some programs allow DSCR 0.75–0.99 with higher down payment and strong credit. Call Angie to explore options.';
+  } else {
+    tier = 'Below 0.75 ❌'; tierClass = 'fail';
+    verdict = '❌ DSCR Too Low for Most Programs';
+    verdictSub = 'The rent doesn\'t support the debt at this purchase price. Consider a higher down payment, lower price, or higher-rent property.';
+  }
+
+  // Max LTV based on score and DSCR (simplified from Champions matrix)
+  let maxLTV;
+  if (dscr >= 1.0) {
+    if (score >= 760) maxLTV = 85;
+    else if (score >= 740) maxLTV = 85;
+    else if (score >= 720) maxLTV = 80;
+    else if (score >= 700) maxLTV = 80;
+    else if (score >= 680) maxLTV = 75;
+    else if (score >= 660) maxLTV = 75;
+    else if (score >= 640) maxLTV = 75;
+    else maxLTV = 65;
+  } else {
+    if (score >= 740) maxLTV = 75;
+    else if (score >= 700) maxLTV = 75;
+    else if (score >= 680) maxLTV = 70;
+    else maxLTV = 65;
+  }
+
+  const ltvOk = ltv <= maxLTV;
+
+  document.getElementById('d_empty').style.display = 'none';
+  document.getElementById('d_output').style.display = 'block';
+  document.getElementById('d_output').innerHTML = `
+    <div class="dscr-score-display ${tierClass}">
+      <div class="dscr-big-num ${tierClass}">${fmtRatio(dscr)}</div>
+      <div class="dscr-verdict">${verdict}</div>
+      <div class="dscr-verdict-sub">${verdictSub}</div>
+    </div>
+
+    <div class="result-row"><div class="rl">Purchase Price</div><div class="rv">${fmt(price)}</div></div>
+    <div class="result-row"><div class="rl">Down Payment (${(downPct*100).toFixed(0)}%)</div><div class="rv">${fmt(down)}</div></div>
+    <div class="result-row"><div class="rl">Loan Amount (${ltv}% LTV)</div><div class="rv ${ltvOk ? '' : 'red'}">${fmt(loan)} ${!ltvOk ? '⚠️' : ''}</div></div>
+    <div class="result-row"><div class="rl">P&I Payment${term === '40io' ? ' (Interest Only)' : ''}</div><div class="rv">${fmt(pi)}/mo</div></div>
+    <div class="result-row"><div class="rl">Total PITIA</div><div class="rv">${fmt(pitia)}/mo</div></div>
+    <div class="result-row"><div class="rl">Monthly Gross Rent</div><div class="rv">${fmt(rent)}/mo</div></div>
+    <div class="result-row" style="border-top:2px solid var(--gold);margin-top:4px;padding-top:10px;"><div class="rl"><strong>DSCR Ratio</strong></div><div class="rv ${tierClass === 'great' || tierClass === 'good' ? 'green' : tierClass === 'fail' ? 'red' : 'amber'} gold">${fmtRatio(dscr)}</div></div>
+    ${!ltvOk ? `<div style="background:var(--red-bg);border-radius:7px;padding:10px 12px;margin-top:10px;font-size:11.5px;color:var(--red);line-height:1.65;">⚠️ <strong>LTV may be too high</strong> for a ${score} credit score. Max LTV for this profile is typically ${maxLTV}%. A down payment of ${fmt(price*(1-maxLTV/100))} (${(100-maxLTV)}%) would bring LTV to ${maxLTV}%.</div>` : ''}
+
+    <div style="margin-top:14px;padding-top:14px;border-top:1.5px solid var(--rule-blue);">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">Rent needed to hit key DSCR targets:</div>
+      <div class="result-row"><div class="rl">To reach DSCR 1.0 (minimum)</div><div class="rv ${rent >= rentFor100 ? 'green' : 'red'}">${fmt(rentFor100)}/mo ${rent >= rentFor100 ? '✅' : '↑ need ' + fmt(rentFor100 - rent) + ' more'}</div></div>
+      <div class="result-row"><div class="rl">To reach DSCR 1.10</div><div class="rv ${rent >= rentFor110 ? 'green' : 'amber'}">${fmt(rentFor110)}/mo ${rent >= rentFor110 ? '✅' : '↑ need ' + fmt(rentFor110 - rent) + ' more'}</div></div>
+      <div class="result-row"><div class="rl">To reach DSCR 1.25 (best pricing)</div><div class="rv ${rent >= rentFor125 ? 'green' : 'amber'}">${fmt(rentFor125)}/mo ${rent >= rentFor125 ? '✅' : '↑ need ' + fmt(rentFor125 - rent) + ' more'}</div></div>
+    </div>
+
+    <div class="result-cta">
+      <p>Ready to run a real scenario? Call Angie with the property address and she can pull comps, confirm rental income, and give you actual program options in minutes.</p>
+      <a href="tel:3364089531">📞 Call Angie — 336-408-9531</a>
+    </div>
+  `;
+}
+
+// Auto-calculate on load
+window.addEventListener('DOMContentLoaded', calcDSCR);
+</script>
+</body>
+</html>

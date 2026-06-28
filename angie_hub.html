@@ -928,6 +928,7 @@
     <a href="angie_hub.html">Agent Hub &#128274;</a>
     <a href="calculators.html">Calculators</a>
     <a href="loan_programs.html">Loan Programs</a>
+    <a href="dscr_calculator.html">DSCR</a>
     <a href="buyer_roadmap.html">Buyer Roadmap</a>
     <a href="credit_action_plan.html">Credit Plan</a>
     <a href="index.html#contact" style="background:#c9a84c;color:white;padding:8px 16px;border-radius:6px;font-weight:700;">Get Pre-Approved</a>
@@ -947,7 +948,7 @@
     </div>
     <div class="gate-contact">
       <strong style="color:white;">Angie Wilmoth</strong> · Glory Mortgage · NMLS# XXXXXXX<br>
-      [Phone] · angie@angiewilmoth.com
+      [Phone] · angiewilmoth@gmail.com
     </div>
   </div>
 
@@ -1032,7 +1033,7 @@
         <button class="gate-submit" onclick="handleAccess()">Access the Tools →</button>
         <div class="gate-error" id="gate-error">Please fill in your name and email to continue.</div>
 
-        <p class="gate-fine">Glory Mortgage · NMLS# 2617463 · 336-408-9531<br>Questions? <strong>angie@closingwithangie.com</strong></p>
+        <p class="gate-fine">Glory Mortgage · NMLS# 2617463 · 336-408-9531<br>Questions? <strong>angiewilmoth@gmail.com</strong></p>
       </div>
     </div>
 
@@ -1097,12 +1098,12 @@
         <span class="tool-card-action" style="color:#aaa;">Coming Soon</span>
       </div>
 
-      <div class="tool-card coming-soon">
-        <span class="tool-card-icon">🔍</span>
-        <div class="tool-card-tag">Coming Soon</div>
-        <h3>Search Available Homes</h3>
-        <p>Browse active listings in the Triad area. Updated from MLS data.</p>
-        <span class="tool-card-action" style="color:#aaa;">Coming Soon</span>
+      <div class="tool-card" onclick="window.open('dscr_calculator.html','_blank')">
+        <span class="tool-card-icon">📈</span>
+        <div class="tool-card-tag">Calculator</div>
+        <h3>DSCR Investor Calculator</h3>
+        <p>Does the rent cover the mortgage? Run DSCR numbers for your investor clients plus agent scripts and eligibility guidelines.</p>
+        <span class="tool-card-action">Open Calculator →</span>
       </div>
 
       <div class="tool-card" onclick="window.open('https://glorymortgage.com/apply','_blank')">
@@ -1119,7 +1120,7 @@
       <p>
         <strong>Ready to talk through a specific buyer?</strong><br>
         Call or text Angie directly — she responds fast and can pull numbers on the spot.<br>
-        <em>angie@closingwithangie.com · 336-408-9531 · Glory Mortgage · NMLS# 2617463</em>
+        <em>angiewilmoth@gmail.com · 336-408-9531 · Glory Mortgage · NMLS# 2617463</em>
       </p>
       <a class="contact-cta" href="tel:+1XXXXXXXXXX">📞 Call Angie</a>
     </div>
@@ -1367,7 +1368,7 @@ function sendBW(method) {
   const name  = document.getElementById('bw-bname').value.trim() || 'there';
   const email = document.getElementById('bw-bemail').value.trim();
   const phone = document.getElementById('bw-bphone').value.trim();
-  const msg = `Hi ${name}!\n\nHere are the numbers we looked at together:\n\n🏡 BUY NOW\n• Home Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.downNow)}\n• Monthly P&I: ${fmt(r.payNow)} at ${r.rateNow}%\n\n⏳ WAIT 12 MONTHS\n• Home Price: ${fmt(r.priceW)} (after appreciation)\n• Down Payment: ${fmt(r.downW)} (+${fmt(r.xDown)} more)\n• Monthly P&I: ${fmt(r.payW)} at ${r.rateW}%\n\n💸 REAL COST OF WAITING: ${fmt(r.total)}\nThat's ${fmt(r.rentPd)} in rent paid to someone else, ${fmt(r.xDown)} more needed at closing, and ${fmt(r.payW-r.payNow)}/month more — permanently.\n\nRemember: it's not when you buy. It's when you sell. 🏠\n\nLet's build your plan!\n— Angie Wilmoth\nGlory Mortgage | NMLS# 2617463\n336-408-9531 | angie@closingwithangie.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
+  const msg = `Hi ${name}!\n\nHere are the numbers we looked at together:\n\n🏡 BUY NOW\n• Home Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.downNow)}\n• Monthly P&I: ${fmt(r.payNow)} at ${r.rateNow}%\n\n⏳ WAIT 12 MONTHS\n• Home Price: ${fmt(r.priceW)} (after appreciation)\n• Down Payment: ${fmt(r.downW)} (+${fmt(r.xDown)} more)\n• Monthly P&I: ${fmt(r.payW)} at ${r.rateW}%\n\n💸 REAL COST OF WAITING: ${fmt(r.total)}\nThat's ${fmt(r.rentPd)} in rent paid to someone else, ${fmt(r.xDown)} more needed at closing, and ${fmt(r.payW-r.payNow)}/month more — permanently.\n\nRemember: it's not when you buy. It's when you sell. 🏠\n\nLet's build your plan!\n— Angie Wilmoth\nGlory Mortgage | NMLS# 2617463\n336-408-9531 | angiewilmoth@gmail.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
 
   document.getElementById('bw-prev').textContent = msg;
   if (method==='email') window.location.href=`mailto:${email}?subject=${encodeURIComponent('Your Home Buying Numbers – Angie Wilmoth')}&body=${encodeURIComponent(msg)}`;
@@ -1476,7 +1477,7 @@ function sendS(method) {
   const name  = document.getElementById('s-bname').value.trim()||'there';
   const email = document.getElementById('s-bemail').value.trim();
   const phone = document.getElementById('s-bphone').value.trim();
-  const msg = `Hi ${name}!\n\nHere's your payment stability breakdown:\n\n🏠 YOUR SCENARIO\n• Purchase Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.down)} (${(r.downPct*100).toFixed(1)}%)\n• Total Est. Monthly Payment at ${r.rate}%: ${fmt(r.totNow)}\n\n😬 WORST CASE: Prices Drop ${(r.drop*100).toFixed(0)}%\n• New monthly payment: ${fmt(r.totD)}\n• Change: only ${fmt(r.swing)}/month — because your rate is FIXED\n• Prices would need to fall ${r.beDrop.toFixed(1)}% to lose your down payment equity\n\n✅ FUTURE REFI AT ${r.refi}%\n• New payment: ${fmt(r.totR)}/month\n• Monthly savings: ${fmt(r.rSave)}\n\nYour payment is stable because your loan is fixed. Marry the home — date the rate. 🏡\n\n— Angie Wilmoth\nGlory Mortgage | NMLS# 2617463\n336-408-9531 | angie@closingwithangie.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
+  const msg = `Hi ${name}!\n\nHere's your payment stability breakdown:\n\n🏠 YOUR SCENARIO\n• Purchase Price: ${fmt(r.price)}\n• Down Payment: ${fmt(r.down)} (${(r.downPct*100).toFixed(1)}%)\n• Total Est. Monthly Payment at ${r.rate}%: ${fmt(r.totNow)}\n\n😬 WORST CASE: Prices Drop ${(r.drop*100).toFixed(0)}%\n• New monthly payment: ${fmt(r.totD)}\n• Change: only ${fmt(r.swing)}/month — because your rate is FIXED\n• Prices would need to fall ${r.beDrop.toFixed(1)}% to lose your down payment equity\n\n✅ FUTURE REFI AT ${r.refi}%\n• New payment: ${fmt(r.totR)}/month\n• Monthly savings: ${fmt(r.rSave)}\n\nYour payment is stable because your loan is fixed. Marry the home — date the rate. 🏡\n\n— Angie Wilmoth\nGlory Mortgage | NMLS# 2617463\n336-408-9531 | angiewilmoth@gmail.com\n\n*Estimates for educational purposes only. Not a loan commitment.*`;
 
   document.getElementById('s-prev').textContent=msg;
   if (method==='email') window.location.href=`mailto:${email}?subject=${encodeURIComponent('Your Payment Stability Analysis – Angie Wilmoth')}&body=${encodeURIComponent(msg)}`;
@@ -1570,7 +1571,7 @@ function togglePrev(id) {
 <footer style="background:#1a2e4a;border-top:3px solid #c9a84c;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
   <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:#c9a84c;">Closing with Angie</div>
   <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.8;text-align:center;">&copy; 2025 Closing with Angie &middot; Angie Wilmoth &middot; NMLS# 2617463<br>Licensed in North Carolina &middot; Glory Mortgage &middot; Realty One Group Results</div>
-  <div style="font-size:11px;color:rgba(255,255,255,0.35);text-align:right;line-height:1.8;">336-408-9531<br>angie@closingwithangie.com</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.35);text-align:right;line-height:1.8;">336-408-9531<br>angiewilmoth@gmail.com</div>
 </footer>
 </body>
 </html>
