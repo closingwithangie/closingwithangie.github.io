@@ -1106,12 +1106,12 @@
         <span class="tool-card-action">Open Calculator →</span>
       </div>
 
-      <div class="tool-card" onclick="window.open('https://glorymortgage.com/apply','_blank')">
+      <div class="tool-card" onclick="copyAppLink()">
         <span class="tool-card-icon">✍️</span>
-        <div class="tool-card-tag">Apply Now</div>
-        <h3>Start a Loan Application</h3>
-        <p>Ready to move? Start a full application with Angie at Glory Mortgage. Fast, secure, and she'll be with you every step.</p>
-        <span class="tool-card-action">Apply Online →</span>
+        <div class="tool-card-tag">Send to Your Buyer</div>
+        <h3>Send Buyer to Apply</h3>
+        <p>Copy Angie's application link and send it directly to your buyer. Fast, secure, and Angie will be with them every step of the way.</p>
+        <span class="tool-card-action" id="copy-app-label">📋 Copy Application Link →</span>
       </div>
 
     </div>
@@ -1122,7 +1122,7 @@
         Call or text Angie directly — she responds fast and can pull numbers on the spot.<br>
         <em>angiewilmoth@gmail.com · 336-408-9531 · Glory Mortgage · NMLS# 2617463</em>
       </p>
-      <a class="contact-cta" href="tel:+1XXXXXXXXXX">📞 Call Angie</a>
+      <a class="contact-cta" href="tel:3364089531">📞 Call Angie</a>
     </div>
 
   </div>
@@ -1566,6 +1566,15 @@ function scoreReview() {
 
 function togglePrev(id) {
   document.getElementById(id).classList.toggle('visible');
+}
+
+function copyAppLink() {
+  const appLink = 'https://prod.lendingpad.com/glory-mortgage-llc/4c44a24a-db5d-4782-8734-f99a117d610e/pos#/';
+  navigator.clipboard.writeText(appLink).then(() => {
+    const label = document.getElementById('copy-app-label');
+    label.textContent = '✅ Copied! Send to your buyer.';
+    setTimeout(() => { label.textContent = '📋 Copy Application Link →'; }, 3000);
+  });
 }
 </script>
 <footer style="background:#1a2e4a;border-top:3px solid #c9a84c;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
