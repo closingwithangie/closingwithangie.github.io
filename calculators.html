@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Calculators | Closing with Angie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f5e9c0;
+  --gold-dim: rgba(201,168,76,0.12);
+  --navy: #1a2e4a;
+  --navy-mid: #243d5e;
+  --navy-light: #eef2f7;
+  --dark: #1a1a1a;
+  --charcoal: #2e2e2e;
+  --white: #ffffff;
+  --warm-white: #faf8f3;
+  --light-gray: #f4f6f9;
+  --rule: #e2d9c5;
+  --rule-blue: #d0dae6;
+  --mid: #5a6a7a;
+  --green: #1e6641;
+  --green-bg: #eaf5ee;
+  --red: #991b1b;
+  --red-bg: #fef2f2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--light-gray);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+#main-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: white;
+  z-index: 1000;
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav-logo a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nl-main {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.nl-sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.nav-links { display: flex; gap: 20px; align-items: center; }
+
+.nav-links a {
+  color: var(--navy-mid);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+.nav-links a.active { color: var(--gold); font-weight: 700; }
+
+.nav-cta {
+  background: var(--gold) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+}
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--navy);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
+
+/* ── HERO ── */
+.page-hero {
+  background: var(--navy);
+  padding: 100px 32px 48px;
+  text-align: center;
+}
+
+.page-hero .eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.page-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.page-hero h1 em { color: var(--gold); font-style: italic; }
+
+.page-hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 36px 24px 56px;
+}
+
+/* ── CALC CARD ── */
+.calc-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 16px rgba(26,46,74,0.08);
+}
+
+.calc-card-header {
+  background: var(--navy);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cch-icon { font-size: 22px; }
+
+.cch-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+
+.cch-sub {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 1px;
+}
+
+.calc-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.calc-inputs { padding: 24px; border-right: 1.5px solid var(--rule-blue); }
+.calc-results { padding: 24px; background: var(--navy-light); }
+
+/* Fields */
+.field { margin-bottom: 16px; }
+
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.field input[type="number"],
+.field select {
+  width: 100%;
+  border: 1.5px solid var(--rule-blue);
+  border-radius: 7px;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field input:focus, .field select:focus { border-color: var(--gold); }
+.field .hint { font-size: 10.5px; color: #999; margin-top: 3px; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Slider */
+.slider-wrap { margin-top: 4px; }
+
+.slider-wrap input[type="range"] {
+  width: 100%;
+  accent-color: var(--gold);
+  height: 4px;
+  cursor: pointer;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--mid);
+  margin-top: 3px;
+}
+
+/* Calc button */
+.calc-btn {
+  width: 100%;
+  background: var(--gold);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+
+.calc-btn:hover { background: #b8962e; }
+.calc-btn:active { transform: scale(0.98); }
+
+/* Results */
+.results-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 200px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+  gap: 8px;
+}
+
+.results-empty .ei { font-size: 32px; }
+
+.result-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold);
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule-blue);
+  gap: 10px;
+}
+
+.result-row:last-child { border-bottom: none; }
+
+.rl { font-size: 12px; color: var(--mid); flex: 1; line-height: 1.4; }
+.rv { font-size: 14px; font-weight: 700; color: var(--navy); text-align: right; white-space: nowrap; }
+.rv.gold { color: var(--gold); font-size: 18px; }
+.rv.green { color: var(--green); }
+.rv.red { color: var(--red); }
+
+.result-cta {
+  margin-top: 16px;
+  background: var(--navy);
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.result-cta p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.result-cta a {
+  display: inline-block;
+  background: var(--gold);
+  color: white;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.result-cta a:hover { background: #b8962e; }
+
+/* ── BIG CTA ── */
+.big-cta {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 32px 36px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.big-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.big-cta h3 em { color: var(--gold); font-style: italic; }
+
+.big-cta p {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.big-cta-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cta-btn-gold {
+  background: var(--gold);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.cta-btn-gold:hover { background: #b8962e; }
+
+.cta-btn-outline {
+  background: transparent;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  white-space: nowrap;
+  transition: border-color 0.2s;
+}
+
+.cta-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  font-size: 10.5px;
+  color: #aaa;
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 16px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.footer-mid { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.8; text-align: center; }
+.footer-right { font-size: 11px; color: rgba(255,255,255,0.35); text-align: right; line-height: 1.8; }
+
+/* ── MOBILE ── */
+@media(max-width:768px) {
+  #main-nav { padding: 12px 20px; }
+  .nav-hamburger { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 260px;
+    background: var(--navy);
+    padding: 80px 28px 32px;
+    gap: 6px;
+    z-index: 1001;
+    border-left: 3px solid var(--gold);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { color: white; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 15px; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { margin-top: 16px; text-align: center !important; }
+  #nav-overlay.open { display: block; }
+  .calc-body { grid-template-columns: 1fr; }
+  .calc-inputs { border-right: none; border-bottom: 1.5px solid var(--rule-blue); }
+  .field-row { grid-template-columns: 1fr; }
+  .big-cta { grid-template-columns: 1fr; }
+  .big-cta-btns { flex-direction: row; flex-wrap: wrap; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-right { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="index.html">
+      <span class="nl-main">Closing with Angie</span>
+      <span class="nl-sub">Homes &middot; Loans &middot; Results</span>
+    </a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()">&#9776;</button>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="angie_hub.html">Agent Hub &#128274;</a>
+    <a href="calculators.html" class="active">Calculators</a>
+    <a href="buyer_roadmap.html">Buyer Roadmap</a>
+    <a href="credit_action_plan.html">Credit Plan</a>
+    <a href="https://prod.lendingpad.com/glory-mortgage-llc/4c44a24a-db5d-4782-8734-f99a117d610e/pos#/" target="_blank" class="nav-cta">Get Pre-Approved</a>
+  </div>
+</nav>
+<div id="nav-overlay" onclick="toggleMobileNav()"></div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="eyebrow">Free Mortgage Calculators</div>
+  <h1>Know your numbers<br>before you <em>fall in love</em><br>with a house.</h1>
+  <p>Use these calculators to get a real sense of what you can afford and what your monthly payment might look like. No signup required — just honest numbers.</p>
+</div>
+
+<div class="main">
+
+  <!-- ══════════════════════════════
+       CALC 1: AFFORDABILITY
+  ══════════════════════════════ -->
+  <div class="calc-card">
+    <div class="calc-card-header">
+      <div class="cch-icon">🏡</div>
+      <div>
+        <div class="cch-title">How Much Home Can I Afford?</div>
+        <div class="cch-sub">Based on your income and monthly debts</div>
+      </div>
+    </div>
+    <div class="calc-body">
+      <div class="calc-inputs">
+        <div class="field">
+          <label>Gross Monthly Income ($)</label>
+          <input type="number" id="a_income" value="6000" min="0" step="100">
+          <div class="hint">Your income before taxes. Include all household income if buying with a partner.</div>
+        </div>
+        <div class="field">
+          <label>Monthly Debt Payments ($)</label>
+          <input type="number" id="a_debt" value="400" min="0" step="50">
+          <div class="hint">Car loans, student loans, credit cards minimum payments, etc.</div>
+        </div>
+        <div class="field">
+          <label>Down Payment (%)</label>
+          <div class="slider-wrap">
+            <input type="range" id="a_down_slider" min="3" max="25" value="5" step="0.5" oninput="document.getElementById('a_down_val').textContent=this.value+'%'; calcAffordability();">
+            <div class="slider-labels">
+              <span>3% (FHA min)</span>
+              <span id="a_down_val">5%</span>
+              <span>25%</span>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Interest Rate (%)</label>
+          <input type="number" id="a_rate" value="6.75" min="1" max="15" step="0.125">
+        </div>
+        <div class="field">
+          <label>Credit Score Range</label>
+          <select id="a_score" onchange="calcAffordability()">
+            <option value="740">740+ (Excellent)</option>
+            <option value="700">700–739 (Good)</option>
+            <option value="660">660–699 (Fair-Good)</option>
+            <option value="620" selected>620–659 (Fair)</option>
+            <option value="580">580–619 (Below Avg)</option>
+          </select>
+        </div>
+        <button class="calc-btn" onclick="calcAffordability()">Calculate My Affordability →</button>
+      </div>
+
+      <div class="calc-results" id="a_results">
+        <div class="results-empty" id="a_empty">
+          <div class="ei">🏡</div>
+          <div>Enter your details and hit<br><strong>Calculate</strong> to see your range.</div>
+        </div>
+        <div id="a_output" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       CALC 2: PAYMENT
+  ══════════════════════════════ -->
+  <div class="calc-card">
+    <div class="calc-card-header">
+      <div class="cch-icon">💰</div>
+      <div>
+        <div class="cch-title">What's My Monthly Payment?</div>
+        <div class="cch-sub">For a specific home price</div>
+      </div>
+    </div>
+    <div class="calc-body">
+      <div class="calc-inputs">
+        <div class="field">
+          <label>Home Price ($)</label>
+          <input type="number" id="p_price" value="300000" min="50000" step="5000">
+        </div>
+        <div class="field">
+          <label>Down Payment (%)</label>
+          <div class="slider-wrap">
+            <input type="range" id="p_down_slider" min="3" max="25" value="5" step="0.5" oninput="document.getElementById('p_down_val').textContent=this.value+'%'; calcPayment();">
+            <div class="slider-labels">
+              <span>3%</span>
+              <span id="p_down_val">5%</span>
+              <span>25%</span>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Interest Rate (%)</label>
+          <input type="number" id="p_rate" value="6.75" min="1" max="15" step="0.125">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Loan Term</label>
+            <select id="p_term">
+              <option value="30" selected>30 Year Fixed</option>
+              <option value="15">15 Year Fixed</option>
+              <option value="20">20 Year Fixed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Property Tax Rate (%)</label>
+            <input type="number" id="p_tax" value="0.85" min="0" max="5" step="0.05">
+            <div class="hint">NC avg ~0.7–0.9%</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>HOA Monthly Fee ($) — if applicable</label>
+          <input type="number" id="p_hoa" value="0" min="0" step="25">
+        </div>
+        <button class="calc-btn" onclick="calcPayment()">Calculate My Payment →</button>
+      </div>
+
+      <div class="calc-results" id="p_results">
+        <div class="results-empty" id="p_empty">
+          <div class="ei">💰</div>
+          <div>Enter the home details and hit<br><strong>Calculate</strong> to see your payment.</div>
+        </div>
+        <div id="p_output" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       CALC 3: COMPARE TERMS
+  ══════════════════════════════ -->
+  <div class="calc-card">
+    <div class="calc-card-header">
+      <div class="cch-icon">📊</div>
+      <div>
+        <div class="cch-title">15-Year vs. 30-Year — Which Is Right for Me?</div>
+        <div class="cch-sub">See the real difference in payment and total interest</div>
+      </div>
+    </div>
+    <div class="calc-body">
+      <div class="calc-inputs">
+        <div class="field">
+          <label>Loan Amount ($)</label>
+          <input type="number" id="c_loan" value="285000" min="50000" step="5000">
+          <div class="hint">Purchase price minus your down payment</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>30-Year Rate (%)</label>
+            <input type="number" id="c_rate30" value="6.75" min="1" max="15" step="0.125">
+          </div>
+          <div class="field">
+            <label>15-Year Rate (%)</label>
+            <input type="number" id="c_rate15" value="6.0" min="1" max="15" step="0.125">
+            <div class="hint">Usually 0.5–0.75% lower</div>
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calcCompare()">Compare Loan Terms →</button>
+      </div>
+
+      <div class="calc-results" id="c_results">
+        <div class="results-empty" id="c_empty">
+          <div class="ei">📊</div>
+          <div>Enter your loan details and hit<br><strong>Compare</strong> to see the difference.</div>
+        </div>
+        <div id="c_output" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       BIG CTA
+  ══════════════════════════════ -->
+  <div class="big-cta">
+    <div>
+      <h3>Ready to turn these numbers<br>into a real <em>plan?</em></h3>
+      <p>These calculators are a great starting point — but every buyer's situation is different. Interest rates, loan programs, down payment assistance, and your specific credit profile all affect what you actually qualify for. Let's talk through your real numbers — no pressure, no obligation.</p>
+    </div>
+    <div class="big-cta-btns">
+      <a href="https://prod.lendingpad.com/glory-mortgage-llc/4c44a24a-db5d-4782-8734-f99a117d610e/pos#/" target="_blank" class="cta-btn-gold">✍️ Apply Now</a>
+      <a href="tel:3364089531" class="cta-btn-outline">📞 Call Angie</a>
+      <a href="buyer_roadmap.html" class="cta-btn-outline">🗺️ Build My Roadmap</a>
+    </div>
+  </div>
+
+  <p class="disclaimer">These calculators provide estimates for educational purposes only and do not constitute a loan commitment, pre-approval, or guarantee of financing. Actual rates, payments, and loan amounts may vary based on credit profile, property type, loan program, and lender guidelines. Contact Angie Wilmoth at Glory Mortgage (NMLS# 2617463) for a personalized analysis.</p>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Closing with Angie</div>
+  <div class="footer-mid">&copy; 2025 Closing with Angie &middot; Angie Wilmoth &middot; NMLS# 2617463<br>Licensed in North Carolina &middot; Glory Mortgage &middot; Realty One Group Results</div>
+  <div class="footer-right">336-408-9531<br>angie@closingwithangie.com</div>
+</footer>
+
+<script>
+// ── NAV ──
+function toggleMobileNav() {
+  document.getElementById('nav-links').classList.toggle('open');
+  document.getElementById('nav-overlay').classList.toggle('open');
+}
+document.querySelectorAll('#nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+  });
+});
+
+// ── HELPERS ──
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+function fmtFull(n) { return '$' + n.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0}); }
+
+function monthlyPayment(principal, annualRate, years) {
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+}
+
+// ── CALC 1: AFFORDABILITY ──
+function calcAffordability() {
+  const income  = parseFloat(document.getElementById('a_income').value) || 0;
+  const debt    = parseFloat(document.getElementById('a_debt').value) || 0;
+  const downPct = parseFloat(document.getElementById('a_down_slider').value) / 100;
+  const rate    = parseFloat(document.getElementById('a_rate').value) || 6.75;
+  const score   = parseInt(document.getElementById('a_score').value) || 620;
+
+  if (income === 0) return;
+
+  // Max DTI based on score
+  const maxDTI = score >= 720 ? 0.50 : score >= 680 ? 0.45 : 0.43;
+
+  // Max monthly housing payment
+  const maxHousing = (income * maxDTI) - debt;
+
+  if (maxHousing <= 0) {
+    document.getElementById('a_empty').style.display = 'none';
+    document.getElementById('a_output').style.display = 'block';
+    document.getElementById('a_output').innerHTML = `
+      <div class="result-headline">Affordability Analysis</div>
+      <div class="result-row"><div class="rl">Current monthly debt vs income</div><div class="rv red">DTI too high</div></div>
+      <div style="background:#fef2f2;border-radius:8px;padding:12px 14px;margin-top:12px;font-size:12.5px;color:#991b1b;line-height:1.65;">
+        Your current monthly debt payments may be too high relative to your income to qualify for a mortgage right now. Paying down debts is your first move — or increasing your income. Call Angie to talk through your options.
+      </div>
+      <div class="result-cta"><p>Let's build a plan to get you there.</p><a href="buyer_roadmap.html">Build My Roadmap →</a></div>
+    `;
+    return;
+  }
+
+  // Estimate max loan (P&I only first, then back into price)
+  // P&I should be about 75-80% of max housing (leaving room for tax/insurance)
+  const maxPI = maxHousing * 0.78;
+  const r = rate / 100 / 12;
+  const n = 360;
+  const maxLoan = maxPI * (Math.pow(1+r,n)-1) / (r * Math.pow(1+r,n));
+  const maxPrice = maxLoan / (1 - downPct);
+
+  // Conservative estimate (80% of max)
+  const conservativePrice = maxPrice * 0.80;
+
+  // Monthly breakdown at max price
+  const loanAtMax = maxPrice * (1 - downPct);
+  const piAtMax   = monthlyPayment(loanAtMax, rate, 30);
+  const taxAtMax  = (maxPrice * 0.0085) / 12;
+  const insAtMax  = (maxPrice * 0.006) / 12;
+  const totalAtMax = piAtMax + taxAtMax + insAtMax;
+  const dti = Math.round(((totalAtMax + debt) / income) * 100);
+
+  document.getElementById('a_empty').style.display = 'none';
+  document.getElementById('a_output').style.display = 'block';
+  document.getElementById('a_output').innerHTML = `
+    <div class="result-headline">Your Affordability Range</div>
+    <div class="result-row"><div class="rl">Conservative estimate</div><div class="rv green">${fmt(conservativePrice)}</div></div>
+    <div class="result-row"><div class="rl">Maximum estimated price</div><div class="rv gold">${fmt(maxPrice)}</div></div>
+    <div class="result-row"><div class="rl">Down payment needed (${(downPct*100).toFixed(1)}%)</div><div class="rv">${fmt(maxPrice * downPct)}</div></div>
+    <div class="result-row"><div class="rl">Est. loan amount</div><div class="rv">${fmt(loanAtMax)}</div></div>
+    <div class="result-row"><div class="rl">Est. P&amp;I payment at max</div><div class="rv">${fmt(piAtMax)}/mo</div></div>
+    <div class="result-row"><div class="rl">Est. total payment (w/ tax &amp; ins)</div><div class="rv">${fmt(totalAtMax)}/mo</div></div>
+    <div class="result-row"><div class="rl">Estimated DTI at max price</div><div class="rv ${dti > 45 ? 'red' : dti > 38 ? 'gold' : 'green'}">${dti}%</div></div>
+    <div class="result-cta">
+      <p>These are estimates. Your actual qualification depends on your credit, loan program, and full financial picture. Let's get you a real pre-approval.</p>
+      <a href="https://prod.lendingpad.com/glory-mortgage-llc/4c44a24a-db5d-4782-8734-f99a117d610e/pos#/" target="_blank">Apply for Pre-Approval →</a>
+    </div>
+  `;
+}
+
+// ── CALC 2: PAYMENT ──
+function calcPayment() {
+  const price  = parseFloat(document.getElementById('p_price').value) || 0;
+  const downPct = parseFloat(document.getElementById('p_down_slider').value) / 100;
+  const rate   = parseFloat(document.getElementById('p_rate').value) || 6.75;
+  const term   = parseInt(document.getElementById('p_term').value) || 30;
+  const taxRate = parseFloat(document.getElementById('p_tax').value) / 100;
+  const hoa    = parseFloat(document.getElementById('p_hoa').value) || 0;
+
+  if (price === 0) return;
+
+  const down    = price * downPct;
+  const loan    = price - down;
+  const pi      = monthlyPayment(loan, rate, term);
+  const tax     = (price * taxRate) / 12;
+  const ins     = (price * 0.006) / 12;
+  const pmi     = downPct < 0.20 ? (loan * 0.008) / 12 : 0;
+  const total   = pi + tax + ins + pmi + hoa;
+
+  document.getElementById('p_empty').style.display = 'none';
+  document.getElementById('p_output').style.display = 'block';
+  document.getElementById('p_output').innerHTML = `
+    <div class="result-headline">Monthly Payment Breakdown</div>
+    <div class="result-row"><div class="rl">Purchase Price</div><div class="rv">${fmt(price)}</div></div>
+    <div class="result-row"><div class="rl">Down Payment (${(downPct*100).toFixed(1)}%)</div><div class="rv">${fmt(down)}</div></div>
+    <div class="result-row"><div class="rl">Loan Amount</div><div class="rv">${fmt(loan)}</div></div>
+    <div class="result-row"><div class="rl">Principal &amp; Interest (${term} yr @ ${rate}%)</div><div class="rv">${fmt(pi)}</div></div>
+    <div class="result-row"><div class="rl">Est. Property Tax</div><div class="rv">${fmt(tax)}</div></div>
+    <div class="result-row"><div class="rl">Est. Homeowner's Insurance</div><div class="rv">${fmt(ins)}</div></div>
+    ${pmi > 0 ? `<div class="result-row"><div class="rl">Est. PMI (removed at 20% equity)</div><div class="rv">${fmt(pmi)}</div></div>` : ''}
+    ${hoa > 0 ? `<div class="result-row"><div class="rl">HOA Fee</div><div class="rv">${fmt(hoa)}</div></div>` : ''}
+    <div class="result-row" style="border-top:2px solid var(--gold);margin-top:4px;padding-top:10px;"><div class="rl"><strong>Total Est. Monthly Payment</strong></div><div class="rv gold">${fmt(total)}</div></div>
+    ${pmi > 0 ? `<div style="background:#fff8e6;border-radius:7px;padding:10px 12px;margin-top:10px;font-size:11.5px;color:#b45309;line-height:1.6;">💡 <strong>PMI tip:</strong> Once you reach 20% equity (~${fmt(price*0.20)} in value), you can request PMI removal — saving ${fmt(pmi)}/month.</div>` : ''}
+    <div class="result-cta">
+      <p>Want to see how this compares to waiting 12 months? The numbers might surprise you.</p>
+      <a href="angie_hub.html">See Full Buyer Analysis →</a>
+    </div>
+  `;
+}
+
+// ── CALC 3: COMPARE TERMS ──
+function calcCompare() {
+  const loan    = parseFloat(document.getElementById('c_loan').value) || 0;
+  const rate30  = parseFloat(document.getElementById('c_rate30').value) || 6.75;
+  const rate15  = parseFloat(document.getElementById('c_rate15').value) || 6.0;
+
+  if (loan === 0) return;
+
+  const p30 = monthlyPayment(loan, rate30, 30);
+  const p15 = monthlyPayment(loan, rate15, 15);
+  const total30 = p30 * 360;
+  const total15 = p15 * 180;
+  const interest30 = total30 - loan;
+  const interest15 = total15 - loan;
+  const interestSaved = interest30 - interest15;
+  const paymentDiff = p15 - p30;
+
+  document.getElementById('c_empty').style.display = 'none';
+  document.getElementById('c_output').style.display = 'block';
+  document.getElementById('c_output').innerHTML = `
+    <div class="result-headline">15 vs. 30 Year Comparison</div>
+    <div class="result-row"><div class="rl">30-Year monthly payment</div><div class="rv">${fmt(p30)}/mo</div></div>
+    <div class="result-row"><div class="rl">15-Year monthly payment</div><div class="rv">${fmt(p15)}/mo</div></div>
+    <div class="result-row"><div class="rl">Extra per month for 15-year</div><div class="rv red">+${fmt(paymentDiff)}/mo</div></div>
+    <div class="result-row" style="margin-top:8px;padding-top:12px;border-top:1.5px solid var(--rule-blue);"><div class="rl">Total interest — 30 year</div><div class="rv red">${fmt(interest30)}</div></div>
+    <div class="result-row"><div class="rl">Total interest — 15 year</div><div class="rv green">${fmt(interest15)}</div></div>
+    <div class="result-row"><div class="rl"><strong>Interest saved with 15-year</strong></div><div class="rv gold">${fmt(interestSaved)}</div></div>
+    <div style="background:var(--green-bg);border-radius:7px;padding:10px 12px;margin-top:10px;font-size:11.5px;color:#1a4a2e;line-height:1.65;">
+      💡 The 15-year saves <strong>${fmt(interestSaved)}</strong> in interest but costs <strong>${fmt(paymentDiff)}/more per month</strong>. Many buyers choose 30-year for flexibility and invest the difference. Ask Angie what makes sense for your situation.
+    </div>
+    <div class="result-cta">
+      <p>Not sure which term is right for you? Let's talk through your goals.</p>
+      <a href="tel:3364089531">📞 Call Angie — 336-408-9531</a>
+    </div>
+  `;
+}
+
+// Auto-calculate on load
+window.addEventListener('DOMContentLoaded', () => {
+  calcAffordability();
+  calcPayment();
+  calcCompare();
+});
+</script>
+</body>
+</html>
