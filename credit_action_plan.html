@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Action Plan – Closing with Angie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f5e9c0;
+  --gold-dim: rgba(201,168,76,0.12);
+  --dark: #1a1a1a;
+  --charcoal: #2e2e2e;
+  --warm-white: #faf8f3;
+  --rule: #e2d9c5;
+  --green: #1e6641;
+  --green-bg: #eaf5ee;
+  --amber: #b45309;
+  --amber-bg: #fef3c7;
+  --red: #991b1b;
+  --red-bg: #fef2f2;
+  --blue: #1e40af;
+  --blue-bg: #eff6ff;
+  --mid: #666;
+  --purple: #6d28d9;
+  --purple-bg: #f5f3ff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--warm-white);
+  color: var(--dark);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--dark);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.header-lo {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
+  line-height: 1.6;
+}
+
+.header-lo strong { color: white; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--dark);
+  border-top: 1px solid #2a2a2a;
+  padding: 36px 32px 40px;
+  text-align: center;
+}
+
+.hero-eye {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.hero h1 em { color: var(--gold); font-style: italic; }
+
+.hero p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  max-width: 560px;
+  margin: 0 auto 16px;
+  line-height: 1.7;
+}
+
+.hero-disclaimer {
+  display: inline-block;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  font-size: 11px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  line-height: 1.5;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+}
+
+/* ── INTAKE ── */
+.intake-card {
+  background: white;
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.intake-header {
+  background: var(--dark);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ih-icon { font-size: 22px; }
+
+.ih-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+.ih-sub {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 1px;
+}
+
+.intake-body { padding: 24px; }
+
+/* Field styles */
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 5px;
+  letter-spacing: 0.02em;
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field select {
+  width: 100%;
+  border: 1.5px solid var(--rule);
+  border-radius: 7px;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--warm-white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field input:focus, .field select:focus { border-color: var(--gold); }
+.field .hint { font-size: 10.5px; color: #999; margin-top: 3px; }
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Option buttons */
+.opt-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.opt-grid.c2 { grid-template-columns: 1fr 1fr; }
+.opt-grid.c3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.ob {
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  padding: 11px 13px;
+  cursor: pointer;
+  background: white;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.ob:hover { border-color: var(--gold); background: var(--gold-dim); }
+.ob.sel { border-color: var(--gold); background: var(--gold-dim); }
+.ob .oi { font-size: 18px; display: block; margin-bottom: 4px; }
+.ob .ol { font-size: 12.5px; font-weight: 600; color: var(--dark); }
+.ob .os { font-size: 10.5px; color: var(--mid); margin-top: 2px; }
+
+/* Item entry rows */
+.item-entry {
+  background: var(--warm-white);
+  border: 1.5px solid var(--rule);
+  border-radius: 9px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.item-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.item-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.item-remove {
+  font-size: 11px;
+  color: var(--red);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: 600;
+  padding: 0;
+}
+
+.item-remove:hover { text-decoration: underline; }
+
+.add-item-btn {
+  width: 100%;
+  background: none;
+  border: 1.5px dashed var(--rule);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mid);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  margin-top: 8px;
+}
+
+.add-item-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Generate btn */
+.gen-btn {
+  width: 100%;
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 8px;
+}
+
+.gen-btn:hover { background: #b8962e; }
+.gen-btn:active { transform: scale(0.98); }
+
+/* ── OUTPUT ── */
+#plan-output { display: none; }
+#plan-output.visible { display: block; }
+
+/* Score summary */
+.score-summary {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.ss-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.ss-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.ss-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.ss-score-box {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.ss-score-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.ss-score-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Action items */
+.action-section {
+  margin-bottom: 20px;
+}
+
+.as-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 9px 9px 0 0;
+  border: 1.5px solid transparent;
+}
+
+.as-icon { font-size: 18px; }
+
+.as-title {
+  font-weight: 700;
+  font-size: 13.5px;
+  flex: 1;
+}
+
+.as-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+
+/* Color themes per action type */
+.theme-dispute { background: var(--blue-bg); border-color: #bfdbfe; }
+.theme-dispute .as-title { color: var(--blue); }
+.theme-dispute .as-badge { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
+
+.theme-paydelete { background: var(--green-bg); border-color: #b7dfc8; }
+.theme-paydelete .as-title { color: var(--green); }
+.theme-paydelete .as-badge { background: var(--green-bg); color: var(--green); border: 1px solid #b7dfc8; }
+
+.theme-goodwill { background: var(--purple-bg); border-color: #ddd6fe; }
+.theme-goodwill .as-title { color: var(--purple); }
+.theme-goodwill .as-badge { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
+
+.theme-utilization { background: var(--amber-bg); border-color: #fcd34d; }
+.theme-utilization .as-title { color: var(--amber); }
+.theme-utilization .as-badge { background: var(--amber-bg); color: var(--amber); border: 1px solid #fcd34d; }
+
+.theme-waitout { background: #f8f8f8; border-color: var(--rule); }
+.theme-waitout .as-title { color: var(--charcoal); }
+.theme-waitout .as-badge { background: #f0f0f0; color: var(--mid); border: 1px solid var(--rule); }
+
+.theme-build { background: var(--green-bg); border-color: #b7dfc8; }
+.theme-build .as-title { color: var(--green); }
+.theme-build .as-badge { background: var(--green-bg); color: var(--green); border: 1px solid #b7dfc8; }
+
+.theme-caution { background: var(--red-bg); border-color: #fecaca; }
+.theme-caution .as-title { color: var(--red); }
+.theme-caution .as-badge { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+
+/* Action item cards */
+.action-item {
+  background: white;
+  border: 1.5px solid var(--rule);
+  border-top: none;
+  padding: 16px 18px;
+}
+
+.action-item:last-child { border-radius: 0 0 9px 9px; }
+
+.ai-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ai-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.3;
+}
+
+.ai-effort {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.effort-fast { background: var(--green-bg); color: var(--green); }
+.effort-medium { background: var(--amber-bg); color: var(--amber); }
+.effort-slow { background: #f0f0f0; color: var(--mid); }
+
+.ai-desc {
+  font-size: 12.5px;
+  color: var(--mid);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.ai-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ai-steps li {
+  font-size: 12px;
+  color: var(--charcoal);
+  line-height: 1.5;
+  padding-left: 18px;
+  position: relative;
+}
+
+.ai-steps li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 10px;
+  top: 2px;
+}
+
+.ai-law {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 600;
+  background: var(--blue-bg);
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+/* Letter generator */
+.letter-gen {
+  background: white;
+  border: 1.5px solid var(--gold);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.lg-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.lg-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dark);
+}
+
+.lg-sub {
+  font-size: 12px;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.lg-select-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.lg-select {
+  flex: 1;
+  border: 1.5px solid var(--rule);
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--warm-white);
+  outline: none;
+  min-width: 160px;
+}
+
+.lg-select:focus { border-color: var(--gold); }
+
+.lg-gen-btn {
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.lg-gen-btn:hover { background: #333; }
+
+.letter-output {
+  background: var(--warm-white);
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  padding: 16px 18px;
+  font-size: 12.5px;
+  color: var(--charcoal);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  font-family: 'Inter', sans-serif;
+  display: none;
+  margin-top: 12px;
+}
+
+.letter-output.visible { display: block; }
+
+.letter-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  display: none;
+}
+
+.letter-actions.visible { display: flex; }
+
+.la-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.la-btn:hover { opacity: 0.85; }
+.la-btn.copy { background: var(--gold); color: var(--dark); }
+.la-btn.print { background: var(--dark); color: white; }
+.copy-confirm { font-size: 11px; color: var(--green); font-weight: 600; display: none; align-self: center; }
+
+/* Falloff timeline */
+.falloff-section {
+  background: white;
+  border: 1.5px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.falloff-header {
+  background: var(--dark);
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.falloff-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+
+.falloff-row:last-child { border-bottom: none; }
+
+.fr-name { color: var(--dark); font-weight: 500; }
+.fr-type { font-size: 11px; color: var(--mid); }
+.fr-date { font-weight: 700; color: var(--gold); white-space: nowrap; text-align: right; }
+.fr-countdown { font-size: 11px; color: var(--mid); text-align: right; }
+
+/* Honest truth box */
+.honest-box {
+  background: var(--dark);
+  border-radius: 10px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.hb-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+
+.hb-content p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.72;
+  margin-bottom: 10px;
+}
+
+.hb-content p:last-child { margin-bottom: 0; }
+.hb-content p strong { color: var(--gold); }
+
+/* CTA */
+.cta-box {
+  background: var(--gold);
+  border-radius: 10px;
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.cta-box p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.5;
+}
+
+.cta-box p small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 3px;
+  opacity: 0.7;
+}
+
+.cta-call {
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 12px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+
+.cta-call:hover { background: #333; }
+
+/* Print */
+.print-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.print-btn {
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.restart-btn {
+  background: white;
+  color: var(--mid);
+  border: 1.5px solid var(--rule);
+  border-radius: 7px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.restart-btn:hover { border-color: var(--gold); color: var(--dark); }
+
+@media (max-width: 640px) {
+  .field-row { grid-template-columns: 1fr; }
+  .opt-grid.c3 { grid-template-columns: 1fr 1fr; }
+  .score-summary { grid-template-columns: 1fr; }
+  .cta-box { flex-direction: column; }
+  .falloff-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  .site-header, .hero, .gen-btn, .letter-gen, .print-row, .cta-box { display: none !important; }
+  body { background: white; }
+  .main { padding: 0; max-width: 100%; }
+}
+
+
+#main-nav{position:fixed;top:0;left:0;right:0;background:rgba(26,26,26,0.97);backdrop-filter:blur(8px);z-index:1000;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(201,168,76,0.2);}
+.nav-logo a{text-decoration:none;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.03em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold)!important;color:var(--dark)!important;padding:8px 16px!important;border-radius:6px!important;font-weight:700!important;white-space:nowrap;}
+.nav-hamburger{display:none;background:none;border:none;color:white;font-size:22px;cursor:pointer;padding:4px;}
+#nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;}
+@media(max-width:768px){
+  .nav-hamburger{display:block;}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:0;right:0;bottom:0;width:260px;background:var(--dark);padding:80px 28px 32px;gap:6px;z-index:1001;border-left:1px solid rgba(201,168,76,0.2);}
+  .nav-links.open{display:flex;}
+  .nav-links a{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px;}
+  .nav-cta{margin-top:16px;text-align:center!important;}
+  #nav-overlay.open{display:block;}
+}
+
+
+/* ── SHARED NAV ── */
+#main-nav{position:fixed;top:0;left:0;right:0;background:white;z-index:1000;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #c9a84c;box-shadow:0 2px 20px rgba(0,0,0,0.08);}
+.nav-hamburger{display:none;background:none;border:none;color:#1a2e4a;font-size:22px;cursor:pointer;padding:4px;}
+.nav-links{display:flex;gap:20px;align-items:center;}
+.nav-links a{color:#243d5e;text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.02em;transition:color 0.2s;}
+.nav-links a:hover{color:#c9a84c;}
+#nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:999;}
+@media(max-width:768px){
+  .nav-hamburger{display:block;}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:0;right:0;bottom:0;width:260px;background:#1a2e4a;padding:80px 28px 32px;gap:6px;z-index:1001;border-left:3px solid #c9a84c;}
+  .nav-links.open{display:flex;}
+  .nav-links a{color:white;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .nav-links a:hover{color:#c9a84c;}
+  #nav-overlay.open{display:block;}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:flex;flex-direction:column;gap:1px;">
+      <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#1a2e4a;letter-spacing:-0.01em;line-height:1;">Closing with Angie</span>
+      <span style="font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#c9a84c;">Homes &middot; Loans &middot; Results</span>
+    </a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()">&#9776;</button>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="angie_hub.html">Agent Hub &#128274;</a>
+    <a href="buyer_calculator_glory.html">Calculators</a>
+    <a href="buyer_roadmap.html">Buyer Roadmap</a>
+    <a href="credit_action_plan.html">Credit Plan</a>
+    <a href="index.html#contact" style="background:#c9a84c;color:white;padding:8px 16px;border-radius:6px;font-weight:700;">Get Pre-Approved</a>
+  </div>
+</nav>
+<div id="nav-overlay" onclick="toggleMobileNav()"></div>
+  <div class="header-lo">
+    <strong>Angie Wilmoth</strong> · Glory Mortgage · NMLS# 2617463<br>
+    336-408-9531 · angie@closingwithangie.com
+  </div>
+</div>
+
+<div class="hero" style="padding-top:82px;">
+  <div class="hero-eye">Honest Credit Education</div>
+  <h1>Your Personal<br><em>Credit Action Plan</em></h1>
+  <p>No gimmicks. No fake law codes. No telling you to claim identity theft. Just honest, actionable steps based on what's actually on your credit — and what you can actually do about it.</p>
+  <div class="hero-disclaimer">⚠️ This tool is for education only — not credit repair services. For personalized guidance, call Angie at 336-408-9531.</div>
+</div>
+
+<div class="main" style="padding-top:82px;">
+
+  <!-- INTAKE -->
+  <div class="intake-card" id="intake-section">
+    <div class="intake-header">
+      <div class="ih-icon">📊</div>
+      <div>
+        <div class="ih-title">Tell me about your credit situation</div>
+        <div class="ih-sub">The more honest you are, the more useful your plan will be</div>
+      </div>
+    </div>
+    <div class="intake-body">
+
+      <!-- Basic info -->
+      <div class="field-row">
+        <div class="field">
+          <label>Your First Name</label>
+          <input type="text" id="c_first" placeholder="e.g. Sarah">
+        </div>
+        <div class="field">
+          <label>Current Credit Score (estimate)</label>
+          <input type="number" id="c_score" placeholder="e.g. 612" min="300" max="850">
+          <div class="hint">Check Credit Karma, your bank app, or any free service</div>
+        </div>
+      </div>
+
+      <!-- Target score -->
+      <div class="field">
+        <label>What's your goal?</label>
+        <div class="opt-grid c3">
+          <div class="ob" onclick="selOpt(this,'goal','qualify')">
+            <span class="oi">🏠</span>
+            <div class="ol">Qualify for a mortgage</div>
+            <div class="os">Get to 620+</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'goal','better-rate')">
+            <span class="oi">📉</span>
+            <div class="ol">Get a better rate</div>
+            <div class="os">Push to 700+</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'goal','understand')">
+            <span class="oi">🔍</span>
+            <div class="ol">Understand my report</div>
+            <div class="os">Know where I stand</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credit items -->
+      <div class="field">
+        <label>What's on your credit report? Add each item below.</label>
+        <div class="hint" style="margin-bottom:10px;">Add one item at a time — be as specific as you can. You can add up to 8 items.</div>
+        <div id="items-container"></div>
+        <button class="add-item-btn" onclick="addItem()" id="add-btn">+ Add a Credit Item</button>
+      </div>
+
+      <!-- Utilization -->
+      <div class="field">
+        <label>Credit Card Utilization</label>
+        <div class="opt-grid c3">
+          <div class="ob" onclick="selOpt(this,'util','low')">
+            <span class="oi">✅</span>
+            <div class="ol">Under 30%</div>
+            <div class="os">In good shape</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'util','mid')">
+            <span class="oi">⚠️</span>
+            <div class="ol">30% – 70%</div>
+            <div class="os">Room to improve</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'util','high')">
+            <span class="oi">🔴</span>
+            <div class="ol">Over 70%</div>
+            <div class="os">Big score drag</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'util','none')">
+            <span class="oi">💳</span>
+            <div class="ol">No credit cards</div>
+            <div class="os">No revolving credit</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment history -->
+      <div class="field">
+        <label>Recent payment history (last 12 months)</label>
+        <div class="opt-grid c3">
+          <div class="ob" onclick="selOpt(this,'payments','perfect')">
+            <span class="oi">⭐</span>
+            <div class="ol">All on time</div>
+            <div class="os">No late payments</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'payments','onetwo')">
+            <span class="oi">😬</span>
+            <div class="ol">1–2 late payments</div>
+            <div class="os">Minor slip</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'payments','several')">
+            <span class="oi">🔴</span>
+            <div class="ol">Several late</div>
+            <div class="os">Pattern of lates</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Positive credit -->
+      <div class="field">
+        <label>Do you have any open accounts in good standing?</label>
+        <div class="opt-grid c3">
+          <div class="ob" onclick="selOpt(this,'positive','yes')">
+            <span class="oi">✅</span>
+            <div class="ol">Yes — several</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'positive','one')">
+            <span class="oi">👍</span>
+            <div class="ol">Just one or two</div>
+          </div>
+          <div class="ob" onclick="selOpt(this,'positive','no')">
+            <span class="oi">😕</span>
+            <div class="ol">No open accounts</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="gen-btn" onclick="generatePlan()">Build My Credit Action Plan →</button>
+    </div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div id="plan-output">
+
+    <!-- Score summary -->
+    <div class="score-summary" id="score-summary"></div>
+
+    <!-- Honest truth -->
+    <div class="honest-box">
+      <div class="hb-icon">💡</div>
+      <div class="hb-content" id="honest-content"></div>
+    </div>
+
+    <!-- Action sections -->
+    <div id="action-sections"></div>
+
+    <!-- Fall-off timeline -->
+    <div class="falloff-section" id="falloff-section" style="display:none;">
+      <div class="falloff-header">
+        <span>📅</span> When Negative Items Fall Off Your Report
+      </div>
+      <div id="falloff-rows"></div>
+    </div>
+
+    <!-- Letter generator -->
+    <div class="letter-gen" id="letter-gen" style="display:none;">
+      <div class="lg-header">
+        <span style="font-size:20px;">✉️</span>
+        <div class="lg-title">Dispute & Goodwill Letter Generator</div>
+      </div>
+      <p class="lg-sub">For items that are genuinely inaccurate or where a goodwill request makes sense. These letters are a starting point — personalize them before sending. <strong>Never use these to dispute accurate information.</strong></p>
+      <div class="lg-select-row">
+        <select class="lg-select" id="letter-type">
+          <option value="">Select letter type...</option>
+          <option value="dispute-bureau">Credit Bureau Dispute Letter</option>
+          <option value="dispute-creditor">Direct Creditor Dispute Letter</option>
+          <option value="goodwill">Goodwill Removal Request</option>
+          <option value="paydelete">Pay-for-Delete Request</option>
+          <option value="debt-validation">Debt Validation Letter</option>
+        </select>
+        <button class="lg-gen-btn" onclick="generateLetter()">Generate Letter →</button>
+      </div>
+      <div class="letter-output" id="letter-output"></div>
+      <div class="letter-actions" id="letter-actions">
+        <button class="la-btn copy" onclick="copyLetter()">📋 Copy Letter</button>
+        <button class="la-btn print" onclick="window.print()">🖨️ Print</button>
+        <span class="copy-confirm" id="letter-cc">✓ Copied!</span>
+      </div>
+      <p style="font-size:11px;color:#aaa;margin-top:12px;">⚠️ These letters are educational templates only. Always personalize with your specific account details. Consult with Angie before sending any dispute letters related to a pending mortgage application.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <p>
+        Ready to talk through your specific situation?
+        <small>Angie reviews credit situations for free — no pressure, no obligation. Just real answers.</small>
+      </p>
+      <a href="tel:3364089531" class="cta-call">📞 Call Angie — 336-408-9531</a>
+    </div>
+
+    <div class="print-row">
+      <button class="restart-btn" onclick="restartPlan()">↺ Start Over</button>
+      <button class="print-btn" onclick="window.print()">🖨️ Print My Plan</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+// ── STATE ──
+const opts = {};
+let items = [];
+let itemCount = 0;
+
+function selOpt(el, key, val) {
+  el.closest('.opt-grid').querySelectorAll('.ob').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  opts[key] = val;
+}
+
+// ── ITEM MANAGEMENT ──
+function addItem() {
+  if (itemCount >= 8) { alert('Maximum 8 items. Call Angie if you have more!'); return; }
+  itemCount++;
+  const id = 'item_' + itemCount;
+
+  const div = document.createElement('div');
+  div.className = 'item-entry';
+  div.id = id;
+  div.innerHTML = `
+    <div class="item-entry-header">
+      <div class="item-num">Item ${itemCount}</div>
+      <button class="item-remove" onclick="removeItem('${id}')">✕ Remove</button>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Creditor / Account Name</label>
+        <input type="text" id="${id}_name" placeholder="e.g. Capital One, Midland Credit">
+      </div>
+      <div class="field">
+        <label>Item Type</label>
+        <select id="${id}_type">
+          <option value="">Select type...</option>
+          <option value="late">Late Payment</option>
+          <option value="collection">Collection Account</option>
+          <option value="chargeoff">Charge-Off</option>
+          <option value="inquiry">Hard Inquiry</option>
+          <option value="bankruptcy">Bankruptcy</option>
+          <option value="repo">Repossession</option>
+          <option value="medical">Medical Debt</option>
+          <option value="judgment">Judgment / Lien</option>
+          <option value="other">Other Negative Item</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Amount Owed (if applicable)</label>
+        <input type="number" id="${id}_amount" placeholder="e.g. 1200" min="0">
+      </div>
+      <div class="field">
+        <label>Approx. Date of First Delinquency</label>
+        <input type="text" id="${id}_date" placeholder="e.g. Jan 2021 or ~3 years ago">
+      </div>
+    </div>
+    <div class="field">
+      <label>Is this information accurate?</label>
+      <div class="opt-grid c3" style="margin-top:6px;">
+        <div class="ob" onclick="selItemOpt(this,'${id}_accurate','yes')"><div class="ol">✅ Yes — it's mine</div></div>
+        <div class="ob" onclick="selItemOpt(this,'${id}_accurate','no')"><div class="ol">❌ No — it's wrong</div></div>
+        <div class="ob" onclick="selItemOpt(this,'${id}_accurate','unsure')"><div class="ol">🤷 Not sure</div></div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('items-container').appendChild(div);
+
+  if (itemCount >= 8) document.getElementById('add-btn').style.display = 'none';
+}
+
+function removeItem(id) {
+  document.getElementById(id)?.remove();
+  if (itemCount >= 8) document.getElementById('add-btn').style.display = 'block';
+  itemCount = Math.max(0, itemCount - 1);
+}
+
+function selItemOpt(el, key, val) {
+  el.closest('.opt-grid').querySelectorAll('.ob').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  opts[key] = val;
+}
+
+// ── COLLECT ITEMS ──
+function collectItems() {
+  const results = [];
+  document.querySelectorAll('.item-entry').forEach(entry => {
+    const id = entry.id;
+    const name = document.getElementById(id + '_name')?.value.trim() || 'Unknown Account';
+    const type = document.getElementById(id + '_type')?.value || 'other';
+    const amount = parseFloat(document.getElementById(id + '_amount')?.value) || 0;
+    const date = document.getElementById(id + '_date')?.value.trim() || '';
+    const accurate = opts[id + '_accurate'] || 'unsure';
+    results.push({ name, type, amount, date, accurate });
+  });
+  return results;
+}
+
+// ── GENERATE PLAN ──
+function generatePlan() {
+  const first = document.getElementById('c_first').value.trim() || 'Friend';
+  const score = parseInt(document.getElementById('c_score').value) || 0;
+  items = collectItems();
+
+  // Hide intake, show output
+  document.getElementById('intake-section').style.display = 'none';
+  document.getElementById('plan-output').style.display = 'block';
+
+  // Score color
+  let scoreColor, scoreTier, scoreDesc;
+  if (score >= 740) {
+    scoreColor = '#1e6641'; scoreTier = 'Excellent';
+    scoreDesc = 'You\'re in the top pricing tier. Most of what\'s left is fine-tuning and maintaining.';
+  } else if (score >= 700) {
+    scoreColor = '#2d6a4f'; scoreTier = 'Good';
+    scoreDesc = 'Strong score with great loan options. A push to 740+ unlocks the absolute best rate tier.';
+  } else if (score >= 660) {
+    scoreColor = var_amber(); scoreTier = 'Fair-Good';
+    scoreDesc = 'You qualify for most programs. Strategic moves from here can save you real money on your rate.';
+  } else if (score >= 620) {
+    scoreColor = '#b45309'; scoreTier = 'Fair';
+    scoreDesc = 'You\'re mortgage-eligible but rate improvements are very achievable. Let\'s work the plan.';
+  } else if (score >= 580) {
+    scoreColor = '#c2410c'; scoreTier = 'Below Average';
+    scoreDesc = 'FHA-eligible at 580. The gap between here and 620 is closeable — often in 3-6 months.';
+  } else if (score > 0) {
+    scoreColor = '#991b1b'; scoreTier = 'Needs Work';
+    scoreDesc = 'Every score has a path forward. Let\'s identify the fastest moves to get you climbing.';
+  } else {
+    scoreColor = '#666'; scoreTier = 'Unknown';
+    scoreDesc = 'Pull your free report at AnnualCreditReport.com — knowing your number is step one.';
+  }
+
+  // Score summary
+  document.getElementById('score-summary').innerHTML = `
+    <div>
+      <div class="ss-label">${first}'s Credit Action Plan</div>
+      <div class="ss-name">Here's the honest picture.</div>
+      <div class="ss-desc">${scoreDesc} This plan is built around what you can actually do — not myths or magic law codes.</div>
+    </div>
+    <div class="ss-score-box">
+      <div class="ss-score-num" style="color:${scoreColor}">${score || '?'}</div>
+      <div class="ss-score-label">${scoreTier}</div>
+    </div>
+  `;
+
+  // Honest truth content
+  buildHonestTruth(score, items);
+
+  // Build action sections
+  buildActionSections(score, items, first);
+
+  // Build falloff timeline
+  buildFalloffTimeline(items);
+
+  // Show letter generator if relevant items
+  const hasDisputable = items.some(i => i.accurate === 'no' || i.accurate === 'unsure');
+  const hasLatePayments = items.some(i => i.type === 'late' && i.accurate === 'yes');
+  const hasCollections = items.some(i => i.type === 'collection');
+  if (hasDisputable || hasLatePayments || hasCollections) {
+    document.getElementById('letter-gen').style.display = 'block';
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function var_amber() { return '#b45309'; }
+
+// ── HONEST TRUTH ──
+function buildHonestTruth(score, items) {
+  const hasInaccurate = items.some(i => i.accurate === 'no');
+  const hasLegit = items.some(i => i.accurate === 'yes');
+  const hasCollections = items.some(i => i.type === 'collection' && i.accurate === 'yes');
+  const util = opts.util;
+
+  let paras = [];
+
+  paras.push(`<p>Let's cut through the noise you've probably seen online. There are no secret law codes that delete accurate negative items from your credit report. Anyone telling you to cite 15 U.S. Code anything to remove a debt that's legitimately yours is misleading you — and advice to claim identity theft on a real debt is <strong>fraud</strong>. You deserve better than that.</p>`);
+
+  if (hasInaccurate) {
+    paras.push(`<p>The good news: you've identified items you believe are inaccurate. <strong>Disputing genuinely inaccurate information is your legal right</strong> under the FCRA — and it works. Bureaus are required to investigate and remove items they can't verify. That's real, and that's where we'll focus first.</p>`);
+  }
+
+  if (hasLegit && hasCollections) {
+    paras.push(`<p>For collections that are accurate — <strong>call Angie before you pay anything.</strong> Strategy matters here. Paying a collection doesn't automatically remove it. A "pay-for-delete" agreement in writing before you pay is the move that actually helps your score.</p>`);
+  }
+
+  if (util === 'high' || util === 'mid') {
+    paras.push(`<p><strong>Credit utilization is your fastest lever.</strong> It's recalculated every month when your statement closes. Getting your balances below 30% — ideally below 10% — can move your score meaningfully in 30-60 days. No waiting, no disputing, no letters. Just pay it down.</p>`);
+  }
+
+  paras.push(`<p>Time heals most credit wounds. The older a negative item gets, the less it impacts your score — even before it falls off completely. Your plan below shows you exactly when each item expires so you know what you're working with.</p>`);
+
+  document.getElementById('honest-content').innerHTML = paras.join('');
+}
+
+// ── ACTION SECTIONS ──
+function buildActionSections(score, items, first) {
+  const container = document.getElementById('action-sections');
+  container.innerHTML = '';
+
+  const sections = [];
+
+  // 1. INACCURATE ITEMS — DISPUTE
+  const inaccurate = items.filter(i => i.accurate === 'no');
+  if (inaccurate.length > 0) {
+    const actionItems = inaccurate.map(item => ({
+      title: `Dispute: ${item.name} (${typeLabel(item.type)})`,
+      effort: 'fast',
+      effortLabel: 'High Priority',
+      desc: `This item appears to be inaccurate. Under the FCRA, you have the right to dispute any information you believe is incorrect. The bureau must investigate within 30 days.`,
+      steps: [
+        'Pull your full credit report at AnnualCreditReport.com (all 3 bureaus)',
+        'Document why this item is inaccurate — gather any supporting evidence',
+        'File a dispute online at Equifax.com, Experian.com, and TransUnion.com',
+        'Include a brief explanation and any documentation',
+        'The bureau has 30 days to investigate and respond',
+        'If removed: great! If not: escalate directly to the creditor'
+      ],
+      law: 'FCRA § 611 — Right to dispute inaccurate information'
+    }));
+
+    sections.push({
+      theme: 'dispute',
+      icon: '❌',
+      title: 'Dispute Inaccurate Items',
+      badge: 'Do First',
+      items: actionItems
+    });
+  }
+
+  // 2. UNVERIFIED ITEMS
+  const unsure = items.filter(i => i.accurate === 'unsure');
+  if (unsure.length > 0) {
+    const actionItems = unsure.map(item => ({
+      title: `Verify: ${item.name} (${typeLabel(item.type)})`,
+      effort: 'fast',
+      effortLabel: 'Verify First',
+      desc: `You're not sure if this is accurate. Before doing anything else, request debt validation to confirm this is actually yours and that the amount is correct.`,
+      steps: [
+        'Send a Debt Validation Letter to the collection agency (use the generator below)',
+        'They are required to provide proof the debt is yours and the amount is correct',
+        'If they can\'t validate it — dispute it with the bureaus immediately',
+        'If it is yours — then decide whether to pay, negotiate, or wait for it to fall off'
+      ],
+      law: 'FDCPA § 809(b) — Right to debt validation within 30 days'
+    }));
+
+    sections.push({
+      theme: 'dispute',
+      icon: '🤷',
+      title: 'Verify Before Acting',
+      badge: 'Check First',
+      items: actionItems
+    });
+  }
+
+  // 3. UTILIZATION
+  if (opts.util === 'high' || opts.util === 'mid') {
+    sections.push({
+      theme: 'utilization',
+      icon: '💳',
+      title: 'Reduce Credit Card Utilization',
+      badge: 'Fastest Score Boost',
+      items: [{
+        title: 'Pay down credit card balances',
+        effort: 'fast',
+        effortLabel: '30-60 Days',
+        desc: 'Utilization is 30% of your FICO score and updates every month. This is the single fastest thing most people can do to move their score.',
+        steps: [
+          'List every credit card and its current balance and limit',
+          'Calculate utilization per card: balance ÷ limit',
+          'Target: get every card below 30% — ideally below 10%',
+          'Pay the highest-utilization cards first for maximum score impact',
+          opts.util === 'high' ? 'Consider a balance transfer to spread balances across cards if payoff isn\'t immediate' : 'You\'re close — a targeted paydown should move your score within one statement cycle',
+          'Ask about "rapid rescore" — if you pay a card down, your score can update in 3-5 business days vs. 30'
+        ]
+      }]
+    });
+  }
+
+  if (opts.util === 'none') {
+    sections.push({
+      theme: 'build',
+      icon: '🌱',
+      title: 'Build Revolving Credit History',
+      badge: 'Important',
+      items: [{
+        title: 'Open a secured credit card',
+        effort: 'medium',
+        effortLabel: '3-6 Months',
+        desc: 'Having no revolving credit actually hurts your score. A secured card (where you deposit $200-500 as collateral) builds credit history safely.',
+        steps: [
+          'Apply for a secured card — Discover Secured, Capital One Secured, or your bank\'s option',
+          'Use it for one small recurring purchase per month (like a Netflix subscription)',
+          'Pay the full balance every month before the due date',
+          'After 6-12 months of on-time payments, most cards graduate to unsecured',
+          'This builds payment history AND adds a revolving account to your mix'
+        ]
+      }]
+    });
+  }
+
+  // 4. PAY FOR DELETE (collections)
+  const collections = items.filter(i => i.type === 'collection' && i.accurate === 'yes');
+  if (collections.length > 0) {
+    const actionItems = collections.map(item => ({
+      title: `Pay-for-Delete Negotiation: ${item.name}${item.amount > 0 ? ' ($' + item.amount.toLocaleString() + ')' : ''}`,
+      effort: 'medium',
+      effortLabel: 'Worth Trying',
+      desc: 'This debt is accurate, so you can\'t dispute it. But some collection agencies will agree to remove it from your report in exchange for payment. It\'s not required by law, but it doesn\'t hurt to ask — especially with smaller agencies.',
+      steps: [
+        'Do NOT pay yet — get the agreement in writing first',
+        'Call the collection agency and ask: "If I pay this in full today, will you remove it from my credit report?"',
+        'Get any agreement in writing via email or letter BEFORE sending payment',
+        'Pay with a method that has a paper trail (check, money order, or credit card)',
+        'Follow up 30-45 days later to confirm removal',
+        'Note: Original creditors (banks, etc.) almost never do pay-for-delete — works best with collection agencies'
+      ]
+    }));
+
+    sections.push({
+      theme: 'paydelete',
+      icon: '🤝',
+      title: 'Negotiate Pay-for-Delete',
+      badge: 'Accurate but Actionable',
+      items: actionItems
+    });
+  }
+
+  // 5. GOODWILL (late payments)
+  const lates = items.filter(i => i.type === 'late' && i.accurate === 'yes');
+  if (lates.length > 0 && lates.length <= 2) {
+    sections.push({
+      theme: 'goodwill',
+      icon: '💌',
+      title: 'Goodwill Letter — Late Payments',
+      badge: 'Worth Trying',
+      items: [{
+        title: `Request goodwill removal for late payment(s)`,
+        effort: 'medium',
+        effortLabel: 'Low Effort, Real Results',
+        desc: 'If you have 1-2 late payments on an otherwise solid account, a well-written goodwill letter asking the creditor to remove them as a courtesy actually works sometimes — especially if you\'ve been a long-time customer or the late was due to a hardship.',
+        steps: [
+          'Write a brief, honest letter to the creditor (use the generator below)',
+          'Acknowledge the late payment — don\'t make excuses, just explain context',
+          'Highlight your overall positive history with them',
+          'Ask politely for a one-time goodwill removal',
+          'Send via certified mail to the creditor\'s customer service address',
+          'Be patient — this is a courtesy request, not a legal right. Some say yes, some don\'t.',
+          'No harm in trying — the worst they can say is no'
+        ]
+      }]
+    });
+  }
+
+  // 6. PAYMENT HISTORY
+  if (opts.payments === 'several' || opts.payments === 'onetwo') {
+    sections.push({
+      theme: 'build',
+      icon: '📅',
+      title: 'Rebuild Payment History',
+      badge: 'Most Important Habit',
+      items: [{
+        title: 'Make every payment on time — starting now',
+        effort: 'slow',
+        effortLabel: 'Ongoing',
+        desc: 'Payment history is 35% of your FICO score — the single biggest factor. Past lates hurt, but consistent on-time payments going forward rebuild your score every single month.',
+        steps: [
+          'Set up autopay for at least the minimum on every account',
+          'Put payment due dates in your phone calendar with reminders',
+          'Six consecutive months of on-time payments starts to meaningfully offset past lates',
+          'Twelve months creates a solid recent history that lenders love to see',
+          'Even one new late payment right now can undo months of progress — protect your streak'
+        ]
+      }]
+    });
+  }
+
+  // 7. POSITIVE CREDIT
+  if (opts.positive === 'no') {
+    sections.push({
+      theme: 'build',
+      icon: '🌱',
+      title: 'Build Positive Credit History',
+      badge: 'Foundation Work',
+      items: [{
+        title: 'Open a credit builder product',
+        effort: 'medium',
+        effortLabel: '6-12 Months',
+        desc: 'With no open accounts in good standing, lenders have nothing positive to look at. Adding even one account and paying it perfectly starts building the foundation you need.',
+        steps: [
+          'Option 1: Secured credit card ($200-500 deposit, use for one small purchase/month, pay in full)',
+          'Option 2: Credit Builder Loan — Self.inc or your local credit union. You pay monthly, they report it as on-time, you get the money at the end.',
+          'Option 3: Become an authorized user on a family member\'s old, clean account — their history becomes yours',
+          'Don\'t open more than 1-2 new accounts at once — too many hard inquiries hurt your score',
+          'Give it 6 months before expecting major score movement — this is foundation building'
+        ]
+      }]
+    });
+  }
+
+  // 8. WAIT-IT-OUT items
+  const waitItems = items.filter(i =>
+    i.accurate === 'yes' &&
+    i.type !== 'collection' &&
+    i.type !== 'late' &&
+    i.type !== 'inquiry'
+  );
+
+  if (waitItems.length > 0) {
+    const actionItems = waitItems.map(item => {
+      const falloff = getFalloffInfo(item);
+      return {
+        title: `${item.name} — ${typeLabel(item.type)}: ${falloff.timeLeft}`,
+        effort: 'slow',
+        effortLabel: 'Time Heals This',
+        desc: `This item is accurate, so disputing it won't work. The honest answer: ${falloff.honestAnswer}`,
+        steps: [
+          `This item falls off your report around: ${falloff.dropDate}`,
+          'In the meantime, focus your energy on the actionable items above',
+          'Negative items lose impact as they age — even before they fall off',
+          'A year-old bankruptcy hurts much more than a 5-year-old one',
+          'Build positive history alongside it to start offsetting the impact'
+        ]
+      };
+    });
+
+    sections.push({
+      theme: 'waitout',
+      icon: '⏳',
+      title: 'Time-Based Items — Nothing to Do But Wait',
+      badge: 'Honest Answer',
+      items: actionItems
+    });
+  }
+
+  // 9. CAUTION — Inquiries
+  const inquiries = items.filter(i => i.type === 'inquiry');
+  if (inquiries.length > 0) {
+    sections.push({
+      theme: 'caution',
+      icon: '⚠️',
+      title: 'Hard Inquiries',
+      badge: 'Minor Impact',
+      items: [{
+        title: 'Hard inquiries — smaller impact than people think',
+        effort: 'slow',
+        effortLabel: 'Falls off in 2 years',
+        desc: 'Hard inquiries from credit applications typically cost 5-10 points and fall off your report after 2 years. They\'re the least impactful negative item on your report.',
+        steps: [
+          'Each inquiry typically costs 5-10 points — minor compared to other factors',
+          'Multiple mortgage inquiries within 14-45 days count as ONE inquiry for scoring purposes',
+          'Don\'t apply for new credit cards, car loans, or anything else before buying a home',
+          'Time is the only cure — they fall off automatically after 2 years',
+          'Focus your energy on utilization and payment history instead — those move the needle more'
+        ]
+      }]
+    });
+  }
+
+  // Render
+  sections.forEach(sec => {
+    const div = document.createElement('div');
+    div.className = 'action-section';
+    div.innerHTML = `
+      <div class="as-header theme-${sec.theme}">
+        <span class="as-icon">${sec.icon}</span>
+        <span class="as-title">${sec.title}</span>
+        <span class="as-badge">${sec.badge}</span>
+      </div>
+      ${sec.items.map(item => `
+        <div class="action-item">
+          <div class="ai-top">
+            <div class="ai-title">${item.title}</div>
+            <span class="ai-effort effort-${item.effort === 'fast' ? 'fast' : item.effort === 'medium' ? 'medium' : 'slow'}">${item.effortLabel}</span>
+          </div>
+          <div class="ai-desc">${item.desc}</div>
+          <ul class="ai-steps">
+            ${item.steps.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+          ${item.law ? `<div class="ai-law">📋 ${item.law}</div>` : ''}
+        </div>
+      `).join('')}
+    `;
+    container.appendChild(div);
+  });
+
+  // Always add final "don't do these" section
+  const dontDiv = document.createElement('div');
+  dontDiv.className = 'action-section';
+  dontDiv.innerHTML = `
+    <div class="as-header theme-caution">
+      <span class="as-icon">🚫</span>
+      <span class="as-title">What NOT to Do — Common Traps</span>
+      <span class="as-badge">Avoid These</span>
+    </div>
+    <div class="action-item">
+      <div class="ai-top"><div class="ai-title">Things that won't work — or could make things worse</div></div>
+      <div class="ai-desc">The internet is full of bad credit advice. Here's the honest truth about what doesn't work:</div>
+      <ul class="ai-steps">
+        <li><strong>Claiming identity theft on a real debt</strong> — This is fraud. The person who signs the dispute letter (you) is the one who could face legal consequences, not the credit repair company coaching you.</li>
+        <li><strong>Citing law codes to delete accurate items</strong> — 15 U.S. Code citations don't magically delete legitimate debts. Bureaus know this game and it rarely works on accurate items.</li>
+        <li><strong>Paying a collection without a written pay-for-delete agreement</strong> — Paying without an agreement can actually reset the activity on the account without removing it. Get it in writing first.</li>
+        <li><strong>Closing old credit cards</strong> — This reduces your available credit (raises utilization) and shortens your credit history. Both hurt your score.</li>
+        <li><strong>Opening lots of new accounts quickly</strong> — Multiple hard inquiries signal risk to lenders. Open one at a time, maximum.</li>
+        <li><strong>Paying a credit repair company $200/month</strong> — Everything a legitimate credit repair company does, you can do yourself for free. Save that money for your down payment.</li>
+        <li><strong>Disputing accurate items just to see what happens</strong> — Frivolous disputes can be flagged and ignored. Save disputes for genuinely inaccurate information.</li>
+      </ul>
+    </div>
+  `;
+  container.appendChild(dontDiv);
+}
+
+// ── FALLOFF TIMELINE ──
+function getFalloffInfo(item) {
+  const typeYears = {
+    'late': 7, 'collection': 7, 'chargeoff': 7,
+    'repo': 7, 'judgment': 7, 'medical': 7,
+    'inquiry': 2, 'bankruptcy': 7, 'other': 7
+  };
+
+  const years = typeYears[item.type] || 7;
+  if (item.type === 'bankruptcy') {
+    return {
+      dropDate: 'Chapter 7: ~10 years from filing · Chapter 13: ~7 years from filing',
+      timeLeft: 'Varies by type',
+      honestAnswer: 'Bankruptcy has a defined waiting period before its impact lessens significantly. FHA allows buying 2 years after Chapter 7 discharge with rebuilt credit.'
+    };
+  }
+
+  return {
+    dropDate: item.date ? `Approximately ${years} years from ${item.date}` : `${years} years from first delinquency`,
+    timeLeft: `Falls off after ${years} years`,
+    honestAnswer: `This stays on your report for up to ${years} years from the date of first delinquency. Its impact diminishes significantly in the last 1-2 years before it drops off.`
+  };
+}
+
+function buildFalloffTimeline(items) {
+  if (items.length === 0) return;
+
+  const section = document.getElementById('falloff-section');
+  const rows = document.getElementById('falloff-rows');
+
+  const typeYears = {
+    'late': 7, 'collection': 7, 'chargeoff': 7,
+    'repo': 7, 'judgment': 7, 'medical': 7,
+    'inquiry': 2, 'bankruptcy': 10, 'other': 7
+  };
+
+  rows.innerHTML = items.map(item => {
+    const years = typeYears[item.type] || 7;
+    const falloff = item.date
+      ? `~${years} yrs from ${item.date}`
+      : `${years} years from delinquency`;
+
+    return `
+      <div class="falloff-row">
+        <div>
+          <div class="fr-name">${item.name}</div>
+          <div class="fr-type">${typeLabel(item.type)}</div>
+        </div>
+        <div class="fr-date">${falloff}</div>
+      </div>
+    `;
+  }).join('');
+
+  section.style.display = 'block';
+}
+
+function typeLabel(type) {
+  const labels = {
+    'late': 'Late Payment', 'collection': 'Collection', 'chargeoff': 'Charge-Off',
+    'inquiry': 'Hard Inquiry', 'bankruptcy': 'Bankruptcy', 'repo': 'Repossession',
+    'medical': 'Medical Debt', 'judgment': 'Judgment/Lien', 'other': 'Negative Item'
+  };
+  return labels[type] || type;
+}
+
+// ── LETTER GENERATOR ──
+function generateLetter() {
+  const type = document.getElementById('letter-type').value;
+  if (!type) { alert('Please select a letter type.'); return; }
+
+  const first = document.getElementById('c_first').value.trim() || '[YOUR NAME]';
+  const score = document.getElementById('c_score').value || '[YOUR SCORE]';
+  const firstItem = items[0];
+  const creditor = firstItem?.name || '[CREDITOR NAME]';
+  const amount = firstItem?.amount > 0 ? '$' + firstItem.amount.toLocaleString() : '[AMOUNT]';
+  const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  let letter = '';
+
+  if (type === 'dispute-bureau') {
+    letter = `${today}
+
+[Your Full Name]
+[Your Address]
+[City, State ZIP]
+[Your Email]
+[Your Phone]
+
+Equifax / Experian / TransUnion
+[Bureau Address]
+
+RE: Request to Investigate Inaccurate Information
+
+To Whom It May Concern,
+
+I am writing to dispute the following inaccurate information on my credit report. I have reviewed my credit report and identified an item that is incorrect and must be investigated and corrected under the Fair Credit Reporting Act (FCRA), 15 U.S.C. § 1681i.
+
+DISPUTED ITEM:
+Creditor/Account Name: ${creditor}
+Reason for Dispute: [Describe specifically why this is inaccurate — wrong amount, not your account, already paid, duplicate entry, etc.]
+
+This information is inaccurate because: [Explain in your own words]
+
+I am requesting that you investigate this matter and correct or remove this inaccurate item from my credit report within the 30-day period required by the FCRA. Please send me written confirmation of the results of your investigation.
+
+Enclosed: [List any supporting documents — statements, letters, receipts, etc.]
+
+Sincerely,
+
+${first}
+[Your Signature]
+
+---
+Note: Send via certified mail with return receipt. Keep a copy of everything.`;
+
+  } else if (type === 'dispute-creditor') {
+    letter = `${today}
+
+[Your Full Name]
+[Your Address]
+[City, State ZIP]
+
+${creditor}
+[Creditor Address — look this up on your statement or their website]
+
+RE: Dispute of Inaccurate Account Information
+
+Dear ${creditor} Customer Service,
+
+I am writing to dispute information reported to the credit bureaus regarding my account with your company. Under the Fair Credit Reporting Act, I have the right to dispute inaccurate information.
+
+ACCOUNT IN QUESTION:
+Account Holder: ${first}
+Account Number: [Your account number]
+Issue: [Describe the inaccuracy specifically]
+
+This information is incorrect because: [Your explanation]
+
+I am requesting that you investigate this matter, correct your records, and update the credit bureaus accordingly within 30 days.
+
+Please confirm receipt of this letter and provide written notification of your findings.
+
+Sincerely,
+
+${first}
+[Phone Number]
+[Email]`;
+
+  } else if (type === 'goodwill') {
+    letter = `${today}
+
+[Your Full Name]
+[Your Address]
+[City, State ZIP]
+
+${creditor} Customer Service
+[Address]
+
+RE: Goodwill Request — Removal of Late Payment
+
+Dear ${creditor} Customer Relations Team,
+
+I have been a customer of ${creditor} since [DATE] and have always valued our relationship. I am writing with a sincere request for your consideration.
+
+In [MONTH/YEAR], I had a late payment on my account. I want to acknowledge this — it was my responsibility and I own that. The circumstances at the time were [briefly explain: job loss, medical issue, family emergency, simple oversight — be honest and brief].
+
+Since that time, I have [describe positive history — made all payments on time, paid the balance down, etc.]. My commitment to this account has been consistent.
+
+I am currently working toward purchasing a home for my family, and this late payment is affecting my credit score significantly. I am humbly requesting that you consider removing this late payment as a one-time goodwill gesture given my otherwise positive history with your company.
+
+I understand this is not required and is entirely at your discretion. I am grateful for your consideration of this request.
+
+Thank you sincerely for your time.
+
+With appreciation,
+
+${first}
+[Phone Number]
+[Email]
+Account Number: [Your account number]`;
+
+  } else if (type === 'paydelete') {
+    letter = `${today}
+
+[Your Full Name]
+[Your Address]
+[City, State ZIP]
+
+${creditor}
+[Address]
+
+RE: Settlement Offer with Request for Credit Reporting Deletion
+
+Dear ${creditor},
+
+I am writing regarding account [ACCOUNT NUMBER] currently showing a balance of ${amount}.
+
+I am prepared to resolve this account immediately in exchange for your agreement to completely remove all references to this account from my credit reports with Equifax, Experian, and TransUnion.
+
+Specifically, I am offering:
+- Full payment of ${amount} [OR: a settlement of $[AMOUNT] — approximately [X]% of the balance]
+- Payment within [X] business days of receiving your written agreement
+
+In return, I am requesting that you:
+- Cease all collection activity on this account
+- Report to all three credit bureaus that this account is to be deleted — not simply marked "paid"
+- Provide written confirmation of this agreement before I submit payment
+
+Please understand that I will NOT submit payment without first receiving your written agreement to delete this account from my credit report. Payment by check or money order will follow within [X] days of your written confirmation.
+
+If you agree to these terms, please respond in writing to the address above or via email at [YOUR EMAIL].
+
+Sincerely,
+
+${first}
+
+IMPORTANT: Do not pay until you have written confirmation of deletion.`;
+
+  } else if (type === 'debt-validation') {
+    letter = `${today}
+
+[Your Full Name]
+[Your Address]
+[City, State ZIP]
+
+${creditor}
+[Address]
+
+RE: Request for Debt Validation — Account [ACCOUNT NUMBER]
+
+Dear ${creditor},
+
+I recently became aware of an account you are reporting to the credit bureaus in my name. Under the Fair Debt Collection Practices Act (FDCPA), 15 U.S.C. § 1692g, I have the right to request validation of this debt within 30 days of initial contact.
+
+I am hereby requesting that you provide:
+
+1. Proof that your company is licensed to collect debts in [YOUR STATE]
+2. The name and address of the original creditor
+3. Proof that you own this debt or are authorized to collect it
+4. The amount of the debt and how it was calculated
+5. A copy of any agreement creating the alleged debt
+
+Until you provide adequate validation of this debt, please cease all collection efforts and do not report this account to any credit bureau. If you cannot validate this debt, I request that you immediately notify all credit bureaus to delete this account from my report.
+
+This is not a refusal to pay — it is an exercise of my legal rights under the FDCPA.
+
+Sincerely,
+
+${first}
+[Phone Number — optional]
+
+Sent via: Certified Mail, Return Receipt Requested
+[Tracking Number]`;
+  }
+
+  const output = document.getElementById('letter-output');
+  const actions = document.getElementById('letter-actions');
+  output.textContent = letter;
+  output.classList.add('visible');
+  actions.classList.add('visible');
+}
+
+function copyLetter() {
+  const text = document.getElementById('letter-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const c = document.getElementById('letter-cc');
+    c.style.display = 'inline';
+    setTimeout(() => c.style.display = 'none', 2500);
+  });
+}
+
+function restartPlan() {
+  if (!confirm('Start over? Your current plan will be cleared.')) return;
+  document.getElementById('plan-output').style.display = 'none';
+  document.getElementById('intake-section').style.display = 'block';
+  document.getElementById('items-container').innerHTML = '';
+  document.getElementById('letter-output').classList.remove('visible');
+  document.getElementById('letter-actions').classList.remove('visible');
+  document.getElementById('letter-gen').style.display = 'none';
+  document.getElementById('falloff-section').style.display = 'none';
+  itemCount = 0;
+  document.getElementById('add-btn').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+<footer style="background:#1a2e4a;border-top:3px solid #c9a84c;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+  <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:#c9a84c;">Closing with Angie</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.8;text-align:center;">&copy; 2025 Closing with Angie &middot; Angie Wilmoth &middot; NMLS# 2617463<br>Licensed in North Carolina &middot; Glory Mortgage &middot; Realty One Group Results</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.35);text-align:right;line-height:1.8;">336-408-9531<br>angie@closingwithangie.com</div>
+</footer>
+</body>
+</html>

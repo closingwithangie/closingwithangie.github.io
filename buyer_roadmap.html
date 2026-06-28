@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buyer Readiness Roadmap – Closing with Angie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f5e9c0;
+  --gold-dim: rgba(201,168,76,0.12);
+  --dark: #1a1a1a;
+  --charcoal: #2e2e2e;
+  --warm-white: #faf8f3;
+  --rule: #e2d9c5;
+  --green: #1e6641;
+  --green-bg: #eaf5ee;
+  --amber: #b45309;
+  --amber-bg: #fef3c7;
+  --red: #991b1b;
+  --red-bg: #fef2f2;
+  --mid: #666;
+  --blue: #1e40af;
+  --blue-bg: #eff6ff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--warm-white);
+  color: var(--dark);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--dark);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.header-lo {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
+  line-height: 1.6;
+}
+
+.header-lo strong { color: white; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--dark);
+  border-top: 1px solid #2a2a2a;
+  padding: 36px 32px 40px;
+  text-align: center;
+}
+
+.hero-eye {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.hero h1 em { color: var(--gold); font-style: italic; }
+
+.hero p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+}
+
+/* ── PROGRESS BAR (top) ── */
+.top-progress {
+  display: none;
+  background: white;
+  border: 1.5px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+}
+
+.top-progress.visible { display: block; }
+
+.tp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.tp-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dark);
+}
+
+.tp-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.tp-bar-wrap {
+  background: #f0ece4;
+  border-radius: 100px;
+  height: 10px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.tp-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--gold), #e8b84b);
+  border-radius: 100px;
+  transition: width 0.6s ease;
+}
+
+.tp-label {
+  font-size: 11px;
+  color: var(--mid);
+}
+
+/* ── STEP WIZARD ── */
+.step-wrap { display: none; }
+.step-wrap.active { display: block; }
+
+.step-card {
+  background: white;
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.step-header {
+  background: var(--dark);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--gold);
+  min-width: 28px;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+.step-sub {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 1px;
+}
+
+.step-body { padding: 24px; }
+
+/* Form elements */
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 5px;
+  letter-spacing: 0.02em;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="number"],
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1.5px solid var(--rule);
+  border-radius: 7px;
+  padding: 10px 13px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--warm-white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color: var(--gold); }
+
+.field .hint { font-size: 10.5px; color: #999; margin-top: 3px; }
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Option buttons */
+.option-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.option-grid.cols2 { grid-template-columns: 1fr 1fr; }
+.option-grid.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.opt-btn {
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  padding: 12px 14px;
+  text-align: center;
+  cursor: pointer;
+  background: white;
+  transition: all 0.15s;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+  line-height: 1.4;
+}
+
+.opt-btn .ob-icon { font-size: 20px; display: block; margin-bottom: 5px; }
+.opt-btn .ob-label { font-size: 12.5px; font-weight: 600; }
+.opt-btn .ob-sub { font-size: 10.5px; color: var(--mid); margin-top: 2px; }
+
+.opt-btn:hover { border-color: var(--gold); background: var(--gold-dim); }
+.opt-btn.selected { border-color: var(--gold); background: var(--gold-dim); }
+.opt-btn.selected .ob-label { color: var(--dark); }
+
+/* Checkbox */
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+}
+
+.check-item:last-child { border-bottom: none; }
+
+.check-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--gold);
+  flex-shrink: 0;
+}
+
+.check-item .ci-text { font-size: 13px; color: var(--charcoal); line-height: 1.5; }
+.check-item .ci-text small { display: block; font-size: 11px; color: var(--mid); margin-top: 1px; }
+
+/* Nav buttons */
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #faf9f6;
+  border-top: 1.5px solid var(--rule);
+}
+
+.nav-back {
+  background: none;
+  border: 1.5px solid var(--rule);
+  border-radius: 7px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mid);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.nav-back:hover { border-color: var(--gold); color: var(--dark); }
+
+.nav-next {
+  background: var(--gold);
+  border: none;
+  border-radius: 7px;
+  padding: 11px 24px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--dark);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+
+.nav-next:hover { background: #b8962e; }
+.nav-next:active { transform: scale(0.97); }
+
+.step-indicator {
+  font-size: 11px;
+  color: var(--mid);
+}
+
+/* ── ROADMAP OUTPUT ── */
+#roadmap-output { display: none; }
+#roadmap-output.visible { display: block; }
+
+.roadmap-hero {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.rh-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.rh-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.rh-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+}
+
+.rh-timeline {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rh-months {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.rh-months-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Overall progress */
+.overall-progress {
+  background: white;
+  border: 1.5px solid var(--rule);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.op-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.op-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dark);
+}
+
+.op-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.progress-bar {
+  background: #f0ece4;
+  border-radius: 100px;
+  height: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #b8962e, var(--gold), #e8c56b);
+  border-radius: 100px;
+  transition: width 0.8s ease;
+}
+
+.op-message {
+  font-size: 12px;
+  color: var(--mid);
+  font-style: italic;
+}
+
+/* Milestone sections */
+.milestone-section {
+  margin-bottom: 20px;
+}
+
+.ms-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.ms-icon { font-size: 18px; }
+
+.ms-title {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--dark);
+}
+
+.ms-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+
+.badge-red { background: var(--red-bg); color: var(--red); }
+.badge-amber { background: var(--amber-bg); color: var(--amber); }
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-blue { background: var(--blue-bg); color: var(--blue); }
+
+/* Milestone items */
+.milestone-item {
+  background: white;
+  border: 1.5px solid var(--rule);
+  border-radius: 9px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+
+.milestone-item.done {
+  background: var(--green-bg);
+  border-color: #b7dfc8;
+}
+
+.milestone-item.in-progress {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.mi-check {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--rule);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+  background: white;
+}
+
+.milestone-item.done .mi-check {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+.milestone-item.in-progress .mi-check {
+  border-color: var(--gold);
+}
+
+.mi-content { flex: 1; }
+
+.mi-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.milestone-item.done .mi-title {
+  text-decoration: line-through;
+  color: var(--green);
+}
+
+.mi-desc {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.55;
+}
+
+.mi-target {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* Update panel */
+.update-panel {
+  background: white;
+  border: 1.5px solid var(--gold);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+
+.up-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.up-sub {
+  font-size: 12px;
+  color: var(--mid);
+  margin-bottom: 16px;
+}
+
+.update-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.uf label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.uf input {
+  width: 100%;
+  border: 1.5px solid var(--rule);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--warm-white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.uf input:focus { border-color: var(--gold); }
+
+.update-btn {
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  border-radius: 7px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.update-btn:hover { background: #b8962e; }
+
+/* Agent notification */
+.agent-notify {
+  background: var(--dark);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.an-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+
+.an-content p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.an-content p strong { color: var(--gold); }
+
+.an-share-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.an-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.an-btn:hover { opacity: 0.85; }
+.an-btn.em { background: var(--gold); color: var(--dark); }
+.an-btn.cp { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+.an-copy-confirm { font-size: 11px; color: var(--gold); font-weight: 600; display: none; }
+
+/* Print btn */
+.print-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.print-btn {
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.print-btn:hover { background: #333; }
+
+.restart-btn {
+  background: white;
+  color: var(--mid);
+  border: 1.5px solid var(--rule);
+  border-radius: 7px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.restart-btn:hover { border-color: var(--gold); color: var(--dark); }
+
+/* Tips box */
+.tips-box {
+  background: var(--blue-bg);
+  border: 1px solid #bfdbfe;
+  border-radius: 9px;
+  padding: 16px 18px;
+  margin-top: 16px;
+}
+
+.tips-box h4 {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tips-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tips-box ul li {
+  font-size: 12px;
+  color: #1e3a8a;
+  line-height: 1.55;
+  padding-left: 14px;
+  position: relative;
+}
+
+.tips-box ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-size: 10px;
+  top: 2px;
+}
+
+@media (max-width: 640px) {
+  .field-row { grid-template-columns: 1fr; }
+  .option-grid.cols3 { grid-template-columns: 1fr 1fr; }
+  .update-grid { grid-template-columns: 1fr; }
+  .roadmap-hero { grid-template-columns: 1fr; }
+  .rh-timeline { text-align: left; }
+}
+
+@media print {
+  .site-header, .hero, .step-nav, .update-panel, .agent-notify, .print-row, .restart-btn, .print-btn { display: none !important; }
+  body { background: white; }
+  .main { padding: 0; max-width: 100%; }
+  .roadmap-hero { border: 1pt solid #ccc; }
+}
+
+
+#main-nav{position:fixed;top:0;left:0;right:0;background:rgba(26,26,26,0.97);backdrop-filter:blur(8px);z-index:1000;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(201,168,76,0.2);}
+.nav-logo a{text-decoration:none;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.03em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold)!important;color:var(--dark)!important;padding:8px 16px!important;border-radius:6px!important;font-weight:700!important;white-space:nowrap;}
+.nav-hamburger{display:none;background:none;border:none;color:white;font-size:22px;cursor:pointer;padding:4px;}
+#nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;}
+@media(max-width:768px){
+  .nav-hamburger{display:block;}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:0;right:0;bottom:0;width:260px;background:var(--dark);padding:80px 28px 32px;gap:6px;z-index:1001;border-left:1px solid rgba(201,168,76,0.2);}
+  .nav-links.open{display:flex;}
+  .nav-links a{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px;}
+  .nav-cta{margin-top:16px;text-align:center!important;}
+  #nav-overlay.open{display:block;}
+}
+
+
+/* ── SHARED NAV ── */
+#main-nav{position:fixed;top:0;left:0;right:0;background:white;z-index:1000;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #c9a84c;box-shadow:0 2px 20px rgba(0,0,0,0.08);}
+.nav-hamburger{display:none;background:none;border:none;color:#1a2e4a;font-size:22px;cursor:pointer;padding:4px;}
+.nav-links{display:flex;gap:20px;align-items:center;}
+.nav-links a{color:#243d5e;text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.02em;transition:color 0.2s;}
+.nav-links a:hover{color:#c9a84c;}
+#nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:999;}
+@media(max-width:768px){
+  .nav-hamburger{display:block;}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:0;right:0;bottom:0;width:260px;background:#1a2e4a;padding:80px 28px 32px;gap:6px;z-index:1001;border-left:3px solid #c9a84c;}
+  .nav-links.open{display:flex;}
+  .nav-links a{color:white;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .nav-links a:hover{color:#c9a84c;}
+  #nav-overlay.open{display:block;}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="index.html" style="text-decoration:none;display:flex;flex-direction:column;gap:1px;">
+      <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#1a2e4a;letter-spacing:-0.01em;line-height:1;">Closing with Angie</span>
+      <span style="font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#c9a84c;">Homes &middot; Loans &middot; Results</span>
+    </a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()">&#9776;</button>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="angie_hub.html">Agent Hub &#128274;</a>
+    <a href="buyer_calculator_glory.html">Calculators</a>
+    <a href="buyer_roadmap.html">Buyer Roadmap</a>
+    <a href="credit_action_plan.html">Credit Plan</a>
+    <a href="index.html#contact" style="background:#c9a84c;color:white;padding:8px 16px;border-radius:6px;font-weight:700;">Get Pre-Approved</a>
+  </div>
+</nav>
+<div id="nav-overlay" onclick="toggleMobileNav()"></div>
+  <div class="header-lo">
+    <strong>Angie Wilmoth</strong> · Glory Mortgage · NMLS# 2617463<br>
+    336-408-9531 · angie@closingwithangie.com
+  </div>
+</div>
+
+<div class="hero" style="padding-top:82px;">
+  <div class="hero-eye">Your Personal Mortgage Roadmap</div>
+  <h1>Let's build your path<br>to <em>closing day.</em></h1>
+  <p>Answer a few questions and I'll build you a personalized, step-by-step roadmap to homeownership — with milestones you can actually track. No matter where you're starting, there's a path forward.</p>
+</div>
+
+<div class="main" style="padding-top:82px;">
+
+  <!-- TOP PROGRESS (shows after roadmap generated) -->
+  <div class="top-progress" id="top-progress">
+    <div class="tp-header">
+      <div class="tp-name" id="tp-name">Your Roadmap</div>
+      <div class="tp-pct" id="tp-pct">0%</div>
+    </div>
+    <div class="tp-bar-wrap">
+      <div class="tp-bar-fill" id="tp-bar" style="width:0%"></div>
+    </div>
+    <div class="tp-label" id="tp-label">Keep going — you're on your way!</div>
+  </div>
+
+  <!-- ══════════════════════════════
+       INTAKE WIZARD
+  ══════════════════════════════ -->
+
+  <!-- STEP 1: About You -->
+  <div class="step-wrap active" id="step-1">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Let's start with you</div>
+          <div class="step-sub">Basic info so I can personalize your roadmap</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="field-row">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" id="i_first" placeholder="e.g. Sarah">
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" id="i_last" placeholder="e.g. Johnson">
+          </div>
+        </div>
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="i_email" placeholder="you@email.com">
+          <div class="hint">Used only to send you your roadmap summary — never shared or sold</div>
+        </div>
+        <div class="field">
+          <label>What's your homebuying goal?</label>
+          <div class="option-grid cols3">
+            <div class="opt-btn" onclick="selectOpt(this,'goal','12months')">
+              <span class="ob-icon">🏃</span>
+              <div class="ob-label">Buy in 12 months</div>
+              <div class="ob-sub">I'm motivated to move</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'goal','12to24')">
+              <span class="ob-icon">🚶</span>
+              <div class="ob-label">Buy in 1–2 years</div>
+              <div class="ob-sub">Building toward it</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'goal','exploring')">
+              <span class="ob-icon">🔭</span>
+              <div class="ob-label">Just exploring</div>
+              <div class="ob-sub">Want to understand the path</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Have you worked with Angie before?</label>
+          <div class="option-grid cols2">
+            <div class="opt-btn" onclick="selectOpt(this,'worked','yes')">
+              <span class="ob-icon">👋</span>
+              <div class="ob-label">Yes — she's my LO/Agent</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'worked','no')">
+              <span class="ob-icon">🤝</span>
+              <div class="ob-label">Not yet — just found this</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <div></div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="step-indicator">Step 1 of 5</span>
+          <button class="nav-next" onclick="nextStep(1)">Next: Credit →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Credit -->
+  <div class="step-wrap" id="step-2">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Credit Picture</div>
+          <div class="step-sub">Your score is the foundation — let's see where you are</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="field">
+          <label>What's your current credit score range?</label>
+          <div class="hint" style="margin-bottom:8px;">Check Credit Karma, your bank app, or any free credit service</div>
+          <div class="option-grid cols2">
+            <div class="opt-btn" onclick="selectOpt(this,'score','below580')">
+              <span class="ob-icon">😬</span>
+              <div class="ob-label">Below 580</div>
+              <div class="ob-sub">We'll build from here</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'score','580to619')">
+              <span class="ob-icon">📈</span>
+              <div class="ob-label">580 – 619</div>
+              <div class="ob-sub">Getting closer</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'score','620to659')">
+              <span class="ob-icon">🟡</span>
+              <div class="ob-label">620 – 659</div>
+              <div class="ob-sub">Loan-eligible range</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'score','660to699')">
+              <span class="ob-icon">🟠</span>
+              <div class="ob-label">660 – 699</div>
+              <div class="ob-sub">Good — room to improve rate</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'score','700to739')">
+              <span class="ob-icon">🟢</span>
+              <div class="ob-label">700 – 739</div>
+              <div class="ob-sub">Strong — great loan options</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'score','740plus')">
+              <span class="ob-icon">⭐</span>
+              <div class="ob-label">740+</div>
+              <div class="ob-sub">Excellent — best rates</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Any known credit challenges?</label>
+          <div class="option-grid cols2">
+            <label class="check-item"><input type="checkbox" class="challenge" value="collections"> <div class="ci-text">Collections or charge-offs <small>Unpaid debts sent to collections</small></div></label>
+            <label class="check-item"><input type="checkbox" class="challenge" value="latemissed"> <div class="ci-text">Late or missed payments <small>In last 12–24 months</small></div></label>
+            <label class="check-item"><input type="checkbox" class="challenge" value="highutil"> <div class="ci-text">High credit card balances <small>Using more than 30% of limit</small></div></label>
+            <label class="check-item"><input type="checkbox" class="challenge" value="bankruptcy"> <div class="ci-text">Prior bankruptcy <small>Chapter 7 or 13</small></div></label>
+            <label class="check-item"><input type="checkbox" class="challenge" value="foreclosure"> <div class="ci-text">Prior foreclosure or short sale <small>On a previous home</small></div></label>
+            <label class="check-item"><input type="checkbox" class="challenge" value="none"> <div class="ci-text">None of these <small>My credit history is clean</small></div></label>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="nav-back" onclick="prevStep(2)">← Back</button>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="step-indicator">Step 2 of 5</span>
+          <button class="nav-next" onclick="nextStep(2)">Next: Income & Debt →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Income & Debt -->
+  <div class="step-wrap" id="step-3">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Income &amp; Debt</div>
+          <div class="step-sub">This helps us figure out what you can qualify for</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="field">
+          <label>Employment situation</label>
+          <div class="option-grid cols3">
+            <div class="opt-btn" onclick="selectOpt(this,'employment','w2full')">
+              <span class="ob-icon">💼</span>
+              <div class="ob-label">W-2 Full Time</div>
+              <div class="ob-sub">Salaried or hourly</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'employment','w2part')">
+              <span class="ob-icon">⏰</span>
+              <div class="ob-label">W-2 Part Time</div>
+              <div class="ob-sub">or multiple jobs</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'employment','selfemployed')">
+              <span class="ob-icon">🧾</span>
+              <div class="ob-label">Self-Employed</div>
+              <div class="ob-sub">1099 / business owner</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'employment','contract')">
+              <span class="ob-icon">📋</span>
+              <div class="ob-label">Contract / Gig</div>
+              <div class="ob-sub">Freelance or variable</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'employment','retired')">
+              <span class="ob-icon">🌴</span>
+              <div class="ob-label">Retired</div>
+              <div class="ob-sub">Fixed income / SSI</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'employment','gap')">
+              <span class="ob-icon">🔄</span>
+              <div class="ob-label">Employment Gap</div>
+              <div class="ob-sub">Recently started or returning</div>
+            </div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Gross Monthly Income (before taxes)</label>
+            <input type="number" id="i_income" placeholder="e.g. 5000" min="0" step="100">
+            <div class="hint">Combined household income if buying with a partner</div>
+          </div>
+          <div class="field">
+            <label>Monthly Debt Payments</label>
+            <input type="number" id="i_debt" placeholder="e.g. 500" min="0" step="50">
+            <div class="hint">Car loans, student loans, credit cards, etc.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>How long at your current job?</label>
+          <div class="option-grid cols3">
+            <div class="opt-btn" onclick="selectOpt(this,'joblength','under1')">
+              <span class="ob-icon">🆕</span>
+              <div class="ob-label">Under 1 year</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'joblength','1to2')">
+              <span class="ob-icon">📅</span>
+              <div class="ob-label">1 – 2 years</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'joblength','2plus')">
+              <span class="ob-icon">✅</span>
+              <div class="ob-label">2+ years</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="nav-back" onclick="prevStep(3)">← Back</button>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="step-indicator">Step 3 of 5</span>
+          <button class="nav-next" onclick="nextStep(3)">Next: Savings →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Savings & Down Payment -->
+  <div class="step-wrap" id="step-4">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Savings &amp; Down Payment</div>
+          <div class="step-sub">What you have saved and what you're working toward</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="field">
+          <label>Current savings set aside for home purchase</label>
+          <div class="option-grid cols2">
+            <div class="opt-btn" onclick="selectOpt(this,'savings','0to1k')">
+              <span class="ob-icon">🌱</span>
+              <div class="ob-label">$0 – $1,000</div>
+              <div class="ob-sub">Just getting started</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'savings','1to5k')">
+              <span class="ob-icon">💰</span>
+              <div class="ob-label">$1,000 – $5,000</div>
+              <div class="ob-sub">Building momentum</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'savings','5to10k')">
+              <span class="ob-icon">💵</span>
+              <div class="ob-label">$5,000 – $10,000</div>
+              <div class="ob-sub">Getting closer</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'savings','10to20k')">
+              <span class="ob-icon">🏦</span>
+              <div class="ob-label">$10,000 – $20,000</div>
+              <div class="ob-sub">Strong foundation</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'savings','20kplus')">
+              <span class="ob-icon">⭐</span>
+              <div class="ob-label">$20,000+</div>
+              <div class="ob-sub">Ready to move</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'savings','gift')">
+              <span class="ob-icon">🎁</span>
+              <div class="ob-label">Gift Funds Available</div>
+              <div class="ob-sub">Family help or gift</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Target home price range</label>
+          <div class="option-grid cols3">
+            <div class="opt-btn" onclick="selectOpt(this,'price','under200')">
+              <div class="ob-label">Under $200k</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'price','200to300')">
+              <div class="ob-label">$200k – $300k</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'price','300to400')">
+              <div class="ob-label">$300k – $400k</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'price','400to500')">
+              <div class="ob-label">$400k – $500k</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'price','500plus')">
+              <div class="ob-label">$500k+</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'price','notsure')">
+              <div class="ob-label">Not sure yet</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Are you open to Down Payment Assistance programs?</label>
+          <div class="option-grid cols3">
+            <div class="opt-btn" onclick="selectOpt(this,'dpa','yes')">
+              <span class="ob-icon">🙋</span>
+              <div class="ob-label">Yes, tell me more</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'dpa','maybe')">
+              <span class="ob-icon">🤔</span>
+              <div class="ob-label">Maybe — depends</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'dpa','no')">
+              <span class="ob-icon">👍</span>
+              <div class="ob-label">No — I have my own funds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="nav-back" onclick="prevStep(4)">← Back</button>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="step-indicator">Step 4 of 5</span>
+          <button class="nav-next" onclick="nextStep(4)">Next: Final Details →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: Agent & Notification -->
+  <div class="step-wrap" id="step-5">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">5</div>
+        <div>
+          <div class="step-title">Almost there!</div>
+          <div class="step-sub">Agent connection and notification preferences</div>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="field">
+          <label>Are you working with a real estate agent?</label>
+          <div class="option-grid cols3">
+            <div class="opt-btn" onclick="selectOpt(this,'hasagent','yes')">
+              <span class="ob-icon">🤝</span>
+              <div class="ob-label">Yes</div>
+              <div class="ob-sub">I have an agent</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'hasagent','no')">
+              <span class="ob-icon">🔍</span>
+              <div class="ob-label">Not yet</div>
+              <div class="ob-sub">Still looking</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'hasagent','angie')">
+              <span class="ob-icon">⭐</span>
+              <div class="ob-label">Angie is my agent</div>
+              <div class="ob-sub">Two in one!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field" id="agent-info-field" style="display:none;">
+          <label>Agent's Name &amp; Email (optional)</label>
+          <div class="field-row">
+            <input type="text" id="i_agent_name" placeholder="Agent's name">
+            <input type="email" id="i_agent_email" placeholder="Agent's email">
+          </div>
+          <div class="hint">With your permission, Angie can send your agent milestone updates — keeping everyone on the same page</div>
+        </div>
+
+        <div class="field" id="agent-notify-field" style="display:none;">
+          <label>Would you like to keep your agent updated on your progress?</label>
+          <div class="option-grid cols2">
+            <div class="opt-btn" onclick="selectOpt(this,'agentnotify','yes')">
+              <span class="ob-icon">📬</span>
+              <div class="ob-label">Yes — keep them in the loop</div>
+              <div class="ob-sub">They'll get milestone updates</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'agentnotify','no')">
+              <span class="ob-icon">🔒</span>
+              <div class="ob-label">No — keep it private</div>
+              <div class="ob-sub">Just between me and Angie</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>How would you like Angie to check in with you?</label>
+          <div class="option-grid cols3">
+            <div class="opt-btn" onclick="selectOpt(this,'checkin','monthly')">
+              <span class="ob-icon">📅</span>
+              <div class="ob-label">Monthly</div>
+              <div class="ob-sub">Steady accountability</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'checkin','quarterly')">
+              <span class="ob-icon">🗓️</span>
+              <div class="ob-label">Every 3 months</div>
+              <div class="ob-sub">Low key check-in</div>
+            </div>
+            <div class="opt-btn" onclick="selectOpt(this,'checkin','milestone')">
+              <span class="ob-icon">🏆</span>
+              <div class="ob-label">Milestone only</div>
+              <div class="ob-sub">Only when something changes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Anything specific you want Angie to know?</label>
+          <textarea id="i_notes" rows="3" placeholder="e.g. 'I'm paying off a car loan in 6 months' or 'I need help understanding credit repair' — anything helps!"></textarea>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="nav-back" onclick="prevStep(5)">← Back</button>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="step-indicator">Step 5 of 5</span>
+          <button class="nav-next" onclick="generateRoadmap()" style="background:var(--green);color:white;">Build My Roadmap 🏡</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       ROADMAP OUTPUT
+  ══════════════════════════════ -->
+  <div id="roadmap-output">
+
+    <div class="roadmap-hero" id="roadmap-hero">
+      <div>
+        <div class="rh-name" id="rh-name"></div>
+        <div class="rh-title" id="rh-title"></div>
+        <div class="rh-subtitle" id="rh-subtitle"></div>
+      </div>
+      <div class="rh-timeline">
+        <div class="rh-months" id="rh-months"></div>
+        <div class="rh-months-label">Est. Months<br>to Ready</div>
+      </div>
+    </div>
+
+    <div class="overall-progress">
+      <div class="op-header">
+        <div class="op-title">Overall Readiness</div>
+        <div class="op-pct" id="op-pct">0%</div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="op-bar" style="width:0%"></div>
+      </div>
+      <div class="op-message" id="op-message"></div>
+    </div>
+
+    <!-- Dynamic milestone sections -->
+    <div id="milestone-sections"></div>
+
+    <!-- Monthly Update Panel -->
+    <div class="update-panel">
+      <div class="up-title">📊 Monthly Progress Update</div>
+      <div class="up-sub">Update your numbers each month to keep your roadmap current. Your progress recalculates automatically.</div>
+      <div class="update-grid">
+        <div class="uf">
+          <label>Current Credit Score</label>
+          <input type="number" id="u_score" placeholder="e.g. 650">
+        </div>
+        <div class="uf">
+          <label>Total Savings ($)</label>
+          <input type="number" id="u_savings" placeholder="e.g. 8500">
+        </div>
+        <div class="uf">
+          <label>Monthly Debt Payments ($)</label>
+          <input type="number" id="u_debt" placeholder="e.g. 450">
+        </div>
+      </div>
+      <button class="update-btn" onclick="updateProgress()">Update My Progress →</button>
+    </div>
+
+    <!-- Agent Notification -->
+    <div class="agent-notify" id="agent-notify-box">
+      <div class="an-icon">📬</div>
+      <div class="an-content">
+        <p id="an-message"></p>
+        <div class="an-share-row" id="an-share-row"></div>
+      </div>
+    </div>
+
+    <div class="print-row">
+      <button class="restart-btn" onclick="restartRoadmap()">↺ Start Over</button>
+      <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ══════════════════════════════════
+// STATE
+// ══════════════════════════════════
+const answers = {};
+let milestoneState = {};
+
+function selectOpt(el, key, value) {
+  // Deselect siblings with same key
+  el.closest('.option-grid').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[key] = value;
+
+  // Show/hide agent fields
+  if (key === 'hasagent') {
+    document.getElementById('agent-info-field').style.display = (value === 'yes') ? 'block' : 'none';
+    document.getElementById('agent-notify-field').style.display = (value === 'yes') ? 'block' : 'none';
+  }
+}
+
+// ── STEP NAV ──
+function nextStep(current) {
+  // Basic validation
+  if (current === 1) {
+    const first = document.getElementById('i_first').value.trim();
+    if (!first) { alert('Please enter your first name.'); return; }
+  }
+  if (current === 2 && !answers.score) { alert('Please select your credit score range.'); return; }
+  if (current === 3 && !answers.employment) { alert('Please select your employment situation.'); return; }
+  if (current === 4 && !answers.savings) { alert('Please select your current savings.'); return; }
+
+  document.getElementById('step-' + current).classList.remove('active');
+  document.getElementById('step-' + (current + 1)).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep(current) {
+  document.getElementById('step-' + current).classList.remove('active');
+  document.getElementById('step-' + (current - 1)).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════
+// ROADMAP GENERATION
+// ══════════════════════════════════
+function generateRoadmap() {
+  const first = document.getElementById('i_first').value.trim() || 'Friend';
+  const income = parseFloat(document.getElementById('i_income').value) || 0;
+  const debt = parseFloat(document.getElementById('i_debt').value) || 0;
+  const notes = document.getElementById('i_notes').value.trim();
+  const agentName = document.getElementById('i_agent_name')?.value.trim() || '';
+  const agentEmail = document.getElementById('i_agent_email')?.value.trim() || '';
+
+  // Hide wizard, show output
+  for (let i = 1; i <= 5; i++) document.getElementById('step-' + i).classList.remove('active');
+  document.getElementById('roadmap-output').classList.add('visible');
+  document.getElementById('top-progress').classList.add('visible');
+  document.getElementById('tp-name').textContent = first + "'s Roadmap";
+
+  // ── Determine timeline and messaging ──
+  const score = answers.score || 'below580';
+  const savings = answers.savings || '0to1k';
+  const employment = answers.employment || 'w2full';
+  const challenges = Array.from(document.querySelectorAll('.challenge:checked')).map(c => c.value);
+  const dpa = answers.dpa;
+  const goal = answers.goal;
+
+  // Score analysis
+  const scoreData = {
+    'below580':  { min: 500, label: 'Below 580', ready: false, months: 12, tip: 'Most loan programs require a minimum 580–620. The good news: scores can improve significantly in 6–12 months with the right moves.' },
+    '580to619':  { min: 580, label: '580–619', ready: false, months: 8, tip: 'You\'re in striking distance of FHA at 580. A push to 620 opens conventional options and better rates.' },
+    '620to659':  { min: 620, label: '620–659', ready: true, months: 4, tip: 'You qualify for most loan programs now. Every 20-point improvement from here saves real money on your rate.' },
+    '660to699':  { min: 660, label: '660–699', ready: true, months: 2, tip: 'Solid score. Hitting 680+ improves your rate tier, and 700+ is where the best conventional pricing kicks in.' },
+    '700to739':  { min: 700, label: '700–739', ready: true, months: 1, tip: 'Great score — you qualify for excellent rates. A push to 740+ unlocks the best pricing tier.' },
+    '740plus':   { min: 740, label: '740+', ready: true, months: 0, tip: 'Excellent! You\'re in the top pricing tier. Focus shifts to savings and DTI.' }
+  };
+
+  // Savings analysis
+  const savingsData = {
+    '0to1k':   { months: 10, ready: false },
+    '1to5k':   { months: 7, ready: false },
+    '5to10k':  { months: 4, ready: dpa === 'yes' },
+    '10to20k': { months: 2, ready: true },
+    '20kplus': { months: 0, ready: true },
+    'gift':    { months: 1, ready: true }
+  };
+
+  // DTI calculation
+  let dti = 0;
+  if (income > 0 && debt > 0) {
+    dti = Math.round((debt / income) * 100);
+  }
+  const dtiOk = dti < 43 || income === 0;
+
+  // Employment concerns
+  const empIssue = ['contract', 'gap', 'selfemployed'].includes(employment);
+
+  // Bankruptcy/foreclosure waiting periods
+  const hasBK = challenges.includes('bankruptcy');
+  const hasFC = challenges.includes('foreclosure');
+
+  // Calculate overall timeline
+  const sd = scoreData[score];
+  const svd = savingsData[savings];
+  let totalMonths = Math.max(sd.months, svd.months);
+  if (hasBK) totalMonths = Math.max(totalMonths, 12);
+  if (hasFC) totalMonths = Math.max(totalMonths, 24);
+  if (!dtiOk && income > 0) totalMonths = Math.max(totalMonths, 6);
+  if (empIssue) totalMonths = Math.max(totalMonths, 6);
+
+  // Hero section
+  document.getElementById('rh-name').textContent = first + "'s Personalized Roadmap";
+  document.getElementById('rh-months').textContent = totalMonths === 0 ? '🏡' : totalMonths;
+
+  let titleText, subtitleText;
+  if (totalMonths === 0) {
+    titleText = "You may be ready to buy NOW!";
+    subtitleText = "Based on what you've shared, you could be in a position to move forward. Let's get you pre-approved and find your home.";
+  } else if (totalMonths <= 3) {
+    titleText = "You're very close — just a few steps away.";
+    subtitleText = "A few targeted moves and you'll be ready to make an offer. Here's your personalized plan.";
+  } else if (totalMonths <= 8) {
+    titleText = "You have a clear path — let's build momentum.";
+    subtitleText = "With consistent progress on these milestones, you'll be ready to buy sooner than you think.";
+  } else {
+    titleText = "Every journey starts somewhere — and yours starts here.";
+    subtitleText = "Your roadmap is built to get you from where you are today to closing day. Let's work the plan together.";
+  }
+
+  document.getElementById('rh-title').textContent = titleText;
+  document.getElementById('rh-subtitle').textContent = subtitleText;
+
+  // ── BUILD MILESTONES ──
+  const sections = [];
+
+  // CREDIT SECTION
+  const creditMilestones = [];
+
+  if (score === 'below580') {
+    creditMilestones.push({ id: 'cr1', title: 'Get your free credit reports', desc: 'Pull all 3 reports from AnnualCreditReport.com. Look for errors, collections, and anything that can be disputed.', target: 'Do this first — it\'s free and takes 15 minutes', status: 'todo' });
+    creditMilestones.push({ id: 'cr2', title: 'Dispute any errors on your credit report', desc: 'Errors are more common than you\'d think. A single removed error can jump your score 20–40 points.', target: 'File disputes online at each bureau website', status: 'todo' });
+    creditMilestones.push({ id: 'cr3', title: 'Pay down credit card balances below 30%', desc: 'Credit utilization is the fastest-moving factor on your score. Getting below 30% on each card can add 20–50 points.', target: 'Target: Under 30% utilization per card', status: 'todo' });
+    creditMilestones.push({ id: 'cr4', title: 'Address collections and charge-offs', desc: 'Talk to Angie before paying collections — strategy matters here. Some paid collections still hurt; some need a pay-for-delete agreement.', target: 'Call Angie before paying any collection', status: 'todo' });
+    creditMilestones.push({ id: 'cr5', title: 'Reach 580 credit score', desc: 'This unlocks FHA financing with as little as 3.5% down. It\'s the first major milestone.', target: 'Score target: 580+', status: 'todo' });
+    creditMilestones.push({ id: 'cr6', title: 'Reach 620 credit score', desc: 'This opens up conventional loan options, better rates, and more programs.', target: 'Score target: 620+', status: 'todo' });
+  } else if (score === '580to619') {
+    creditMilestones.push({ id: 'cr1', title: 'Pay down credit card balances below 30%', desc: 'This is the fastest lever you have. Getting utilization below 30% per card can add 20–50 points quickly.', target: 'Target: Under 30% per card', status: 'todo' });
+    creditMilestones.push({ id: 'cr2', title: 'Make all payments on time for 6 months', desc: 'Payment history is 35% of your score. Six consecutive on-time payments builds serious momentum.', target: '6 months of perfect payment history', status: 'todo' });
+    creditMilestones.push({ id: 'cr3', title: 'Reach 620 credit score', desc: 'Opens conventional options and better rates beyond FHA.', target: 'Score target: 620+', status: 'todo' });
+  } else if (['620to659','660to699'].includes(score)) {
+    creditMilestones.push({ id: 'cr1', title: 'Keep all payments on time', desc: 'Don\'t let anything slip now. One late payment can set you back 60–90 days of progress.', target: 'Zero late payments going forward', status: 'inprogress' });
+    creditMilestones.push({ id: 'cr2', title: 'Reduce credit card utilization below 10%', desc: 'You\'re past 30% territory — now go for under 10% to maximize your score boost.', target: 'Target: Under 10% utilization overall', status: 'todo' });
+    if (score === '620to659') {
+      creditMilestones.push({ id: 'cr3', title: 'Reach 680 credit score', desc: 'Meaningful rate improvement at this tier, especially for conventional loans.', target: 'Score target: 680+', status: 'todo' });
+    }
+  } else {
+    creditMilestones.push({ id: 'cr1', title: '✅ Credit score is strong', desc: sd.tip, target: 'Maintain current habits and avoid new hard inquiries', status: 'done' });
+  }
+
+  if (challenges.includes('highutil')) {
+    creditMilestones.push({ id: 'cr_util', title: 'Bring each credit card below 30% utilization', desc: 'High utilization is likely your biggest score drag right now. This is your highest-ROI move.', target: 'Pay down highest-utilization cards first', status: 'todo' });
+  }
+
+  if (hasBK) {
+    creditMilestones.push({ id: 'cr_bk', title: 'Confirm bankruptcy waiting period', desc: 'FHA requires 2 years from Chapter 7 discharge. Chapter 13 may qualify after 12 months of payments. Conventional varies.', target: 'Talk to Angie to confirm your exact timeline', status: 'todo' });
+  }
+
+  if (hasFC) {
+    creditMilestones.push({ id: 'cr_fc', title: 'Confirm foreclosure waiting period', desc: 'FHA typically requires 3 years from foreclosure. Conventional requires 7 years (3 with extenuating circumstances). Let\'s confirm yours.', target: 'Call Angie to review your specific situation', status: 'todo' });
+  }
+
+  sections.push({ icon: '📈', title: 'Credit', milestones: creditMilestones, badge: sd.ready ? 'green' : (sd.months <= 4 ? 'amber' : 'red'), badgeText: sd.ready ? 'On Track' : `~${sd.months} mo.`, tips: [sd.tip, 'Don\'t open new credit accounts while working toward your purchase — each hard inquiry can drop your score 5–10 points.', 'Ask Angie about rapid rescore — if you pay down a balance, your score can update in 3–5 business days instead of 30.'] });
+
+  // SAVINGS SECTION
+  const savingsMilestones = [];
+  const priceMap = { 'under200': 200000, '200to300': 250000, '300to400': 350000, '400to500': 450000, '500plus': 550000, 'notsure': 300000 };
+  const targetPrice = priceMap[answers.price || 'notsure'];
+  const minDown = Math.round(targetPrice * 0.035);
+  const closingEst = Math.round(targetPrice * 0.025);
+  const totalNeeded = minDown + closingEst;
+
+  const savingsNow = { '0to1k': 500, '1to5k': 3000, '5to10k': 7500, '10to20k': 15000, '20kplus': 22000, 'gift': 0 };
+  const currentSavings = savingsNow[savings] || 0;
+  const stillNeeded = Math.max(0, totalNeeded - currentSavings);
+  const monthlySaveNeeded = totalMonths > 0 ? Math.round(stillNeeded / totalMonths) : 0;
+
+  if (savings === '0to1k' || savings === '1to5k') {
+    savingsMilestones.push({ id: 'sv1', title: 'Open a dedicated home savings account', desc: 'Separate your home savings from everyday spending. A high-yield savings account (HYSA) earns 4–5% while you save.', target: 'Open account this week — takes 10 minutes online', status: 'todo' });
+    savingsMilestones.push({ id: 'sv2', title: `Save $${monthlySaveNeeded.toLocaleString()}/month toward your down payment`, desc: `At this pace you'll hit your target in about ${totalMonths} months. Even small automatic transfers add up fast.`, target: 'Set up auto-transfer on payday', status: 'todo' });
+  }
+
+  if (dpa === 'yes' || dpa === 'maybe') {
+    savingsMilestones.push({ id: 'sv_dpa', title: 'Explore Down Payment Assistance programs', desc: 'NC has several DPA programs that can cover 3–5% of your purchase price as a grant or low-interest loan. You may qualify and not even know it.', target: 'Call Angie to review DPA options for your situation', status: 'todo' });
+  }
+
+  savingsMilestones.push({ id: 'sv3', title: `Save for down payment: $${minDown.toLocaleString()}`, desc: `Minimum 3.5% down for FHA on a ~$${(targetPrice/1000).toFixed(0)}k home. More down = lower payment and no PMI at 20%.`, target: `Target: $${minDown.toLocaleString()} minimum`, status: svd.ready ? 'done' : 'todo' });
+  savingsMilestones.push({ id: 'sv4', title: `Save for closing costs: ~$${closingEst.toLocaleString()}`, desc: 'Closing costs typically run 2–3% of the purchase price and are due at the closing table. Can sometimes be negotiated into the offer.', target: `Target: ~$${closingEst.toLocaleString()} for closing`, status: savings === '20kplus' || savings === 'gift' ? 'done' : 'todo' });
+
+  sections.push({ icon: '💰', title: 'Savings & Down Payment', milestones: savingsMilestones, badge: svd.ready ? 'green' : (svd.months <= 4 ? 'amber' : 'red'), badgeText: svd.ready ? 'On Track' : `~${svd.months} mo.`, tips: [`For a ~$${(targetPrice/1000).toFixed(0)}k home you'll want $${totalNeeded.toLocaleString()} total (down + closing). Down Payment Assistance could reduce this significantly.`, 'Ask sellers to contribute toward closing costs — in slower markets, this is very common and can save you thousands at the table.', 'Gifted funds from family are allowed on most loan types. They just need to be properly documented.'] });
+
+  // INCOME / DTI SECTION
+  const incomeMilestones = [];
+
+  if (!dtiOk && income > 0) {
+    const maxDebt = Math.round(income * 0.43);
+    const needToReduce = debt - maxDebt + Math.round(income * 0.15); // rough housing payment estimate
+    incomeMilestones.push({ id: 'inc1', title: `Reduce monthly debt payments`, desc: `Your current debt-to-income ratio is around ${dti}%. Most lenders want total DTI (including your future mortgage) under 43–50%. Paying off debts with small balances can quickly improve this.`, target: `Target: Get non-housing debt under $${(Math.round(income * 0.20)).toLocaleString()}/mo`, status: 'todo' });
+    incomeMilestones.push({ id: 'inc2', title: 'Pay off smallest debts first', desc: 'Each eliminated monthly payment improves your DTI and your monthly cash flow — a double win for your mortgage readiness.', target: 'List all debts smallest to largest, knock them out in order', status: 'todo' });
+  } else {
+    incomeMilestones.push({ id: 'inc1', title: '✅ Income & DTI look workable', desc: 'Your debt-to-income ratio appears manageable for qualification. Angie will run the exact numbers when it\'s time to pre-approve.', target: 'Avoid taking on new debt before closing', status: 'done' });
+  }
+
+  if (empIssue) {
+    if (employment === 'selfemployed') {
+      incomeMilestones.push({ id: 'inc_se', title: 'Prepare 2 years of self-employment documentation', desc: 'Self-employed borrowers typically need 2 years of tax returns (personal and business), YTD P&L, and 2 months of bank statements.', target: 'Talk to Angie about which loan programs work best for self-employed buyers', status: 'todo' });
+    }
+    if (employment === 'gap') {
+      incomeMilestones.push({ id: 'inc_gap', title: 'Build employment history at current job', desc: 'Lenders generally want 2 years of employment history. A recent job change is okay if it\'s in the same field — a gap may need 6–12 months at the new job.', target: 'Call Angie to confirm how your specific situation is viewed', status: 'todo' });
+    }
+    if (employment === 'contract') {
+      incomeMilestones.push({ id: 'inc_con', title: 'Document consistent contract/1099 income', desc: 'Variable income requires a 2-year history to use in qualification. Non-QM loan programs may work with shorter history.', target: 'Talk to Angie about Non-QM options if traditional won\'t work', status: 'todo' });
+    }
+  }
+
+  incomeMilestones.push({ id: 'inc_new', title: 'Do NOT take on new debt before closing', desc: 'No new car loans, no co-signing, no new credit cards. New debt can change your qualification completely — even after you\'re under contract.', target: 'This rule applies from now until after closing', status: 'inprogress' });
+
+  sections.push({ icon: '💼', title: 'Income & Debt', milestones: incomeMilestones, badge: (!dtiOk && income > 0) ? 'amber' : 'green', badgeText: (!dtiOk && income > 0) ? 'Needs Work' : 'Looking Good', tips: ['Your DTI includes your future mortgage payment — Angie will model this exactly when it\'s time to pre-approve.', 'Paying off a car loan or credit card with a small balance can move the needle significantly on DTI.', 'If you\'re self-employed, talk to your CPA about how write-offs affect your qualifying income before filing this year.'] });
+
+  // FINAL STEPS SECTION
+  const finalMilestones = [];
+  finalMilestones.push({ id: 'fin1', title: 'Schedule a free strategy call with Angie', desc: 'Even if you\'re 12 months out, a 20-minute call can save you months of guesswork. Angie will review your full picture and build a custom plan.', target: 'Call or text: 336-408-9531', status: 'todo' });
+  finalMilestones.push({ id: 'fin2', title: 'Avoid major financial changes', desc: 'No job changes, no large deposits without documentation, no new accounts. Lenders want to see stability.', target: 'Maintain financial stability until after closing', status: 'inprogress' });
+  finalMilestones.push({ id: 'fin3', title: 'Get pre-approved when you hit your milestones', desc: 'Pre-approval is the green light — it tells you exactly what you can buy and makes your offer competitive. Plan to do this 30–60 days before you want to make an offer.', target: 'Pre-approval typically takes 24–48 hours with Angie', status: 'todo' });
+
+  if (notes) {
+    finalMilestones.push({ id: 'fin_notes', title: 'Your note to Angie', desc: `"${notes}"`, target: 'Angie will follow up on this specifically', status: 'inprogress' });
+  }
+
+  sections.push({ icon: '🏁', title: 'Final Steps to Closing Day', milestones: finalMilestones, badge: 'blue', badgeText: 'Action Items', tips: [] });
+
+  // ── RENDER SECTIONS ──
+  const container = document.getElementById('milestone-sections');
+  container.innerHTML = '';
+  milestoneState = {};
+
+  sections.forEach(sec => {
+    const secEl = document.createElement('div');
+    secEl.className = 'milestone-section';
+
+    secEl.innerHTML = `
+      <div class="ms-header">
+        <span class="ms-icon">${sec.icon}</span>
+        <span class="ms-title">${sec.title}</span>
+        <span class="ms-badge badge-${sec.badge}">${sec.badgeText}</span>
+      </div>
+      ${sec.milestones.map(m => `
+        <div class="milestone-item ${m.status === 'done' ? 'done' : m.status === 'inprogress' ? 'in-progress' : ''}" id="mi-${m.id}" onclick="toggleMilestone('${m.id}')">
+          <div class="mi-check" id="mc-${m.id}">${m.status === 'done' ? '✓' : ''}</div>
+          <div class="mi-content">
+            <div class="mi-title">${m.title}</div>
+            <div class="mi-desc">${m.desc}</div>
+            <div class="mi-target">${m.target}</div>
+          </div>
+        </div>
+      `).join('')}
+      ${sec.tips.length > 0 ? `
+        <div class="tips-box">
+          <h4>💡 Angie's Tips</h4>
+          <ul>${sec.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+      ` : ''}
+    `;
+
+    container.appendChild(secEl);
+
+    sec.milestones.forEach(m => {
+      milestoneState[m.id] = m.status === 'done';
+    });
+  });
+
+  // ── AGENT NOTIFICATION ──
+  const agentBox = document.getElementById('agent-notify-box');
+  const anMsg = document.getElementById('an-message');
+  const anShare = document.getElementById('an-share-row');
+
+  if (answers.hasagent === 'yes' && agentName && agentEmail && answers.agentnotify === 'yes') {
+    anMsg.innerHTML = `<strong>Great — ${agentName} will be kept in the loop.</strong> When you hit a major milestone, Angie will send them a quick update (with your permission already noted). You can also share your progress summary directly:`;
+    anShare.innerHTML = `
+      <button class="an-btn em" onclick="emailAgent('${agentName}','${agentEmail}','${first}')">✉️ Email ${agentName} Now</button>
+      <button class="an-btn cp" onclick="copyAgentMsg('${agentName}','${first}')">📋 Copy Summary</button>
+      <span class="an-copy-confirm" id="an-cc">✓ Copied!</span>
+    `;
+  } else if (answers.hasagent === 'angie') {
+    anMsg.innerHTML = `<strong>Perfect — Angie is already your agent AND your LO.</strong> She has the full picture and will guide you every step of the way. Call or text her anytime: <strong>336-408-9531</strong>`;
+    anShare.innerHTML = '';
+  } else {
+    anMsg.innerHTML = `<strong>Ready to share this with an agent?</strong> Once you're working with a buyer's agent, Angie can keep them updated on your progress — so everyone's on the same page when it's time to make an offer.`;
+    anShare.innerHTML = '';
+  }
+
+  // Calculate and show initial progress
+  recalcProgress();
+
+  // ── BREVO INTEGRATION ──
+  addToBrevo();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════
+// BREVO AUTO-ENROLL
+// ══════════════════════════════════
+async function addToBrevo() {
+  // ⚠️ REPLACE THIS WITH YOUR ACTUAL BREVO API KEY
+  const BREVO_API_KEY = 'YOUR_BREVO_API_KEY_HERE';
+  const BREVO_LIST_ID = 16;
+
+  const first  = document.getElementById('i_first').value.trim();
+  const last   = document.getElementById('i_last').value.trim();
+  const email  = document.getElementById('i_email').value.trim();
+
+  // Don't proceed without an email
+  if (!email || !email.includes('@')) return;
+
+  // Build timeline tag
+  const score    = answers.score || 'below580';
+  const savings  = answers.savings || '0to1k';
+  const scoreMonths = { 'below580':12,'580to619':8,'620to659':4,'660to699':2,'700to739':1,'740plus':0 };
+  const savingsMonths = { '0to1k':10,'1to5k':7,'5to10k':4,'10to20k':2,'20kplus':0,'gift':1 };
+  const months = Math.max(scoreMonths[score]||0, savingsMonths[savings]||0);
+
+  let timelineTag = 'roadmap-ready-now';
+  if (months >= 12) timelineTag = 'roadmap-12months';
+  else if (months >= 6) timelineTag = 'roadmap-6months';
+  else if (months >= 3) timelineTag = 'roadmap-3months';
+  else if (months >= 1) timelineTag = 'roadmap-1to3months';
+
+  const agentName  = document.getElementById('i_agent_name')?.value.trim() || '';
+  const agentEmail = document.getElementById('i_agent_email')?.value.trim() || '';
+
+  const payload = {
+    email: email,
+    attributes: {
+      FIRSTNAME: first,
+      LASTNAME: last,
+      ROADMAP_TIMELINE: months === 0 ? 'Ready Now' : `~${months} months`,
+      ROADMAP_SCORE: score,
+      ROADMAP_SAVINGS: savings,
+      ROADMAP_GOAL: answers.goal || '',
+      AGENT_NAME: agentName,
+      AGENT_EMAIL: agentEmail,
+      AGENT_NOTIFY: answers.agentnotify === 'yes' ? 'Yes' : 'No',
+      CHECKIN_PREF: answers.checkin || 'monthly',
+      ENROLLMENT_DATE: new Date().toLocaleDateString('en-US')
+    },
+    listIds: [BREVO_LIST_ID],
+    tags: [timelineTag, 'buyer-roadmap'],
+    updateEnabled: true
+  };
+
+  try {
+    const res = await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': BREVO_API_KEY
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok || res.status === 204) {
+      console.log('✅ Borrower added to Brevo successfully');
+      showBrevoSuccess(first, timelineTag);
+    } else {
+      const err = await res.json();
+      // Contact may already exist — try updating instead
+      if (res.status === 400 && err.code === 'duplicate_parameter') {
+        await updateBrevoContact(email, payload, BREVO_API_KEY);
+      } else {
+        console.warn('Brevo add failed:', err);
+      }
+    }
+  } catch (e) {
+    // Silently fail — don't disrupt the borrower experience
+    console.warn('Brevo connection issue:', e);
+  }
+}
+
+async function updateBrevoContact(email, payload, apiKey) {
+  try {
+    const res = await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'api-key': apiKey },
+      body: JSON.stringify({ attributes: payload.attributes, listIds: payload.listIds })
+    });
+    if (res.ok || res.status === 204) {
+      console.log('✅ Existing contact updated in Brevo');
+    }
+  } catch(e) {
+    console.warn('Brevo update failed:', e);
+  }
+}
+
+function showBrevoSuccess(firstName, tag) {
+  // Show a subtle confirmation banner
+  const existing = document.getElementById('brevo-confirm');
+  if (existing) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'brevo-confirm';
+  banner.style.cssText = `
+    background: #eaf5ee;
+    border: 1px solid #b7dfc8;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #1a4a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  `;
+
+  const tagLabels = {
+    'roadmap-ready-now': 'You may be ready now!',
+    'roadmap-1to3months': '1–3 month timeline',
+    'roadmap-3months': '~3 month timeline',
+    'roadmap-6months': '~6 month timeline',
+    'roadmap-12months': '~12 month timeline'
+  };
+
+  banner.innerHTML = `
+    <span style="font-size:18px;">✅</span>
+    <span><strong>You're in the pipeline, ${firstName}!</strong> Angie will check in with you based on your preferences. Your timeline: <strong>${tagLabels[tag] || tag}</strong>. Watch for an email from angie@closingwithangie.com.</span>
+  `;
+
+  const output = document.getElementById('roadmap-output');
+  output.insertBefore(banner, output.firstChild);
+}
+
+// ══════════════════════════════════
+// MILESTONE TOGGLE
+// ══════════════════════════════════
+function toggleMilestone(id) {
+  milestoneState[id] = !milestoneState[id];
+  const item = document.getElementById('mi-' + id);
+  const check = document.getElementById('mc-' + id);
+  if (milestoneState[id]) {
+    item.classList.add('done');
+    item.classList.remove('in-progress');
+    check.textContent = '✓';
+  } else {
+    item.classList.remove('done');
+    check.textContent = '';
+  }
+  recalcProgress();
+}
+
+function recalcProgress() {
+  const total = Object.keys(milestoneState).length;
+  const done = Object.values(milestoneState).filter(Boolean).length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  document.getElementById('op-pct').textContent = pct + '%';
+  document.getElementById('op-bar').style.width = pct + '%';
+  document.getElementById('tp-pct').textContent = pct + '%';
+  document.getElementById('tp-bar').style.width = pct + '%';
+
+  const msgs = [
+    [0, 10, "Every journey starts with a single step. You've got this! 🏡"],
+    [11, 30, "You're building momentum — keep checking off those milestones!"],
+    [31, 50, "Halfway there! The progress you're making is real."],
+    [51, 74, "Over halfway and picking up speed — closing day is getting closer!"],
+    [75, 89, "Almost there! A few more steps and you'll be ready to make an offer."],
+    [90, 99, "You're in the final stretch — time to call Angie and get pre-approved!"],
+    [100, 100, "🎉 Roadmap complete! You're ready to buy. Call Angie now: 336-408-9531"]
+  ];
+
+  const msg = msgs.find(([min, max]) => pct >= min && pct <= max);
+  if (msg) {
+    document.getElementById('op-message').textContent = msg[2];
+    document.getElementById('tp-label').textContent = msg[2];
+  }
+}
+
+// ══════════════════════════════════
+// MONTHLY UPDATE
+// ══════════════════════════════════
+function updateProgress() {
+  const score = parseFloat(document.getElementById('u_score').value);
+  const savings = parseFloat(document.getElementById('u_savings').value);
+  const debt = parseFloat(document.getElementById('u_debt').value);
+
+  let messages = [];
+
+  if (score) {
+    if (score >= 740) messages.push('🌟 Credit score ' + score + ' — excellent! You\'re in the best rate tier.');
+    else if (score >= 700) messages.push('✅ Credit score ' + score + ' — strong! Keep the momentum going.');
+    else if (score >= 660) messages.push('📈 Credit score ' + score + ' — good progress! Target is 700+.');
+    else if (score >= 620) messages.push('📈 Credit score ' + score + ' — you qualify for most programs. Push for 660+.');
+    else if (score >= 580) messages.push('⚠️ Credit score ' + score + ' — FHA eligible. Let\'s get you to 620.');
+    else messages.push('🔧 Credit score ' + score + ' — working toward 580. Call Angie for a credit action plan.');
+  }
+
+  if (savings) {
+    messages.push('💰 Savings updated: $' + savings.toLocaleString() + ' saved toward your home.');
+  }
+
+  if (debt) {
+    messages.push('💼 Monthly debt: $' + debt.toLocaleString() + '/mo logged.');
+  }
+
+  if (messages.length === 0) {
+    alert('Enter at least one updated number above.');
+    return;
+  }
+
+  alert('Progress updated! ✅\n\n' + messages.join('\n') + '\n\nKeep going — you\'re building toward closing day!');
+}
+
+// ══════════════════════════════════
+// AGENT MESSAGING
+// ══════════════════════════════════
+function buildAgentMsg(agentName, borrowerFirst) {
+  const done = Object.values(milestoneState).filter(Boolean).length;
+  const total = Object.keys(milestoneState).length;
+  const pct = Math.round((done/total)*100);
+  return `Hi ${agentName},
+
+I wanted to share a quick update on your buyer ${borrowerFirst}'s mortgage readiness — with their permission.
+
+${borrowerFirst} has been working through their personalized Buyer Readiness Roadmap and is currently at ${pct}% complete (${done} of ${total} milestones).
+
+I'm actively coaching them through the process and will keep you updated as they hit key milestones. When they're close to pre-approval ready, you'll be the first to know.
+
+Questions? Call or text me anytime.
+
+— Angie Wilmoth
+Closing with Angie · Glory Mortgage
+NMLS# 2617463
+336-408-9531 | angie@closingwithangie.com`;
+}
+
+function emailAgent(agentName, agentEmail, borrowerFirst) {
+  const msg = buildAgentMsg(agentName, borrowerFirst);
+  const subj = encodeURIComponent('Buyer Update: ' + borrowerFirst + '\'s Mortgage Readiness');
+  window.location.href = `mailto:${agentEmail}?subject=${subj}&body=${encodeURIComponent(msg)}`;
+}
+
+function copyAgentMsg(agentName, borrowerFirst) {
+  const msg = buildAgentMsg(agentName, borrowerFirst);
+  navigator.clipboard.writeText(msg).then(() => {
+    const c = document.getElementById('an-cc');
+    c.style.display = 'inline';
+    setTimeout(() => c.style.display = 'none', 2500);
+  });
+}
+
+function restartRoadmap() {
+  if (!confirm('Start over? Your current roadmap will be cleared.')) return;
+  document.getElementById('roadmap-output').classList.remove('visible');
+  document.getElementById('top-progress').classList.remove('visible');
+  document.getElementById('step-1').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+<footer style="background:#1a2e4a;border-top:3px solid #c9a84c;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+  <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:#c9a84c;">Closing with Angie</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.8;text-align:center;">&copy; 2025 Closing with Angie &middot; Angie Wilmoth &middot; NMLS# 2617463<br>Licensed in North Carolina &middot; Glory Mortgage &middot; Realty One Group Results</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.35);text-align:right;line-height:1.8;">336-408-9531<br>angie@closingwithangie.com</div>
+</footer>
+</body>
+</html>
