@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporary Buydown Calculator | Closing with Angie</title>
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-light: #1a3357;
+    --navy-lighter: #2a4a7c;
+    --gold: #c9a24b;
+    --gold-light: #e0c375;
+    --off-white: #f7f5f0;
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-muted: #5a6472;
+    --border: #e2e0d8;
+    --success: #2f6b4f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+
+  .site-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: var(--white);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-bottom: 4px solid var(--gold);
+  }
+
+  .site-header .brand {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .site-header h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .site-header p {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .calc-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(15, 31, 61, 0.06);
+    margin-bottom: 2rem;
+  }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .calc-grid { grid-template-columns: 1fr; }
+  }
+
+  .field label {
+    display: block;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .field input, .field select {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-dark);
+    background: var(--off-white);
+    transition: border-color 0.15s;
+  }
+
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: var(--white);
+  }
+
+  .buydown-type-group {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .type-btn {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+    border: 1.5px solid var(--border);
+    background: var(--off-white);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text-muted);
+  }
+
+  .type-btn.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+
+  .custom-rates-row {
+    display: none;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .custom-rates-row.visible { display: flex; }
+
+  .custom-rates-row .field { flex: 1; min-width: 100px; }
+
+  .calc-btn {
+    width: 100%;
+    padding: 0.85rem;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .calc-btn:hover { background: var(--gold-light); }
+
+  .results {
+    display: none;
+  }
+
+  .results.visible { display: block; }
+
+  .results-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .results-summary { grid-template-columns: 1fr; }
+  }
+
+  .summary-box {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 6px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .summary-box .label {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gold-light);
+    margin-bottom: 0.4rem;
+  }
+
+  .summary-box .value {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+
+  th {
+    background: var(--navy);
+    color: var(--white);
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  td {
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tr:nth-child(even) td { background: var(--off-white); }
+
+  tr:last-child td {
+    font-weight: 700;
+    background: #f0ead9 !important;
+    border-top: 2px solid var(--gold);
+  }
+
+  .note-box {
+    background: #fbf8ee;
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .caps-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+  }
+
+  .caps-card h2 {
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+  }
+
+  .caps-card .subtitle {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .caps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 800px) {
+    .caps-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .cap-item {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.1rem;
+    text-align: center;
+  }
+
+  .cap-item .loan-type {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .cap-item .pct {
+    font-size: 1.7rem;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .cap-item .detail {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .footer-cta {
+    text-align: center;
+    margin-top: 2.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    border-radius: 6px;
+    color: var(--white);
+  }
+
+  .footer-cta p {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .footer-cta .contact {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 1.05rem;
+  }
+
+  .disclaimer {
+    text-align: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="brand">Closing with Angie · Homes · Loans · Results</div>
+  <h1>Temporary Buydown Calculator</h1>
+  <p>See exactly how a seller-funded rate buydown lowers your buyer's payment year by year — and what it costs to get there.</p>
+</div>
+
+<div class="container">
+
+  <div class="calc-card">
+    <div class="calc-grid">
+      <div class="field">
+        <label for="loanAmount">Loan Amount ($)</label>
+        <input type="text" id="loanAmount" value="450,000">
+      </div>
+      <div class="field">
+        <label for="noteRate">Note Rate (%)</label>
+        <input type="number" id="noteRate" value="6.25" step="0.01">
+      </div>
+    </div>
+
+    <div class="field" style="margin-bottom: 0.75rem;">
+      <label>Buydown Structure</label>
+    </div>
+    <div class="buydown-type-group" id="typeGroup">
+      <button class="type-btn active" data-type="321">3-2-1</button>
+      <button class="type-btn" data-type="21">2-1</button>
+      <button class="type-btn" data-type="10">1-0</button>
+      <button class="type-btn" data-type="custom">Custom</button>
+    </div>
+
+    <div class="custom-rates-row" id="customRow">
+      <div class="field">
+        <label>Year 1 Reduction (%)</label>
+        <input type="number" id="cy1" value="3" step="0.125">
+      </div>
+      <div class="field">
+        <label>Year 2 Reduction (%)</label>
+        <input type="number" id="cy2" value="2" step="0.125">
+      </div>
+      <div class="field">
+        <label>Year 3 Reduction (%)</label>
+        <input type="number" id="cy3" value="1" step="0.125">
+      </div>
+    </div>
+
+    <div class="calc-grid">
+      <div class="field">
+        <label for="loanTerm">Loan Term (Years)</label>
+        <select id="loanTerm">
+          <option value="30" selected>30-Year Fixed</option>
+          <option value="15">15-Year Fixed</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="loanType">Loan Type (for cap reference below)</label>
+        <select id="loanType">
+          <option value="conventional">Conventional</option>
+          <option value="fha">FHA</option>
+          <option value="va">VA</option>
+          <option value="usda">USDA</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate Buydown</button>
+  </div>
+
+  <div class="results" id="resultsSection">
+    <div class="results-summary">
+      <div class="summary-box">
+        <div class="label">Total Buydown Cost</div>
+        <div class="value" id="totalCost">$0</div>
+      </div>
+      <div class="summary-box">
+        <div class="label">Year 1 Monthly Savings</div>
+        <div class="value" id="y1Savings">$0</div>
+      </div>
+      <div class="summary-box">
+        <div class="label">Note Rate (Year 4+)</div>
+        <div class="value" id="finalRate">0%</div>
+      </div>
+    </div>
+
+    <div class="calc-card">
+      <table id="scheduleTable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Rate</th>
+            <th>Monthly P&amp;I</th>
+            <th>Monthly Savings vs. Note Rate</th>
+          </tr>
+        </thead>
+        <tbody id="scheduleBody"></tbody>
+      </table>
+      <div class="note-box">
+        This is what to ask the seller to fund at closing. Ask your buyer's lender to confirm the exact cost — actual figures may vary slightly based on the payoff method used.
+      </div>
+    </div>
+  </div>
+
+  <div class="caps-card">
+    <h2>Reminder: Seller Contribution Caps</h2>
+    <div class="subtitle">Buydown funds come out of the seller's allowable contribution — know the ceiling before you write the offer.</div>
+    <div class="caps-grid">
+      <div class="cap-item">
+        <div class="loan-type">Conventional</div>
+        <div class="pct">3–9%</div>
+        <div class="detail">By down payment: 3% under 10% down, 6% at 10–24.9%, 9% at 25%+. Investment properties capped at 2%.</div>
+      </div>
+      <div class="cap-item">
+        <div class="loan-type">FHA</div>
+        <div class="pct">6%</div>
+        <div class="detail">Flat 6% of the lesser of sale price or appraised value, regardless of down payment.</div>
+      </div>
+      <div class="cap-item">
+        <div class="loan-type">VA</div>
+        <div class="pct">4%</div>
+        <div class="detail">4% cap applies to buydowns and certain concessions. Standard closing costs and discount points are separate and uncapped.</div>
+      </div>
+      <div class="cap-item">
+        <div class="loan-type">USDA</div>
+        <div class="pct">6%</div>
+        <div class="detail">Up to 6% of the sale price, and can't exceed the buyer's actual closing costs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <p>Have a live deal and want the exact numbers run for your buyer?</p>
+    <div class="contact">Angie Wilmoth · 336-408-9531 · angiewilmoth@gmail.com</div>
+  </div>
+
+  <div class="disclaimer">
+    For estimation purposes only. Not a commitment to lend or a guarantee of terms. Contact Angie Wilmoth, NMLS# 2617463, Glory Mortgage, for a personalized quote.
+  </div>
+
+</div>
+
+<script>
+  let activeType = '321';
+
+  document.querySelectorAll('.type-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeType = btn.dataset.type;
+      document.getElementById('customRow').classList.toggle('visible', activeType === 'custom');
+    });
+  });
+
+  document.getElementById('loanAmount').addEventListener('input', (e) => {
+    let val = e.target.value.replace(/[^0-9]/g, '');
+    if (val) e.target.value = Number(val).toLocaleString('en-US');
+  });
+
+  function getReductions() {
+    if (activeType === '321') return [3, 2, 1];
+    if (activeType === '21') return [2, 1];
+    if (activeType === '10') return [1];
+    const y1 = parseFloat(document.getElementById('cy1').value) || 0;
+    const y2 = parseFloat(document.getElementById('cy2').value) || 0;
+    const y3 = parseFloat(document.getElementById('cy3').value) || 0;
+    return [y1, y2, y3].filter((v, i) => i === 0 || v > 0);
+  }
+
+  function monthlyPI(principal, annualRate, termYears) {
+    const r = annualRate / 100 / 12;
+    const n = termYears * 12;
+    if (r === 0) return principal / n;
+    return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  function calculate() {
+    const loanAmount = parseFloat(document.getElementById('loanAmount').value.replace(/,/g, '')) || 0;
+    const noteRate = parseFloat(document.getElementById('noteRate').value) || 0;
+    const term = parseInt(document.getElementById('loanTerm').value);
+    const reductions = getReductions();
+
+    const notePayment = monthlyPI(loanAmount, noteRate, term);
+    let totalCost = 0;
+    let rows = '';
+    let y1SavingsVal = 0;
+
+    reductions.forEach((reduction, i) => {
+      const yearRate = noteRate - reduction;
+      const yearPayment = monthlyPI(loanAmount, yearRate, term);
+      const savings = notePayment - yearPayment;
+      totalCost += savings * 12;
+      if (i === 0) y1SavingsVal = savings;
+
+      rows += `<tr>
+        <td>Year ${i + 1}</td>
+        <td>${yearRate.toFixed(3)}%</td>
+        <td>$${yearPayment.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+        <td>$${savings.toLocaleString('en-US', {maximumFractionDigits: 0})}/mo</td>
+      </tr>`;
+    });
+
+    rows += `<tr>
+      <td>Year ${reductions.length + 1}+</td>
+      <td>${noteRate.toFixed(3)}%</td>
+      <td>$${notePayment.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+      <td>—</td>
+    </tr>`;
+
+    document.getElementById('scheduleBody').innerHTML = rows;
+    document.getElementById('totalCost').textContent = '$' + totalCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('y1Savings').textContent = '$' + y1SavingsVal.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('finalRate').textContent = noteRate.toFixed(3) + '%';
+    document.getElementById('resultsSection').classList.add('visible');
+  }
+
+  calculate();
+</script>
+
+</body>
+</html>
