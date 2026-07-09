@@ -36,6 +36,24 @@
     border-bottom: 4px solid var(--gold);
   }
 
+  .back-link {
+    display: inline-block;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    text-decoration: none;
+    margin-bottom: 1.2rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    transition: all 0.15s;
+  }
+
+  .back-link:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--gold-light);
+  }
+
   .site-header .brand {
     font-size: 0.85rem;
     letter-spacing: 0.2em;
@@ -60,7 +78,7 @@
   }
 
   .container {
-    max-width: 960px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2.5rem 1.5rem 4rem;
   }
@@ -114,42 +132,6 @@
     background: var(--white);
   }
 
-  .buydown-type-group {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-  }
-
-  .type-btn {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 0.85rem;
-    padding: 0.55rem 1rem;
-    border: 1.5px solid var(--border);
-    background: var(--off-white);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--text-muted);
-  }
-
-  .type-btn.active {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: var(--white);
-  }
-
-  .custom-rates-row {
-    display: none;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .custom-rates-row.visible { display: flex; }
-
-  .custom-rates-row .field { flex: 1; min-width: 100px; }
-
   .calc-btn {
     width: 100%;
     padding: 0.85rem;
@@ -168,34 +150,28 @@
 
   .calc-btn:hover { background: var(--gold-light); }
 
-  .results {
-    display: none;
-  }
-
-  .results.visible { display: block; }
-
-  .results-summary {
+  .loan-summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
   }
 
   @media (max-width: 640px) {
-    .results-summary { grid-template-columns: 1fr; }
+    .loan-summary { grid-template-columns: 1fr; }
   }
 
   .summary-box {
     background: var(--navy);
     color: var(--white);
     border-radius: 6px;
-    padding: 1.25rem;
+    padding: 1.1rem;
     text-align: center;
   }
 
   .summary-box .label {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--gold-light);
@@ -203,8 +179,29 @@
   }
 
   .summary-box .value {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
+  }
+
+  .results {
+    display: none;
+  }
+
+  .results.visible { display: block; }
+
+  .buydown-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .buydown-section h3 {
+    font-size: 1.3rem;
+    color: var(--navy);
+    font-weight: 400;
+    margin-bottom: 1rem;
   }
 
   table {
@@ -218,21 +215,21 @@
     background: var(--navy);
     color: var(--white);
     text-align: left;
-    padding: 0.7rem 0.9rem;
+    padding: 0.65rem 0.85rem;
     font-weight: 600;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
 
   td {
-    padding: 0.7rem 0.9rem;
+    padding: 0.65rem 0.85rem;
     border-bottom: 1px solid var(--border);
   }
 
   tr:nth-child(even) td { background: var(--off-white); }
 
-  tr:last-child td {
+  .cost-row td {
     font-weight: 700;
     background: #f0ead9 !important;
     border-top: 2px solid var(--gold);
@@ -242,8 +239,9 @@
     background: #fbf8ee;
     border-left: 4px solid var(--gold);
     padding: 1rem 1.25rem;
-    margin-top: 1.5rem;
-    font-size: 0.92rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
     font-family: 'Helvetica Neue', Arial, sans-serif;
   }
@@ -310,6 +308,16 @@
     line-height: 1.4;
   }
 
+  .investment-note {
+    background: #fdf1f1;
+    border-left: 4px solid #b3413e;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+    font-size: 0.88rem;
+    color: #6b2e2c;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
   .footer-cta {
     text-align: center;
     margin-top: 2.5rem;
@@ -346,9 +354,10 @@
 <body>
 
 <div class="site-header">
+  <a href="angie_hub.html" class="back-link">&larr; Back to Agent Hub</a>
   <div class="brand">Closing with Angie · Homes · Loans · Results</div>
   <h1>Temporary Buydown Calculator</h1>
-  <p>See exactly how a seller-funded rate buydown lowers your buyer's payment year by year — and what it costs to get there.</p>
+  <p>Matches Glory Mortgage's official Buy-Down Calculator (v1.23) — same inputs, same formulas, same numbers I'd give you over the phone.</p>
 </div>
 
 <div class="container">
@@ -356,95 +365,65 @@
   <div class="calc-card">
     <div class="calc-grid">
       <div class="field">
-        <label for="loanAmount">Loan Amount ($)</label>
-        <input type="text" id="loanAmount" value="450,000">
+        <label for="purchasePrice">Purchase Price ($)</label>
+        <input type="text" id="purchasePrice" value="698,000">
       </div>
       <div class="field">
-        <label for="noteRate">Note Rate (%)</label>
-        <input type="number" id="noteRate" value="6.25" step="0.01">
+        <label for="downPct">Borrower Down Payment (%)</label>
+        <input type="number" id="downPct" value="10" step="0.5">
       </div>
     </div>
-
-    <div class="field" style="margin-bottom: 0.75rem;">
-      <label>Buydown Structure</label>
-    </div>
-    <div class="buydown-type-group" id="typeGroup">
-      <button class="type-btn active" data-type="321">3-2-1</button>
-      <button class="type-btn" data-type="21">2-1</button>
-      <button class="type-btn" data-type="10">1-0</button>
-      <button class="type-btn" data-type="custom">Custom</button>
-    </div>
-
-    <div class="custom-rates-row" id="customRow">
-      <div class="field">
-        <label>Year 1 Reduction (%)</label>
-        <input type="number" id="cy1" value="3" step="0.125">
-      </div>
-      <div class="field">
-        <label>Year 2 Reduction (%)</label>
-        <input type="number" id="cy2" value="2" step="0.125">
-      </div>
-      <div class="field">
-        <label>Year 3 Reduction (%)</label>
-        <input type="number" id="cy3" value="1" step="0.125">
-      </div>
-    </div>
-
     <div class="calc-grid">
       <div class="field">
-        <label for="loanTerm">Loan Term (Years)</label>
+        <label for="noteRate">Interest Rate (%)</label>
+        <input type="number" id="noteRate" value="7.25" step="0.01">
+      </div>
+      <div class="field">
+        <label for="dpa">Down Payment Assistance ($, if any)</label>
+        <input type="text" id="dpa" value="0">
+      </div>
+    </div>
+    <div class="calc-grid">
+      <div class="field">
+        <label for="loanTerm">Loan Term</label>
         <select id="loanTerm">
-          <option value="30" selected>30-Year Fixed</option>
-          <option value="15">15-Year Fixed</option>
+          <option value="360" selected>30-Year Fixed (360 mo)</option>
+          <option value="180">15-Year Fixed (180 mo)</option>
         </select>
       </div>
       <div class="field">
-        <label for="loanType">Loan Type (for cap reference below)</label>
-        <select id="loanType">
-          <option value="conventional">Conventional</option>
-          <option value="fha">FHA</option>
-          <option value="va">VA</option>
-          <option value="usda">USDA</option>
+        <label for="occupancy">Occupancy Type</label>
+        <select id="occupancy">
+          <option value="primary" selected>Primary Residence</option>
+          <option value="second">Second Home</option>
+          <option value="investment">Investment Property</option>
         </select>
       </div>
     </div>
 
-    <button class="calc-btn" onclick="calculate()">Calculate Buydown</button>
-  </div>
+    <button class="calc-btn" onclick="calculate()">Calculate Buydown Options</button>
 
-  <div class="results" id="resultsSection">
-    <div class="results-summary">
+    <div class="loan-summary" id="loanSummary" style="display:none;">
       <div class="summary-box">
-        <div class="label">Total Buydown Cost</div>
-        <div class="value" id="totalCost">$0</div>
+        <div class="label">Loan Amount</div>
+        <div class="value" id="loanAmountOut">$0</div>
       </div>
       <div class="summary-box">
-        <div class="label">Year 1 Monthly Savings</div>
-        <div class="value" id="y1Savings">$0</div>
+        <div class="label">Total Down Payment</div>
+        <div class="value" id="downOut">$0</div>
       </div>
       <div class="summary-box">
-        <div class="label">Note Rate (Year 4+)</div>
-        <div class="value" id="finalRate">0%</div>
+        <div class="label">Monthly P&amp;I (Note Rate)</div>
+        <div class="value" id="notePmtOut">$0</div>
       </div>
     </div>
 
-    <div class="calc-card">
-      <table id="scheduleTable">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Rate</th>
-            <th>Monthly P&amp;I</th>
-            <th>Monthly Savings vs. Note Rate</th>
-          </tr>
-        </thead>
-        <tbody id="scheduleBody"></tbody>
-      </table>
-      <div class="note-box">
-        This is what to ask the seller to fund at closing. Ask your buyer's lender to confirm the exact cost — actual figures may vary slightly based on the payoff method used.
-      </div>
+    <div class="investment-note" id="investmentWarning" style="display:none;">
+      <strong>Heads up:</strong> temporary buydowns aren't eligible on investment properties under Fannie Mae / Freddie Mac guidelines. The figures below are for reference only — this loan would need a different structure.
     </div>
   </div>
+
+  <div class="results" id="resultsSection"></div>
 
   <div class="caps-card">
     <h2>Reminder: Seller Contribution Caps</h2>
@@ -474,7 +453,7 @@
   </div>
 
   <div class="footer-cta">
-    <p>Have a live deal and want the exact numbers run for your buyer?</p>
+    <p>Have a live deal and want me to run the exact numbers for your buyer?</p>
     <div class="contact">Angie Wilmoth · 336-408-9531 · angiewilmoth@gmail.com</div>
   </div>
 
@@ -485,76 +464,83 @@
 </div>
 
 <script>
-  let activeType = '321';
+  document.getElementById('purchasePrice').addEventListener('input', formatThousands);
+  document.getElementById('dpa').addEventListener('input', formatThousands);
 
-  document.querySelectorAll('.type-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeType = btn.dataset.type;
-      document.getElementById('customRow').classList.toggle('visible', activeType === 'custom');
-    });
-  });
-
-  document.getElementById('loanAmount').addEventListener('input', (e) => {
+  function formatThousands(e) {
     let val = e.target.value.replace(/[^0-9]/g, '');
     if (val) e.target.value = Number(val).toLocaleString('en-US');
-  });
-
-  function getReductions() {
-    if (activeType === '321') return [3, 2, 1];
-    if (activeType === '21') return [2, 1];
-    if (activeType === '10') return [1];
-    const y1 = parseFloat(document.getElementById('cy1').value) || 0;
-    const y2 = parseFloat(document.getElementById('cy2').value) || 0;
-    const y3 = parseFloat(document.getElementById('cy3').value) || 0;
-    return [y1, y2, y3].filter((v, i) => i === 0 || v > 0);
   }
 
-  function monthlyPI(principal, annualRate, termYears) {
-    const r = annualRate / 100 / 12;
-    const n = termYears * 12;
-    if (r === 0) return principal / n;
-    return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  function pmt(ratePerPeriod, numPeriods, principal) {
+    if (ratePerPeriod === 0) return principal / numPeriods;
+    const r = ratePerPeriod;
+    return principal * (r * Math.pow(1 + r, numPeriods)) / (Math.pow(1 + r, numPeriods) - 1);
+  }
+
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  }
+
+  function buildBuydownTable(title, reductions, noteRate, notePmt, loanAmount, termMonths, purchasePrice) {
+    let rows = '';
+    let totalAnnual = 0;
+    reductions.forEach((reduction, i) => {
+      const yearRate = noteRate - reduction;
+      const yearPmt = pmt(yearRate / 12, termMonths, loanAmount);
+      const monthlySavings = notePmt - yearPmt;
+      const annualSavings = monthlySavings * 12;
+      totalAnnual += annualSavings;
+      rows += `<tr>
+        <td>Year ${i + 1}</td>
+        <td>${(yearRate * 100).toFixed(3)}%</td>
+        <td>${fmt(yearPmt)}</td>
+        <td>${fmt(monthlySavings)}/mo</td>
+        <td>${fmt(annualSavings)}</td>
+      </tr>`;
+    });
+    const costPct = (totalAnnual / purchasePrice * 100).toFixed(2);
+    rows += `<tr class="cost-row">
+      <td colspan="4">${title} Buy Down Cost \u2014 ${costPct}% of Purchase Price</td>
+      <td>${fmt(totalAnnual)}</td>
+    </tr>`;
+
+    return `<div class="buydown-section">
+      <h3>${title} Buy Down</h3>
+      <table>
+        <thead><tr><th>Year</th><th>Interest Rate</th><th>Reduced PI Payment</th><th>Monthly Savings</th><th>Annual Savings</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
   }
 
   function calculate() {
-    const loanAmount = parseFloat(document.getElementById('loanAmount').value.replace(/,/g, '')) || 0;
-    const noteRate = parseFloat(document.getElementById('noteRate').value) || 0;
-    const term = parseInt(document.getElementById('loanTerm').value);
-    const reductions = getReductions();
+    const purchasePrice = parseFloat(document.getElementById('purchasePrice').value.replace(/,/g, '')) || 0;
+    const downPct = (parseFloat(document.getElementById('downPct').value) || 0) / 100;
+    const dpa = parseFloat(document.getElementById('dpa').value.replace(/,/g, '')) || 0;
+    const noteRate = (parseFloat(document.getElementById('noteRate').value) || 0) / 100;
+    const termMonths = parseInt(document.getElementById('loanTerm').value);
+    const occupancy = document.getElementById('occupancy').value;
 
-    const notePayment = monthlyPI(loanAmount, noteRate, term);
-    let totalCost = 0;
-    let rows = '';
-    let y1SavingsVal = 0;
+    const borrowerDown = purchasePrice * downPct;
+    const totalDown = borrowerDown + dpa;
+    const loanAmount = purchasePrice - totalDown;
+    const notePmt = pmt(noteRate / 12, termMonths, loanAmount);
 
-    reductions.forEach((reduction, i) => {
-      const yearRate = noteRate - reduction;
-      const yearPayment = monthlyPI(loanAmount, yearRate, term);
-      const savings = notePayment - yearPayment;
-      totalCost += savings * 12;
-      if (i === 0) y1SavingsVal = savings;
+    document.getElementById('loanAmountOut').textContent = fmt(loanAmount);
+    document.getElementById('downOut').textContent = fmt(totalDown);
+    document.getElementById('notePmtOut').textContent = fmt(notePmt);
+    document.getElementById('loanSummary').style.display = 'grid';
 
-      rows += `<tr>
-        <td>Year ${i + 1}</td>
-        <td>${yearRate.toFixed(3)}%</td>
-        <td>$${yearPayment.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
-        <td>$${savings.toLocaleString('en-US', {maximumFractionDigits: 0})}/mo</td>
-      </tr>`;
-    });
+    document.getElementById('investmentWarning').style.display = (occupancy === 'investment') ? 'block' : 'none';
 
-    rows += `<tr>
-      <td>Year ${reductions.length + 1}+</td>
-      <td>${noteRate.toFixed(3)}%</td>
-      <td>$${notePayment.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
-      <td>—</td>
-    </tr>`;
+    let html = '';
+    html += buildBuydownTable('2-1', [0.02, 0.01], noteRate, notePmt, loanAmount, termMonths, purchasePrice);
+    html += buildBuydownTable('1-1', [0.01, 0.01], noteRate, notePmt, loanAmount, termMonths, purchasePrice);
+    html += buildBuydownTable('1-0', [0.01], noteRate, notePmt, loanAmount, termMonths, purchasePrice);
+    html += buildBuydownTable('3-2-1', [0.03, 0.02, 0.01], noteRate, notePmt, loanAmount, termMonths, purchasePrice);
 
-    document.getElementById('scheduleBody').innerHTML = rows;
-    document.getElementById('totalCost').textContent = '$' + totalCost.toLocaleString('en-US', {maximumFractionDigits: 0});
-    document.getElementById('y1Savings').textContent = '$' + y1SavingsVal.toLocaleString('en-US', {maximumFractionDigits: 0});
-    document.getElementById('finalRate').textContent = noteRate.toFixed(3) + '%';
+    document.getElementById('resultsSection').innerHTML = html;
     document.getElementById('resultsSection').classList.add('visible');
   }
 
