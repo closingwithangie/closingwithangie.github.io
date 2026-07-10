@@ -929,6 +929,7 @@
     <a href="calculators.html">Calculators</a>
     <a href="loan_programs.html">Loan Programs</a>
     <a href="dscr_calculator.html">DSCR</a>
+    <a href="buydown-calculator.html">Buydown</a>
     <a href="buyer_roadmap.html">Buyer Roadmap</a>
     <a href="credit_action_plan.html">Credit Plan</a>
     <a href="index.html#contact" style="background:#c9a84c;color:white;padding:8px 16px;border-radius:6px;font-weight:700;">Get Pre-Approved</a>
@@ -1106,6 +1107,14 @@
         <span class="tool-card-action">Open Calculator →</span>
       </div>
 
+      <div class="tool-card" onclick="window.open('buydown-calculator.html','_blank')">
+        <span class="tool-card-icon">💰</span>
+        <div class="tool-card-tag">Calculator</div>
+        <h3>Temporary Buydown Calculator</h3>
+        <p>Show sellers exactly what a 3-2-1, 2-1, or 1-0 buydown costs and what it saves your buyer — plus seller contribution caps by loan type.</p>
+        <span class="tool-card-action">Open Calculator →</span>
+      </div>
+
       <div class="tool-card" onclick="copyAppLink()">
         <span class="tool-card-icon">✍️</span>
         <div class="tool-card-tag">Send to Your Buyer</div>
@@ -1132,7 +1141,7 @@
 <!-- ══════════════════════════════════
      TOOL OVERLAY / MODAL
 ══════════════════════════════════ -->
-<div id="tool-overlay" onclick="closeTool()">
+<div id="tool-overlay" onclick="if(event.target===this) closeTool()">
   <div class="tool-modal">
     <button class="modal-close" onclick="closeTool()">
       <span>← Back to Tools Hub</span>
